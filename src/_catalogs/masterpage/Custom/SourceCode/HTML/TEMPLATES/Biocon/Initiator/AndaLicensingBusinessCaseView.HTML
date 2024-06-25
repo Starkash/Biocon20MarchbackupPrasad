@@ -1,0 +1,124 @@
+<div ng-form="frmReqInitiation" novalidate>
+    <div class="modal-header customModalheader">
+        <div class="modal-title customModalTitle" id="modal-title"><i class="fa fa-list-alt" aria-hidden="true"></i>
+            <h3 class="headingtitle">View Business Case Initiation Form </h3>
+        </div>
+    </div>
+    <div style="border: 1px solid #ddd; margin-top: 20px; border-radius: 5px;" class="addasswrap">
+        <div class="modal-body" id="divContSafeAuditFrm">
+            <div class="row mt-10">
+                <!-- <div class="col-md-4">
+                      <label class="col-form-label">Business Case ID</label>
+                         <input type="text" class="form-control" ng-model="Businesscaseid" id="Businesscaseid" disabled>
+                         </div> -->
+              
+                <div class="col-md-4">
+                   <label class="col-form-label">Strategy </label>
+                   <input type="text" class="form-control" ng-model="ddlStrategy" id="ddlStrategy" disabled> 
+                 </div>
+                 <div class="col-md-4">
+                    <label class="col-form-label">Sub Strategy </label>
+                    <input type="text" class="form-control" ng-model="ddlSubStrategy" id="ddlSubStrategy" disabled> 
+                  </div>
+                 
+                <div class="col-md-4">
+                <label class="col-form-label">Business Case Name</label>
+                <input type="text" class="form-control" ng-model="Businesscasename" disabled>
+             </div>
+               
+                <div class="col-md-4">
+                <label class="col-form-label">Product Category</label>
+                   <input type="text" class="form-control" ng-model="ddlProductCategory" id="ddlProductCategory" disabled>
+                  </div>
+                <div class="col-md-4">
+                <label class="col-form-label">Product Name </label>
+                    <input type="text" class="form-control"  ng-model="ddlProductName" id="ddlProductName" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Date Of Initiation</label>
+                   <input type="date" class="form-control" ng-model="InitiationDate" id="InitiationDate" disabled>
+ 
+                 </div>
+           
+                 <div class="col-md-4">
+                    <label class="col-form-label">Market </label>
+                        <input type="text" class="form-control" ng-model="ddlmarket" id="ddlmarket" disabled>
+                    </div>
+                  
+                    <div class="col-md-4">
+                    <label class="col-form-label">Country</label>
+                        <input type="text" class="form-control" ng-model="ddlCountry" id="ddlCountry" disabled>                            
+
+                    </div>
+                 </div>
+
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-top:50px;">
+            <table id="tableM" class="table table-bordered flowtbl">
+                      <thead>
+                        <tr>
+                            <th style="text-align:left"> Id</th>
+                            <th style="text-align:left"> SKU Name</th>
+                            <th style="text-align:left"> Quantity </th> 
+                            <th style="text-align:left"> SKU Unit</th>
+                            <th style="text-align:left"> Pack</th>  
+                            <th style="text-align:left"> Packing Type</th>  
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="AndaSKUDetails in AndaSKUDetailsColl" >
+                                            
+                                            <td>
+                                                <div>
+                                                    {{AndaSKUDetails.Id}}
+                                                </div> 
+                
+                                            </td>   <td>
+                                                <div>
+                                                    {{AndaSKUDetails.Title}}
+                                                </div> 
+                
+                                            </td>       
+                                            <td >
+                                                <div>
+                                                    {{AndaSKUDetails.Quantity}}
+                                                </div>
+                                                </td>     
+                                            <td > 
+                                                <div>
+                                                    {{AndaSKUDetails.Unit}}   
+                                                </div>
+                                                                                                    
+                                            </td>    
+                                            <td > 
+                                                <div>
+                                                    {{AndaSKUDetails.Pack}}
+                                                </div>
+                                                                                                    
+                                            </td> 
+                                            <td > 
+                                                <div>
+                                                    {{AndaSKUDetails.PackingType}}
+                                                </div>
+                                                                                                    
+                                            </td> 
+                                            
+                                            
+                              </tr>
+                         
+                      </tbody>
+                 </table>     
+                </div>  
+                              
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class=" row">
+        <div class="col-md-12 " style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-danger" type="button" ng-click="onInitiationCancel()">Exit</button>
+        </div>
+    </div>
+</div>

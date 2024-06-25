@@ -1,0 +1,376 @@
+﻿<form name="frmReqInitiation" novalidate>
+    <div class="modal-header customModalheader">
+        <div class="modal-title customModalTitle" id="modal-title" style="width: 100%;">
+            <i class="fa fa-list-alt fa-2x" aria-hidden="true"></i>
+            <h3 style="display: inline-block;" class="col-md-5"> Business Case Validation Form</h3>
+
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd; margin-top: 20px;border-radius: 5px;" class="addasswrap">
+        <div class="modal-body" id="divContSafeAuditFrm">
+            <div class="row mt-10">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Business Case ID</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="Businesscaseid" id="Businesscaseid" style="width: 450px;" ng-required="true" disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Strategy </label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="Strategy" id="Strategy" style="width: 450px;" disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Business Case Name</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="Businesscasename" style="width: 450px;" ng-required="true" disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Date Of Initiation</label>
+                        </div>
+                        <input type="date" class="form-control" ng-model="DateofInitiation" id="DateofInitiation" style="width: 450px;" disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Business Case Template Type </label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="ddltemplatename" id="ddltemplatename" style="width: 450px;" disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Product Category</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="ddlProductCategory" id="ddlProductCategory" style="width: 450px;" ng-required="true" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Product Name </label>
+                        </div>
+                        <input type="text" ng-model="ddlProductName" id="ddlProductName" style="width: 450px;" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Country</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="ddlCountry" id="ddlCountry" style="width: 450px;" ng-required="true" disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Market </label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="ddlmarket" id="ddlmarket" style="width: 450px;" ng-required="true" disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Treatment category</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="ddltreatmentcategory" id="ddltreatmentcategory" style="width: 450px;" ng-required="true" disabled>
+                    </div>
+                </div>
+                <!-- <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Biocon filing Date (mmm-yyyy)</label>
+                            <div>
+                                <input type="date" class="form-control" ng-model="Bioconfillingdate" style="width: 213px;"  disabled></input>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Biocon Filing Date (mmm-yyyy)</label>
+                            <div>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy" ng-model="Bioconfillingdate"
+                                        is-open="BioconfillingdateDatePopUp.opened" datepicker-options="billingFillingDateOptions"
+                                        close-text="Close" alt-input-formats="altInputFormats" ng-readonly="true"
+                                        show-button-bar="false" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-secondary" ng-click="openBillingFillingDate()"
+                                            style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                            <i class="fa-svg-icon">
+                                                <svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                                </svg>
+                                            </i>
+                                        </button>
+                                    </span>
+                                </p>
+                                <!-- <input type="date" class="form-control" ng-model="Bioconfillingdate" style="width: 213px;"  disabled></input> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6"><label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Dosage Form </label></div>
+                   </div>
+                    <div>
+                        <label>Cap <input type="checkbox" name="Dosage" ng-model="Cap" id="Cap" ng-click="toggleDosage('Cap')" value="Cap" ng-checked="capChecked"></label>
+                        <label style="margin-left: 60px;">Oral <input type="checkbox" name="Dosage" ng-model="Oral" ng-click="toggleDosage('Oral')" id="Oral" value="Oral" ng-checked="oralChecked"></label>
+                    </div>
+                </div>
+                <!-- <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Dosage Form </label>
+                        </div>
+                    </div>
+                    <div> <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Cap<input type="checkbox" ngModel="Cap" id="Cap"></label>
+                        <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap; margin-left: 60px;">Oral <input type="checkbox" ngModel="Oral" id="Oral"></label>
+                    </div>
+                </div> -->
+                <!-- <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">CFT Users Intimation</label>
+                        </div>
+                        <div title="MultiplepeoplePickerNotify" id="MultiplepeoplePickerNotify"> </div>
+                    </div>
+                </div> -->
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">API (IH/OS)</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="API" id="API" style="width: 450px;"  disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Generic Filers</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="GenericFilers" id="GenericFilers" style="width: 450px;" disabled></input>
+                    </div>
+                </div>
+                <!-- <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Year of generalisation (YYYY)</label>
+                            <div>
+                                <input type="date" class="form-control" ng-model="Yearofgen" id="Yearofgen" style="width: 213px;" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">LOE Expiry(YYYY)</label>
+                            <div>
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="yyyy" ng-model="Yearofgen"
+                                        is-open="BioconfillingdateDatePopUp.opened" datepicker-options="billingFillingDateOptions" 
+                                        close-text="Close" alt-input-formats="altInputFormats" ng-readonly="true"
+                                        show-button-bar="false" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-secondary" ng-click="openBillingFillingDate()"
+                                            style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                            <i class="fa-svg-icon">
+                                                <svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                                </svg>
+                                            </i>
+                                        </button>
+                                    </span>
+                                </p>
+                                <!-- <input type="date" class="form-control" ng-model="Yearofgen" id="Yearofgen" style="width: 213px;"  disabled> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Brand</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="ddlbrand" id="ddlbrand" style="width: 450px;" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Innovator</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="ddlInnovator" id="ddlInnovator" style="width: 450px;"  disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Mfg Site (IH/OS)</label> 
+                        </div>
+                        <input type="text" class="form-control" ng-model="MfgSite" id="MfgSite" style="width: 450px;"  disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Current Development Status</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="CurrentDevlopStatus" style="width: 450px;" disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Filing Type</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="FillingType" id="FillingType" style="width: 450px;" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Partner Filing Strategy</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="PartnerFillingStrategy" id="PartnerFillingStrategy" style="width: 450px;"disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Site</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="site" style="width: 450px;" disabled></input>
+                    </div>
+                </div>
+              
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Genericisation Scenario</label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="genscenario" style="width: 450px;" disabled></input>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">OB Approvals </label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="ObApproval" id="ObApproval" style="width: 450px;" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">No of USDMF </label>
+                        </div>
+                        <input type="text" class="form-control" ng-model="NoofUSDMF" id="NoofUSDMF" style="width: 450px;"  disabled></input>
+                    </div>
+                </div>
+                
+                <div style="margin-top:50px;">
+                    <table id="tableM" class="table table-bordered flowtbl">
+                              <thead>
+                              <tr>
+                              
+                                  <th style="text-align:left">Template </th>
+                                  <th style="text-align:left">{{VersionFlag}}</th>
+                                  <th style="text-align:left">Current Business Case Stage</th>
+                                  <th style="text-align:left">Current Case Status</th>
+                                  <th style="text-align:left"> Reason for Version Change </th> 
+                                  <th style="text-align:left"> User Name</th>
+                                  <th style="text-align:left"> Last Updated On</th>                                                                       
+                                                              
+                              </tr>
+                              </thead>
+                              <tbody ng-repeat="DocData in BusinessCaseDocumentLinkColl" >
+                                      <td>
+                                          <div> 
+                                              <a ng-href="ms-excel:ofv|u|{{DocData.ServRel}}"  target="_blank" style="text-decoration: underline;" >{{DocData.Fname}}</a><a  id="UploadDoc{{DocData.DocID}}" ng-click="DeleteDocAttachment(DocData.Fname,DocData.DocID,this)"><i class='fa fa-close' style='color: red'></i></a>
+                                          </div>
+                                      </td>
+                                          <td >
+                                              <div>
+                                                  {{MinorV}}
+                                              </div>
+              
+                                          </td>       
+                                          <td >
+                                                <div>
+                                                    {{CaseStage}}
+                                                </div>
+                                             </td>     
+                                             <td >
+                                                <div>
+                                                    {{CaseStatus}}
+                                                </div>
+                                             </td>     
+                                            <td > 
+                                                <div>
+                                                    {{InitiatorComments1}}   
+                                                </div>
+                                                                                                   
+                                            </td>    
+                                            <td > 
+                                                <div>
+                                                   {{}}
+                                                </div>
+                                                                                                   
+                                            </td> 
+                                            <td > 
+                                                {{Modified |date :"MMM d,y h:mm:ss a"}}
+                                            </td>  
+                                          
+                                      </tr>
+                              </tbody>   
+                       </table>     
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <div style="border: 1px solid #ddd; margin-top: 20px;border-radius: 5px;" class="addasswrap">
+        <div class="modal-body" id="divContSafeAuditFrm">
+            <div class="row mt-10">
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-sm-1 col-form-label align-self-center" style="white-space: nowrap;">Validator Comments <span style="color:red;">*</span></label>
+                        </div>
+                        <textarea ng-model="ValidatorComments" id="ValidatorComments" ng-required="true" style="margin-left: 50px;size: 40px;"></textarea>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</form>
+<hr>
+
+<div class=" row">
+    <div class="col-md-12 " style="text-align: center; margin-top: 20px;">
+       <button class="btn btn-success" type="button" ng-show="!frmReqInitiation.$invalid"  ng-click="onValidatorSubmit()" style="margin-right: 16px;">Validate</button>
+        <button class="btn btn-warning" type="button" ng-click="onReviewerCancel()">Exit</button>
+    </div>
+</div>

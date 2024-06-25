@@ -1,0 +1,265 @@
+<div ng-form="frmReqInitiation" novalidate>
+    <div class="modal-header customModalheader">
+        <div class="modal-title customModalTitle" id="modal-title"><i class="fa fa-list-alt" aria-hidden="true"></i>
+            <h3 class="headingtitle">Review Business Case Initiation Form </h3>
+        </div>
+    </div>
+    <div style="border: 1px solid #ddd; margin-top: 20px; border-radius: 5px;" class="addasswrap">
+        <div class="modal-body" id="divContSafeAuditFrm">
+            <div class="row mt-10">
+                         
+                <div class="col-md-4">
+                   <label class="col-form-label">Strategy </label>
+                   <input type="text" class="form-control" ng-model="ddlStrategy" id="ddlStrategy" disabled> 
+                 </div>
+                 <div class="col-md-4">
+                <label class="col-form-label">Business Case Name</label>
+                <input type="text" class="form-control" ng-model="Businesscasename" disabled>
+             </div>
+              <div class="col-md-4">
+                   <label class="col-form-label">Business Case Initiator</label>
+                         <div title="SinglelepeoplePickerNotify" id="SinglelepeoplePickerNotify" style="margin-left:3px;"> </div>
+                </div>
+               
+                <!-- <div class="col-md-4">
+                <label class="col-form-label">Business Case Initiator</label>
+                   <input type="text" class="form-control" ng-model="ddlProductCategory" id="ddlProductCategory" disabled>
+                  </div> -->
+                <div class="col-md-4">
+                <label class="col-form-label">Entity </label>
+                    <input type="text" class="form-control"  ng-model="ddlEntity" id="ddlEntity" disabled>
+                </div> 
+                 <div class="col-md-4">
+                <label class="col-form-label">Site</label>
+                    <input type="text" class="form-control"  ng-model="ddlSite" id="ddlSite" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Business Case Initiation Date(mmm-yyyy)</label>
+                   <input type="date" class="form-control" ng-model="InitiationDate" id="InitiationDate" disabled>
+                 </div>  
+                 <div class="col-md-4">
+                    <label class="col-form-label">Capex Value( in INR Crs)</label>
+                   <input type="text" class="form-control" ng-model="CapexValue" id="CapexValue" disabled>
+                 </div>  
+                 <div class="col-md-4">
+                    <label class="col-form-label">Capex Currency</label>
+                   <input type="text" class="form-control" ng-model="CapexCurrency" id="CapexCurrency" disabled>
+                 </div>  
+                 <div class="col-md-4">
+                    <label class="col-form-label">Escalation</label>
+                   <input type="text" class="form-control" ng-model="Escalation" id="Escalation" disabled>
+                 </div> 
+                  <div class="col-md-4">
+                    <label class="col-form-label">Escalation Remarks</label>
+                   <input type="text" class="form-control" ng-model="EscalationRemarks" id="EscalationRemarks" disabled>
+                 </div> 
+                  <div class="col-md-4">
+                    <label class="col-form-label">Capex Approval Year</label>
+                   <input type="date" class="form-control" ng-model="CapexApprovalYear" id="CapexApprovalYear" disabled>
+                 </div>  
+                 <div class="col-md-4">
+                    <label class="col-form-label">BC Completion Year</label>
+                   <input type="date" class="form-control" ng-model="BCCompletionYear" id="BCCompletionYear" disabled>
+                 </div>
+                 <div class="col-md-4">
+                     <label class="col-form-label">No of Products</label>
+                    <input type="text" class="form-control"  ng-model="NoofProducts" id="NoofProducts" disabled>
+                </div>
+               
+                       </div>
+
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-top:50px;">
+            <table id="tableM" class="table table-bordered flowtbl">
+                      <thead>
+                      <tr>
+                        
+                        <th style="text-align:left"> ID</th>  
+                        <th style="text-align:left"> Phase</th>  
+                        <th style="text-align:left"> Capex Phase Total</th>  
+                        <th style="text-align:left"> Capex Trigger year Phase </th>  
+                        <th style="text-align:left"> Product Name</th>
+                        <th style="text-align:left"> Capex completion year - Phase Date  </th> 
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="CapexPhaseDetails in CapexPhaseDetailsColl" >
+                            <td > 
+                                <div>
+                                    {{CapexPhaseDetails.ID}}
+                                </div>
+                                                                                    
+                            </td>   <td > 
+                                <div>
+                                    {{CapexPhaseDetails.Title}}
+                                </div>
+                                                                                    
+                            </td>  
+                             <td > 
+                                <div>
+                                    {{CapexPhaseDetails.PhaseTotal}}
+                                </div>
+                                                                                    
+                            </td>  <td > 
+                                <div>
+                                    {{CapexPhaseDetails.TriggerYear}}
+                                </div>
+                                                                                    
+                            </td> 
+                            <td > 
+                                <div>
+                                    {{CapexPhaseDetails.ProductName.Title}}
+                                </div>
+                                                                                    
+                            </td>  
+                            <td>
+                                <div>
+                                    {{CapexPhaseDetails.CompletionYear}}
+                                </div>
+
+                            </td>       
+                          
+                                            
+                            </tr>
+                                    
+         
+                             </table>  
+                            </td>
+                            
+                        </tr>
+                      </tbody>
+               </table>     
+        </div>  
+     </div>
+
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-top:50px;">
+            <table id="tableM" class="table table-bordered flowtbl">
+                      <thead>
+                      <tr>
+                          <th style="text-align:left">Template </th>
+                          <th style="text-align:left">{{VersionFlag}}</th>
+                          <th style="text-align:left">Current Business Case Stage</th>
+                          <th style="text-align:left"> Reason for Version Change </th> 
+                          <th style="text-align:left"> User Name</th>
+                          <th style="text-align:left"> Last Updated On</th>  
+                      </tr>
+                      </thead>
+                      <tr ng-repeat="DocData in OutLicensingBusinessCaseDocuments" >
+                              <td>
+                                  <div> 
+                                      <a ng-href="ms-excel:ofv|u|{{DocData.ServRel}}"  target="_blank" style="text-decoration: underline;" >{{DocData.Fname}}</a><a  id="UploadDoc{{DocData.DocID}}" ng-click="DeleteDocAttachment(DocData.Fname,DocData.DocID,this)"><i class='fa fa-close' style='color: red'></i></a>
+                                  </div>
+                              </td>
+                                  <td >
+                                      <div>
+                                          {{MinorV}}
+                                      </div>
+      
+                                  </td>       
+                                  <td >
+                                        <div>
+                                            {{CaseStage}}
+                                        </div>
+                                     </td>     
+                                    <td > 
+                                        <div>
+                                            {{InitiatorComments1}}   
+                                        </div>
+                                                                                           
+                                    </td>    
+                                    <td > 
+                                        <div>
+                                           {{}}
+                                        </div>
+                                                                                           
+                                    </td> 
+                                    <td > 
+                                        {{Modified |date :"MMM d,y h:mm:ss a"}}
+                                    </td>  
+                                  
+                              </tr>
+
+               </table>     
+        </div>  
+        </div>
+    </div>  
+</div>
+<div style="border: 1px solid #ddd; margin-top: 20px;border-radius: 5px;" class="addasswrap">
+<div class="modal-body" id="divContSafeAuditFrm">
+    <div class="row mt-10">
+        <div class="col-md-4">
+               <label class="col-form-label ">Change Business Case Stages <span style="color:red;">*</span></label>
+                         <select class="form-control" name="singleSelect" ng-model="ChagneBusinesscaseStage" id="ChagneBusinesscaseStage" ng-required="true">
+                    <option value="">Select</option>                         
+                    <option value="In Process">In Process</option>
+                    <option value="Under Review">Under Review</option>                       
+                    <option value="Under Validation">Under Validation</option>
+                    <option value="Ready for ELT Review">Ready for ELT Review </option>
+                    <option value="Under Revalidation">Under Revalidation </option>
+                    <option value="Approved/Published">Approved/Published </option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Other">Other</option>
+                </select>
+        
+        </div>
+        <div class="col-md-4">
+         <label class="col-form-label">Initiator Comments<span style="color:red;">*</span></label>
+                    <textarea ng-model="InitiatorComments" class="form-control" id="InitiatorComments" ng-required="true"> </textarea>
+
+        </div>
+
+<!-- 
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="col-sm-1 col-form-label align-self-center"style="white-space: nowrap;">Initiator Comments<span style="color:red;">*</span></label>
+                </div>
+                <input id="uploadFile" type="file" name="files[]" multiple="multiple" class="form-control"/>
+            </div>
+        </div> -->
+
+            <!-- <div>
+                <input type="file" ngf-select ng-model="preQScoreFile" name="file" > 
+            </div> -->
+                <div class="col-md-4">
+                     <label class="col-form-label">Attach Supporting Documents</label>
+                            <input type="file" ngf-select ng-model="BcAttachFileNew" name="file" multiple ngf-multiple="true"
+                            accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                            ngf-pattern="'.xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf'"
+                            ngf-accept="'.xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf'">
+                              <div class="mt-1">
+                    <span style="color:red; font-size:12px">Note : Files with special character will not be allowed.</span>
+                    
+                </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<hr> 
+</div>
+</div>
+<div class=" row">
+<!-- ng-show="frmReqInitiation.$invalid" -->
+<div class="col-md-12 " style="text-align: center; margin-top: 20px;">
+    <button class="btn btn-primary" type="button"  ng-show="(ChagneBusinesscaseStage == 'Other')" ng-click="onCreateVersion()" style="margin-right: 16px;">Create Version</button>
+    <button class="btn btn-success" type="button" ng-hide="(ChagneBusinesscaseStage == 'Other' ||ChagneBusinesscaseStage == 'Select')"  ng-click="onInitiationSubmit()" style="    margin-right: 16px;">Submit</button>
+    <button class="btn btn-danger" type="button" ng-click="onInitiationCancel()">Exit</button>
+</div>
+</div>
+</div>
+    </div>
+ 
+</div>
+    </div>
+    <!-- <div class=" row">
+        <div class="col-md-12 " style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-danger" type="button" ng-click="onInitiationCancel()">Exit</button>
+        </div>
+    </div> -->
+</div>

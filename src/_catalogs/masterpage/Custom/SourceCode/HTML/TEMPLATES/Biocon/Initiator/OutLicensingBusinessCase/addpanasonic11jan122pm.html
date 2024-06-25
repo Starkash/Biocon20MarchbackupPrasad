@@ -1,0 +1,1866 @@
+<style>
+    .multiselectDropdown .dropdown-menu {
+        top: -1px !important;
+        left: -14px;
+    }
+
+    .multiselectDropdown .dropdown-header {
+        display: block;
+        padding: 0.5rem 0.5rem !important;
+    }
+
+    .multiselectDropdown .btn {
+        border: 1px solid #ced4da;
+        padding: 0.375rem 3rem;
+    }
+
+    .multiselectDropdown ul li,
+    a {
+        text-align: left;
+        font-size: 13px;
+        color: #000;
+        text-decoration: none;
+    }
+
+
+/* 
+    <!--calender--> of current ficsal */
+
+    /* .calendar {
+            width: 300px;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        } */
+
+
+        /* 
+    <!--calender--> */
+
+</style>
+<!-- <h1>{{Krishna}}</h1> -->
+
+<div ng-form="frmReqInitiation" novalidate class="bsviewformwrap">
+    <div class="modal-header customModalheader">
+        <div class="modal-title customModalTitle wid-100" id="modal-title">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+            <h3 style="display: inline-block; font-size: 18px; margin: 0px;">Add Offer Requisition Form</h3>
+            <div class="userbox"><span class="fstyle">Welcome</span> : <span class="username">{{CurrLogUserId}}</span>
+            </div>
+        </div>
+    </div>
+    <div style="border: 1px solid #ddd; margin-top: 20px;border-radius: 5px;" class="addasswrap">
+        <div class="modal-body" id="divContSafeAuditFrm">
+            <div class="row mt-10">
+                <div class="col-md-4">
+                    <label class="col-form-label">Name</label>
+                    <div><span class="lbl-ol">{{Name}}</span></div>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Employee Code</label>
+                    <div><span class="lbl-ol">{{EmployeeCode}}</span></div>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="col-form-label"> Contact No</label>
+                    <div><span class="lbl-ol">{{ContactNo}}</span></div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label"> Email ID</label>
+                    <div><span class="lbl-ol">{{EmailID}}</span></div>
+                </div>
+
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label"> Date of Request</label>
+                    <div>
+                        <label class="col-form-label" id="lblDate">{{CurrDate|date :"dd-MMM-yyyy"}}</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-5">
+                    <label class="col-form-label">Type of Beneficiary <span style="color:red;">*</span></label>
+                    <select class="form-control" name="TypeofBeneficiary " ng-model="TypeofBeneficiary"
+                        id="TypeofBeneficiary" ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{Beneficiary .Id}}" ng-repeat="Beneficiary in TypeofbeneficiaryColl">
+                            {{Beneficiary.Typeofbeneficiary}}</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-5">
+                    <label class="col-form-label">Type of Benefit for Offering <span style="color:red;">*</span></label>
+                    <select class="form-control" name="TypeofBenefitforOffering " ng-model="TypeofBenefitforOffering" ng-change="ChangeTypeofBenefitforOffering(TypeofBenefitforOffering)"
+                        id="TypeofBenefitforOffering" ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{TypeofBenefitforOffering.Id}}"
+                            ng-repeat="TypeofBenefitforOffering in TypeofofferingColl">
+                            {{TypeofBenefitforOffering.Typeofoffering}}</option>
+                    </select>
+
+                </div>
+<!-- START GIFT TAB-->
+
+                <!-- <div ng-show="Gifttype">
+
+                    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+                        <label type="text" class="col-form-label"></label>
+                        <div><span class="lbl-ol" style="color: white;">{{SrNo3}}) {{question3}}</span></div>
+                    </div>
+                    <div class="col-md-11">
+    
+                        <div class="control">
+                            <label class="radio">
+                                <input type="radio" ng-model="Radio3" value="Yes">
+                                Yes
+                            </label>
+                            <label class="radio">
+                                <input type="radio" ng-model="Radio3" value="No">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    <div ng-hide="Radio3=='Yes'">
+    
+    
+                        <div  class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+                            <label type="text" class="col-form-label"></label>
+                            <div><span class="lbl-ol" style="color: white;">{{SrNo3_1}}) {{question3_1}}</span></div>
+                        </div>
+                        <div class="col-md-11"  >
+                            <div class="control">
+                                <label class="radio">
+                                    <input type="radio" ng-model="Radio3_1" value="Yes">
+                                    Yes
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" ng-model="Radio3_1" value="No">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+    
+    
+    
+                        <div class="row mt-10">
+                            <div class="col-md-5" ng-show="Radio3_1=='Yes'">
+                                <label class="col-form-label">Approval Attachment</label>
+                                <input type="file" ngf-select ng-model="BcAttachFileNew" id="fileAttachSupport" name="file" ng-required="Radio3_1=='Yes'"
+                                    style="width:250px" multiple ngf-multiple="true"
+                                    accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf,.eml,.msg"
+                                    ngf-pattern="'.xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf,.eml,.msg'"
+                                    ngf-accept="'.xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf,.eml,.msg'">
+                                <div class="mt-1">
+                                    
+                                </div>
+                            </div>
+    
+                            <div class="attachment-grid" style="margin-left:20px" ng-show="Radio3_1=='Yes'">
+                                <div class="attachment-item" ng-repeat="attachment in attachments">
+                                    <img ng-src="{{ attachment.url }}" alt="{{ attachment.name }}" />
+                                    <p>{{ attachment.name }}</p>
+                                </div>
+                            </div>
+    
+    
+                                <div class="col-md-5" ng-show="Radio3_1=='No'">
+                                <label class="col-form-label">Requestor's Remarks<span style="color:red;">*</span></label>
+                                <textarea ng-model="RequestorRemarks" name="RequestorRemarks" ng-required="Radio3_1=='No'"
+                                    class="form-control" id="RequestorRemarks" ng-change="ChnageCommentReuquired()"
+                                    style="height:auto  !important;"> </textarea>
+    
+                                
+                            </div>
+    
+    
+    
+                        </div>
+    
+                        <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+                            <label type="text" class="col-form-label"></label>
+                            <div><span class="lbl-ol" style="color: white;">{{SrNo3_2}}) {{question3_2}}</span></div>
+                        </div>
+    
+    
+    
+                        <div ng-repeat="giftdetailprev in GiftsDetailsprevColl"> 
+        
+                        <div class="form-group row">  
+                        <table class="col-sm-12">
+    
+                            <tr class="row document-heading">
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <span style="color: red;">*</span>Sr. No.
+                                </td>
+    
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <span style="color: red;">*</span>Name of Beneficiary
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <span style="color: red;">*</span>Designation & Organization Name
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <span style="color: red;">*</span>Date of Last Benifits Offered
+    
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <span style="color: red;">*</span>Value of Gift Offered(INR)
+    
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <span style="color: red;">*</span>Purpose of Pase offerings
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <span style="color: red;">*</span>Types of Benifits Offered
+    
+                                </td>
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <span style="color: red;">*</span>Details of Benifits Offered
+    
+                                </td>
+    
+                            </tr>
+    
+                            <tr class="row grid-style rowItem document-content">
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <label>{{$Index+1}}</label>
+    
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <input type="text" class="form-control" ng-model="giftdetailprev.NameofBeneficiary"
+                                        id="NameofBeneficiary" name="NameofBeneficiary" ng-required="Radio3=='No'" />
+    
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <input type="text" class="form-control"
+                                        ng-model="giftdetailprev.DesignationOrganizationName"
+                                        id="DesignationOrganizationName" name="DesignationOrganizationName"
+                                        ng-required="Radio3=='No'" />
+    
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <input type="text" class="form-control"
+                                        ng-model="giftdetailprev.DateofLastBenifitsOffered" id="DateofLastBenifitsOffered"
+                                        name="DateofLastBenifitsOffered" ng-required="Radio3=='No'" />
+    
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <input type="text" class="form-control" ng-model="giftdetailprev.ValueofGiftOffered"
+                                        id="ValueofGiftOffered" name="ValueofGiftOffered" ng-required="Radio3=='No'" />
+    
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <input type="text" class="form-control" ng-model="giftdetailprev.PurposeofPaseofferings"
+                                        id="PurposeofPaseofferings" name="PurposeofPaseofferings" ng-required="Radio3=='No'" />
+    
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <input type="text" class="form-control" ng-model="giftdetailprev.TypesofBenifitsOffered"
+                                        id="TypesofBenifitsOffered" name="TypesofBenifitsOffered" ng-required="Radio3=='No'" />
+    
+                                </td>
+    
+                                <td class="col-xs-1 col-sm-1 col-md-1">
+                                    <input type="text" class="form-control"
+                                        ng-model="giftdetailprev.DetailsofBenifitsOffered" id="DetailsofBenifitsOffered"
+                                        name="DetailsofBenifitsOffered" ng-required="Radio3=='No'" />
+    
+                                </td>
+                                <td class="col-xs-2 col-sm-2 col-md-1">
+    
+                                    <i class="fa fa-plus-square  fa-2x" aria-hidden="true"
+                                        style="color: #1a8f49; cursor: pointer;" ng-click="addGiftItem(giftdetailprev)"></i>
+                                    <i class="fa fa-minus-square fa-2x" aria-hidden="true"
+                                        style="color: #dc3545; cursor: pointer;"
+                                        ng-if="giftdetailprev.HideRemoveButton == false"
+                                        ng-click="removeGigttItem(giftdetailprev, $event)"></i>
+                                </td>
+    
+                            </tr>
+                        </table>
+                    </div>
+                        </div>
+                        
+                   
+            </div>
+    
+            <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+                <label type="text" class="col-form-label"></label>
+                <div><span class="lbl-ol" style="color: white;">{{SrNo4}}) {{question4}}</span></div>
+            </div>
+    
+            <div class="col-md-11">
+    
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" ng-model="Radio4" value="Yes">
+                        Yes
+                    </label>
+                    <label class="radio">
+                        <input type="radio" ng-model="Radio4" value="No">
+                        No
+                    </label>
+                </div>
+    
+    
+            </div>
+    
+            <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;margin-left: 5px;" ng-hide="Radio4=='No'">
+                <label type="text" class="col-form-label"></label>
+                <div><span class="lbl-ol" style="color: white;">{{SrNo4_1}}) {{question4_1}}</span></div>
+            </div>
+    
+             <div ng-repeat="EmpDetails in EmpDetailsColl"> 
+        
+                        <div class="form-group row" DetailsofPanasonicEmployees> 
+            <table class="col-sm-12" ng-hide="Radio4=='No'">
+    
+                <tr class="row document-heading">
+    
+                    <td class="col-xs-1 col-sm-1 col-md-1">
+                        <span style="color: red;">*</span>Sr. No.
+                    </td>
+    
+    
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <span style="color: red;">*</span>Name of Employee
+                    </td>
+                    <td class="col-xs-1 col-sm-1 col-md-1">
+                        <span style="color: red;">*</span>Employee ID
+                    </td>
+    
+                    <td class="col-xs-1 col-sm-1 col-md-1">
+                        <span style="color: red;">*</span>Contact No.
+    
+                    </td>
+    
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <span style="color: red;">*</span>Designation & Department
+                    </td>
+    
+                    <td class="col-xs-1 col-sm-1 col-md-1">
+                        <span style="color: red;">*</span>Email
+    
+                    </td>
+    
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <span style="color: red;">*</span>Location
+    
+                    </td>
+    
+    
+    
+    
+    
+    
+    
+                </tr>
+    
+                <tr class="row grid-style rowItem document-content">
+    
+                    <td class="col-xs-1 col-sm-1 col-md-1">
+                        <label>{{$Index+1}}</label>
+    
+                    </td>
+    
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <input type="text" class="form-control" ng-model="EmpDetails.NameofEmployee" id="NameofEmployee"
+                            name="NameofEmployee"  ng-required="Radio4=='Yes'" />
+    
+                    </td>
+    
+                    <td class="col-xs-1 col-sm-1 col-md-1">
+                        <input type="text" class="form-control" ng-model="EmpDetails.EmployeeID" id="EmployeeID"
+                            name="EmployeeID"  ng-required="Radio4=='Yes'" />
+    
+                    </td>
+    
+                    <td class="col-xs-1 col-sm-1 col-md-1">
+                        <input type="text" class="form-control" ng-model="EmpDetails.ContactNo" id="ContactNo"
+                            name="ContactNo" ng-required="Radio4=='Yes'" />
+    
+                    </td>
+    
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <input type="text" class="form-control" ng-model="EmpDetails.DesignationnDepartment"
+                            id="DesignationnDepartment" name="DesignationnDepartment" ng-required="Radio4=='Yes'" />
+    
+                    </td>
+                    <td class="col-xs-1 col-sm-1 col-md-1">
+                        <input type="text" class="form-control" ng-model="EmpDetails.Email" id="Email" name="Email"
+                        ng-required="Radio4=='Yes'" />
+    
+                    </td>
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <input type="text" class="form-control" ng-model="EmpDetails.Location" id="Location" name="Location"
+                        ng-required="Radio4=='Yes'" />
+    
+                    </td>
+    
+                    <td class="col-xs-2 col-sm-2 col-md-1">
+    
+                        <i class="fa fa-plus-square  fa-2x" aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+                            ng-click="addEmpDetailsItem(EmpDetails)"></i>
+                        <i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;"
+                            ng-if="EmpDetails.HideRemoveButton == false"
+                            ng-click="removeEmpDetailsItem(EmpDetails, $event)"></i>
+                    </td>
+    
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    
+    <div ng-hide="Radio4=='Yes'" class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo4_2}}) {{question4_2}}</span></div>
+    </div>
+    
+    <div class="col-md-11">
+    
+        
+    
+        <div class="control" ng-hide="Radio4=='Yes'">
+            <label class="radio">
+                <input type="radio" ng-model="Radio4_2" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio4_2" value="No">
+                No
+            </label>
+        </div>
+    
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;" ng-hide="Radio4=='Yes'">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo4_3}}) {{question4_3}}</span></div>
+    </div>
+    
+    <div class="col-md-11" ng-hide="Radio4=='Yes'">
+    
+        
+    
+        <div class="control" ng-hide="Radio4=='Yes'">
+            <label class="radio">
+                <input type="radio" ng-model="Radio4_3" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio4_3" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;" ng-hide="Radio4=='Yes'">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo4_4}}) {{question4_4}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11" style="margin-top: 30px;margin-left: 5px;" ng-hide="Radio4=='Yes'">
+        <input type="text" style="width: 75%;">
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo5}}) {{question5}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11" style="margin-top: 30px;margin-left: 5px;">
+        <input type="text" style="width: 75%;">
+    </div>
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo5_1}}) {{question5_1}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11" style="margin-top: 30px;margin-left: 5px;">
+        <input type="text" style="width: 75%;">
+    </div>
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo6}}) {{question6}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+        
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio6" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio6" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks6" name="Remarks6"  class="form-control" id="Remarks6" ng-required="Radio6=='No'"
+            ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+        
+    
+    
+    </div>
+    
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo7}}) {{question7}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+       
+    
+    
+       
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio7" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio7" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks7" name="Remarks7"  class="form-control" id="Remarks7"
+        ng-required="Radio7=='No'"   ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+        
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo8}}) {{question8}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+        
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio8" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio8" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks8" name="Remarks8"  class="form-control" id="Remarks8"
+        ng-required="Radio8=='No'"   ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo9}}) {{question9}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+        
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio9" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio9" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks9" name="Remarks9"  class="form-control" id="Remarks9"
+        ng-required="Radio9=='No'"  ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+        
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo10}}) {{question10}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+        
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio10" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio10" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks10" name="Remarks10"  class="form-control" id="Remarks10"
+        ng-required="Radio10=='No'"    ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo11}}) {{question11}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+       
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio11" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio11" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks11" name="Remarks11"  class="form-control" id="Remarks11"
+        ng-required="Radio11=='No'"    ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo12}}) {{question12}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+     
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio12" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio12" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks12" name="Remarks12"  class="form-control" id="Remarks12"
+        ng-required="Radio12=='No'"     ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo13}}) {{question13}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+     
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio13" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio13" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks13" name="Remarks13"  class="form-control" id="Remarks13"
+        ng-required="Radio13=='No'"  ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+      
+    </div>
+    
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo14}}) {{question14}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+        
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio14" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio14" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks14" name="Remarks14"  class="form-control" id="Remarks14"
+        ng-required="Radio14=='No'"   ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+        
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo15}}) {{question15}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+       
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio15" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio15" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks15" name="Remarks15"  class="form-control" id="Remarks15"
+        ng-required="Radio15=='No'"   ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo16}}) {{question16}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+        
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio16" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio16" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks16" name="Remarks16"   ng-required="Radio16=='No'" class="form-control" id="Remarks16"
+         ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo17}}) {{question17}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+   
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio17" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio17" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo18}}) {{question18}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio18" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio18" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo19}}) {{question19}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+       
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio19" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio19" value="No">
+                No
+            </label>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+        <textarea ng-model="Remarks19" name="Remarks19"   ng-required="Radio19=='No'" class="form-control" id="Remarks19"
+         ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+    
+    
+    
+    </div>
+    
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo20}}) {{question20}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+    
+       
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio20" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio20" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo21}}) {{question21}}</span></div>
+    
+    </div>
+    
+    <div class="col-md-11">
+       
+    
+        <div class="control">
+            <label class="radio">
+                <input type="radio" ng-model="Radio21" value="Yes">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" ng-model="Radio21" value="No">
+                No
+            </label>
+        </div>
+    
+    </div>
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo22}}) {{question22}}</span></div>
+    </div>
+    
+    <div ng-repeat="GiftsDetails in GiftsDetailsColl"> 
+        
+                        <div class="form-group row"> 
+    <table class="col-sm-12">
+    
+        <tr class="row document-heading">
+    
+            <td class="col-xs-1 col-sm-1 col-md-1">
+                <span style="color: red;">*</span>Sr. No.
+            </td>
+    
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <span style="color: red;">*</span>Gifts Category
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <span style="color: red;">*</span>Details of Gifts Offered
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <span style="color: red;">*</span>Quantity of Gifts Offered
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <span style="color: red;">*</span>Per Unit Rate(INR)
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <span style="color: red;">*</span>Total Amount of Gifts Offered(INR)
+    
+            </td>
+        </tr>
+    
+        <tr class="row grid-style rowItem document-content">
+    
+            <td class="col-xs-1 col-sm-1 col-md-1">
+                <label>{{$Index+1}}</label>
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <input type="text" class="form-control" ng-model="GiftsDetails.GiftsCategory" id="GiftsCategory"
+                    name="GiftsCategory" ng-required="true" />
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <input type="text" class="form-control" ng-model="GiftsDetails.DetailsofGiftsOffered"
+                    id="DetailsofGiftsOffered" name="DetailsofGiftsOffered" ng-required="true" />
+    
+            </td>
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <input type="text" class="form-control" ng-model="GiftsDetails.QuantityofGiftsOffered"
+                    id="QuantityofGiftsOffered" name="QuantityofGiftsOffered" ng-required="true" />
+    
+            </td>
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <input type="text" class="form-control" ng-model="GiftsDetails.PerUnitRate" id="PerUnitRate"
+                    name="PerUnitRate" ng-required="true" />
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <input type="text" class="form-control" ng-model="GiftsDetails.TotalAmountofGiftsOffered22"
+                    id="TotalAmountofGiftsOffered22" name="TotalAmountofGiftsOffered22" ng-required="true" />
+    
+            </td>
+    
+    
+            <td class="col-xs-2 col-sm-2 col-md-1">
+                <i class="fa fa-plus-square  fa-2x" aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+                    ng-click="addAuditItem(GiftsDetails)"></i>
+                <i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;"
+                    ng-if="GiftsDetails.HideRemoveButton == false" ng-click="removeAuditItem(GiftsDetails, $event)"></i>
+            </td>
+    
+        </tr>
+    </table>
+    </div>
+    </div>
+    
+    <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+        <label type="text" class="col-form-label"></label>
+        <div><span class="lbl-ol" style="color: white;">{{SrNo23}}) {{question23}}</span></div>
+    </div>
+    
+    
+     <div ng-repeat="Benificiary in BenificiaryColl"> 
+        
+                        <div class="form-group row" > 
+    <table class="col-sm-12">
+    
+        <tr class="row document-heading">
+    
+            <td class="col-xs-1 col-sm-1 col-md-1">
+                <span style="color: red;">*</span>Sr. No.
+            </td>
+    
+    
+            <td class="col-xs-1 col-sm-1 col-md-1">
+                <span style="color: red;">*</span>Name of Benificiary
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <span style="color: red;">*</span>Organization/Department Name
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-1">
+                <span style="color: red;">*</span>Designation
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <span style="color: red;">*</span>Relationship b/w Panasonic and Benificiary
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <span style="color: red;">*</span>Details Gifts Offered(INR)
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <span style="color: red;">*</span>Total Amount of Gifts Offered(INR)
+    
+            </td>
+    
+        </tr>
+    
+        <tr class="row grid-style rowItem document-content">
+    
+            <td class="col-xs-1 col-sm-1 col-md-1">
+                <label>{{$Index+1}}</label>
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-1">
+                <input type="text" class="form-control" ng-model="Benificiary.NameofBenificiary" id="NameofBenificiary"
+                    name="NameofBenificiary" ng-required="true" />
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <input type="text" class="form-control" ng-model="Benificiary.OrganizationDepartmentName"
+                    id="OrganizationDepartmentName" name="OrganizationDepartmentName" ng-required="true" />
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-1">
+                <input type="text" class="form-control" ng-model="Benificiary.Designation" id="Designation"
+                    name="Designation" ng-required="true" />
+    
+            </td>
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <input type="text" class="form-control" ng-model="Benificiary.RelationshipPanasonicnBenificiary"
+                    id="RelationshipPanasonicnBenificiary" name="RelationshipPanasonicnBenificiary" ng-required="true" />
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <input type="text" class="form-control" ng-model="Benificiary.DetailsGiftsOffered" id="DetailsGiftsOffered"
+                    name="DetailsGiftsOffered" ng-required="true" />
+    
+            </td>
+    
+            <td class="col-xs-1 col-sm-1 col-md-2">
+                <input type="text" class="form-control" ng-model="Benificiary.TotalAmountofGiftsOffered"
+                    id="TotalAmountofGiftsOffered" name="TotalAmountofGiftsOffered" ng-required="true" />
+    
+            </td>
+    
+            <td class="col-xs-2 col-sm-2 col-md-1">
+                <i class="fa fa-plus-square  fa-2x" aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+                    ng-click="addBenificiaryItem(Benificiary)"></i>
+                <i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;"
+                    ng-if="Benificiary.HideRemoveButton == false" ng-click="removeAuditItem(Benificiary, $event)"></i>
+            </td>
+    
+        </tr>
+    </table>
+    </div>
+    </div>
+    
+                
+            
+
+                
+
+<hr>
+
+<div class="col-md-5">
+    <label class="col-form-label">Remarks<span style="color:red;">*</span></label>
+    <textarea ng-model="CommentsWorkflowHistory" name="CommentsWorkflowHistory" ng-required="true" class="form-control"
+        id="CommentsWorkflowHistory" ng-change="ChnageCommentReuquired()" style="height:auto  !important;"> </textarea>
+
+
+
+</div>
+</div>   -->
+<div ng-show="Gifttype">
+    <div ng-repeat="item in QuestionArray">
+        <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+            <label type="text" class="col-form-label"></label>
+            <div><span class="lbl-ol" style="color: white;">{{item.SrNo}} ). {{item.Question}}</span></div>
+        </div>
+        <div class="col-md-11">
+    
+            <div class="control">
+                <div ng-show="item.TypeOfControl == 'Radio'">
+                    <!-- <div ng-show="item[$index - 1].Modal != 'Yes'"> -->
+                        <label class="radio">
+                            <input type="radio" ng-model="" value="Yes">
+                            Yes
+                        </label>
+                        <label class="radio">
+                            <input type="radio" ng-model="" value="No">
+                            No
+                        </label>
+                    <!-- </div> -->
+                </div>
+                <div ng-show="item.TypeOfControl == 'Input Text'">
+                    <input class="form-control-plaintext"/>
+
+
+                </div>
+
+                
+                <div  ng-show="item.TypeOfControl == 'Detailsofgiftpreviously'" > 
+
+                    <div class="form-group row"   >  
+                    <table class="col-sm-12">
+    
+                        <tr class="row document-heading">
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <span style="color: red;">*</span>Sr. No.
+                            </td>
+    
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <span style="color: red;">*</span>Beneficiary’s name
+
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <span style="color: red;">*</span>Organization Name
+
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <span style="color: red;">*</span>Designation
+
+    
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-2">
+                                <span style="color: red;">*</span>Date of Offering
+
+    
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <span style="color: red;">*</span>Value of GIFT Offered (INR)
+
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <span style="color: red;">*</span>Purpose
+
+    
+                            </td>
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <span style="color: red;">*</span>Details of offered gift
+
+    
+                            </td>
+    
+                        </tr>
+    
+                        <tr class="row grid-style rowItem document-content "  ng-repeat="giftdetailprev in GiftsDetailsprevColl">
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <label type="number" class="form-control" ng-model="giftdetailprev.SrNo">{{$index+1}}</label>
+                                
+    
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                 <!-- <input type="text" class="form-control" ng-model="giftdetailprev.NameofBeneficiary"  ng-change="autoPopulateGiftsDetailsprev(giftdetailprev)"
+                                    id="NameofBeneficiary" name="NameofBeneficiary" ng-required="Radio3=='No'" />
+      -->
+      
+                             
+                            
+                                <select class="form-control" name="NameofBeneficiary" ng-model="giftdetailprev.NameofBeneficiary"
+                                id="NameofBeneficiary"  ng-change="bindbenificiaryname(giftdetailprev.NameofBeneficiary)"  ng-required="true">
+                                  <option ng-value="0">Select</option>
+                                  <option ng-value="{{Beneficiary.Id}}" ng-repeat="Beneficiary in BeneficiaryMasterColl">
+                                      {{Beneficiary.NameofBeneficiary}}</option>
+                              </select>
+   
+                               
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <input type="text" class="form-control" disabled
+                                    ng-model="giftdetailprev.OrganizationName"
+                                    id="OrganizationName" name="OrganizationName"
+                                    ng-required="Radio3=='No'" />
+    
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <input type="text" class="form-control" disabled
+                                    ng-model="giftdetailprev.Designation" id="Designation"
+                                    name="Designation" ng-required="Radio3=='No'" />
+    
+                            </td>
+    
+                            <!-- <td class="col-xs-1 col-sm-1 col-md-2">
+                                <input type="date" class="form-control" ng-model="giftdetailprev.DateofOffering"
+                                    id="DateofOffering" name="DateofOffering" ng-required="Radio3=='No'" />
+    
+                            </td> -->
+
+                            <td class="col-xs-1 col-sm-1 col-md-2">
+
+
+                                <!-- <input type="text" readonly class="form-control" ng-model="giftdetailprev.DateofOffering"
+                                    id="DateofOffering" name="DateofOffering" ng-required="Radio3=='No'" 
+                                    uib-datepicker-popup="{{dateFormat}}" is-open="giftdetailprev.datepickerIsOpen"
+                                    datepicker-options="dateOptions" ng-focus="openDatepicker(giftdetailprev)" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openDatepicker(giftdetailprev)">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span> -->
+
+
+                                <p class="input-group">
+                                    <input type="text" class="form-control" uib-datepicker-popup="dd-MM-yyyy"
+                                    ng-model="giftdetailprev.DateofOffering" ng-required="true"
+                                    is-open="giftdetailprev.datepickerIsOpen" datepicker-options="dateOptions" ng-focus="openDatepicker(giftdetailprev)"
+                                        close-text="Close" alt-input-formats="altInputFormats" ng-readonly="true"
+                                        show-button-bar="false" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-secondary"
+                                        ng-click="openDatepicker(giftdetailprev)" style="min-width: 1em !important;"
+                                            ng-disabled="isFormReadonly">
+                                            <i class="fa-svg-icon">
+                                                <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                                </svg>
+                                            </i>
+                                        </button>
+                                    </span>
+                                </p>
+
+
+                            </td>
+
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <input type="number" class="form-control" ng-model="giftdetailprev.ValueofGIFTOffered" min="0"
+                                    id="ValueofGIFTOffered" name="ValueofGIFTOffered" ng-required="Radio3=='No'" />
+    
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <input type="text" class="form-control" ng-model="giftdetailprev.Purpose"
+                                    id="Purpose" name="Purpose" ng-required="Radio3=='No'" />
+    
+                            </td>
+    
+                            <td class="col-xs-1 col-sm-1 col-md-1">
+                                <input type="text" class="form-control"
+                                    ng-model="giftdetailprev.Detailsofofferedgift" id="Detailsofofferedgift"
+                                    name="Detailsofofferedgift" ng-required="Radio3=='No'" />
+    
+                            </td>
+                            <td class="col-xs-2 col-sm-2 col-md-1">
+    
+                                <i class="fa fa-plus-square  fa-2x" aria-hidden="true"
+                                    style="color: #1a8f49; cursor: pointer;" ng-click="addGiftItem(giftdetailprev)"></i>
+                                <i class="fa fa-minus-square fa-2x" aria-hidden="true"
+                                    style="color: #dc3545; cursor: pointer;"
+                                    ng-if="giftdetailprev.HideRemoveButton == false"
+                                    ng-click="removeGigttItem(giftdetailprev, $event)"></i>
+                            </td>
+    
+                        </tr>
+                    </table>
+                </div>
+                    </div>
+                
+
+
+
+                <!--table-->
+
+                <div > 
+        
+                    <div class="form-group row" ng-show="item.TypeOfControl == 'DetailsofPanasonicEmployees'" > 
+        <!-- <table class="col-sm-12" ng-hide="Radio4=='No'"> -->
+                    <table class="col-sm-12" ng-hide="Radio4=='No'">
+
+
+            <tr class="row document-heading">
+
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <span style="color: red;">*</span>Sr. No.
+                </td>
+
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <span style="color: red;">*</span>Employee ID
+                </td>
+
+                <td class="col-xs-1 col-sm-1 col-md-2">
+                    <span style="color: red;">*</span>Name of Employee
+                </td>
+               
+
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <span style="color: red;">*</span>Contact No.
+
+                </td>
+
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <span style="color: red;">*</span>Designation
+                </td>
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <span style="color: red;">*</span>Department
+                </td>
+
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <span style="color: red;">*</span>Email
+
+                </td>
+
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <span style="color: red;">*</span>Location
+
+                </td>
+
+
+
+
+
+
+
+            </tr>
+
+            <tr class="row grid-style rowItem document-content" ng-repeat="EmpDetails in EmpDetailsColl">
+
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <label ng-model="EmpDetails.SrNo">{{$index+1}}</label>
+
+                </td>
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <!-- <input type="text" class="form-control" ng-change="bindEmpDetails(EmpDetails.EmployeeID)" ng-model="EmpDetails.EmployeeID" id="EmployeeID"
+                        name="EmployeeID"  ng-required="Radio4=='Yes'" /> -->
+
+                        <select class="form-control" name="EmployeeID" ng-model="EmpDetails.EmployeeID"
+                        id="EmployeeID"  ng-change="bindEmpDetails(EmpDetails.EmployeeID)"  ng-required="true">
+                          <option ng-value="0">Select</option>
+                          <option ng-value="{{EmpDetails.Id}}" ng-repeat="EmpDetails in EmployeeMasterColl">
+                              {{EmpDetails.EmployeeEmpcode}}</option>
+                      </select>
+
+
+
+                      
+
+                      
+
+                </td>
+
+                <td class="col-xs-1 col-sm-1 col-md-2">
+                    <input type="text" class="form-control" ng-model="EmpDetails.NameofEmployee" id="NameofEmployee" disabled
+                        name="NameofEmployee"  ng-required="Radio4=='Yes'" />
+
+                </td>
+
+                
+
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <input type="text" class="form-control" ng-model="EmpDetails.ContactNo" id="ContactNo" disabled
+                        name="ContactNo" ng-required="Radio4=='Yes'" />
+
+                </td>
+
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <input type="text" class="form-control" ng-model="EmpDetails.Designation4_2" disabled
+                        id="Designation4_2" name="Designation4_2" ng-required="Radio4=='Yes'" />
+
+                </td>
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <input type="text" class="form-control" ng-model="EmpDetails.Department4_2" disabled
+                        id="Department4_2" name="Department4_2" ng-required="Radio4=='Yes'" />
+
+                </td>
+                
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <input type="text" class="form-control" ng-model="EmpDetails.Email" id="Email" name="Email" disabled
+                    ng-required="Radio4=='Yes'" />
+
+                </td>
+                <td class="col-xs-1 col-sm-1 col-md-1">
+                    <input type="text" class="form-control" ng-model="EmpDetails.Location" id="Location" name="Location" disabled
+                    ng-required="Radio4=='Yes'" />
+
+                </td>
+
+                <td class="col-xs-2 col-sm-2 col-md-1">
+
+                    <i class="fa fa-plus-square  fa-2x" aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+                        ng-click="addEmpDetailsItem(EmpDetails)"></i>
+                    <i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;"
+                        ng-if="EmpDetails.HideRemoveButton == false"
+                        ng-click="removeEmpDetailsItem(EmpDetails, $event)"></i>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+                
+                <!-- <p>{{Radio3}}</p> -->
+
+
+                <div > 
+        
+                    <div class="form-group row"  ng-show="item.TypeOfControl == 'DetailsofGifts'" > 
+<table class="col-sm-12">
+
+    <tr class="row document-heading">
+
+        <td class="col-xs-1 col-sm-1 col-md-1">
+            <span style="color: red;">*</span>Sr. No.
+        </td>
+
+
+        <td class="col-xs-1 col-sm-1 col-md-2">
+            <span style="color: red;">*</span>Gifts Category
+        </td>
+
+        <td class="col-xs-1 col-sm-1 col-md-2">
+            <span style="color: red;">*</span>Details of Gifts Offered
+        </td>
+
+        <td class="col-xs-1 col-sm-1 col-md-2">
+            <span style="color: red;">*</span>Quantity of Gifts Offered
+
+        </td>
+
+        <td class="col-xs-1 col-sm-1 col-md-2">
+            <span style="color: red;">*</span>Per Unit Rate(INR)
+
+        </td>
+
+        <td class="col-xs-1 col-sm-1 col-md-2">
+            <span style="color: red;">*</span>Total Amount of Gifts Offered(INR)
+
+        </td>
+    </tr>
+
+    <tr class="row grid-style rowItem document-content" ng-repeat="GiftsDetails in GiftsDetailsColl">
+
+        <td class="col-xs-1 col-sm-1 col-md-1">
+            <label ng-model="GiftsDetails.SrNo">{{$index+1}}</label>
+
+        </td>
+
+        <td class="col-xs-1 col-sm-1 col-md-2">
+            <!-- <input type="text" class="form-control" ng-model="GiftsDetails.GiftsCategory" id="GiftsCategory"
+                name="GiftsCategory" ng-required="true" /> -->
+
+                <select class="form-control" name="GiftsCategory"  ng-model="GiftsDetails.GiftsCategory"
+                      id="GiftsCategory"  ng-change="bindGiftsDetails(GiftsDetails)"  ng-required="true">
+                        <option ng-value="0">Select</option>
+                        <option ng-value="{{GiftsCategory.Id}}" ng-repeat="GiftsCategory in GiftsCategoryColl">
+                            {{GiftsCategory.GiftsCategory}}</option>
+                    </select>
+
+        </td>
+
+        <td class="col-xs-1 col-sm-1 col-md-2" >
+            <input type="text" class="form-control" ng-model="GiftsDetails.DetailsofGiftsOffered" ng-show="GiftsDetails.GiftsCategory!='1'"
+                id="DetailsofGiftsOffered" name="DetailsofGiftsOffered" ng-required="true" />
+
+
+                <select class="form-control" name="DetailsofGiftsOffered"  ng-model="GiftsDetails.DetailsofGiftsOffered" ng-show="GiftsDetails.GiftsCategory=='1'"
+                id="DetailsofGiftsOffered"    ng-required="true">
+                  <option ng-value="0">Select</option>
+                  <option ng-value="{{PanasonicProducts.Id}}" ng-repeat="PanasonicProducts in PanasonicProductsColl">
+                      {{PanasonicProducts.Product}}</option>
+              </select>
+
+
+
+        </td>
+        <td class="col-xs-1 col-sm-1 col-md-2">
+            <input type="number" min="0" class="form-control" ng-model="GiftsDetails.QuantityofGiftsOffered"  ng-change="ChangeperUnitratedetails(GiftsDetails)"
+                id="QuantityofGiftsOffered" name="QuantityofGiftsOffered" ng-required="true" />
+
+        </td>
+        <td class="col-xs-1 col-sm-1 col-md-2">
+            <input type="number" min="0" class="form-control" ng-change="ChangeperUnitratedetails(GiftsDetails)" ng-model="GiftsDetails.PerUnitRate" id="PerUnitRate" ng-if="GiftsDetails.GiftsCategory!='1'"
+                name="PerUnitRate" ng-required="true" />
+
+                <select class="form-control" name="PerUnitRate" ng-change="ChangeperUnitratedetails(GiftsDetails)"
+                 ng-model="GiftsDetails.PerUnitRate" ng-if="GiftsDetails.GiftsCategory=='1'"
+                id="PerUnitRate"   ng-required="true">
+                  <option ng-value="0">Select</option>
+                  <option  ng-value="{{PanasonicProducts.ProductUnitRate}}" ng-repeat="PanasonicProducts in PanasonicProductsColl  |filter :{ProductUnitRate:GiftsDetails.DetailsofGiftsOffered}">
+                      {{PanasonicProducts.ProductUnitRate}}</option>
+              </select>
+
+        </td>
+
+        <td class="col-xs-1 col-sm-1 col-md-2">
+
+            
+         
+                
+                <!-- <lable  class="form-control" ng-model="GiftsDetails.TotalAmountofGiftsOffered22" min="0"
+                id="TotalAmountofGiftsOffered22" name="TotalAmountofGiftsOffered22"> {{(GiftsDetails.PerUnitRate)*(GiftsDetails.QuantityofGiftsOffered)}}</lable>
+                -->
+                <input type="text" disabled class="form-control" min="2" ng-model="GiftsDetails.TotalAmountofGiftsOffered22" 
+                id="TotalAmountofGiftsOffered22" name="TotalAmountofGiftsOffered22" ng-required="true" />
+                
+        </td>
+
+
+
+        <td class="col-xs-2 col-sm-2 col-md-1">
+            <i class="fa fa-plus-square  fa-2x" aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+                ng-click="addGiftsDetailsItem(GiftsDetails)"></i>
+            <i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;"
+                ng-if="GiftsDetails.HideRemoveButton == false" ng-click="removeGiftsDetailsItem(GiftsDetails, $event)"></i>
+        </td>
+
+    </tr>
+</table>
+</div>
+</div>
+
+
+
+<!-- DetailsofBeneficiary -->
+
+
+<div  > 
+        
+    <div class="form-group row" ng-show="item.TypeOfControl == 'DetailsofBeneficiary'"  > 
+<table class="col-sm-12">
+
+<tr class="row document-heading">
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<span style="color: red;">*</span>Sr. No.
+</td>
+
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<span style="color: red;">*</span>Name of Benificiary
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<span style="color: red;">*</span>Organization
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+    <span style="color: red;">*</span>Department
+    </td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<span style="color: red;">*</span>Designation
+
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<span style="color: red;">*</span>Relationship b/w Panasonic and Benificiary
+
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<span style="color: red;">*</span>Details Gifts Offered(INR)
+
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<span style="color: red;">*</span>Total Amount of Gifts Offered(INR)
+
+</td>
+
+</tr>
+
+<tr class="row grid-style rowItem document-content" ng-repeat="Benificiary in BenificiaryColl">
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<label ng-model="Benificiary.SrNo">{{$index+1}}</label>
+
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<input type="text" class="form-control" ng-model="Benificiary.NameofBenificiary" id="NameofBenificiary"
+name="NameofBenificiary" ng-required="true" />
+
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<input type="text" class="form-control" ng-model="Benificiary.Organization_23"
+id="Organization_23" name="Organization_23" ng-required="true" />
+
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+    <input type="text" class="form-control" ng-model="Benificiary.Department_23"
+    id="Department_23" name="Department_23" ng-required="true" />
+    
+    </td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<input type="text" class="form-control" ng-model="Benificiary.Designation_23" id="Designation_23"
+name="Designation_23" ng-required="true" />
+
+</td>
+<td class="col-xs-1 col-sm-1 col-md-1">
+<input type="text" class="form-control" ng-model="Benificiary.RelationshipPanasonicnBenificiary"
+id="RelationshipPanasonicnBenificiary" name="RelationshipPanasonicnBenificiary" ng-required="true" />
+
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<input type="text" class="form-control" ng-model="Benificiary.DetailsGiftsOffered" id="DetailsGiftsOffered"
+name="DetailsGiftsOffered" ng-required="true" />
+
+</td>
+
+<td class="col-xs-1 col-sm-1 col-md-1">
+<input type="text" class="form-control" ng-model="Benificiary.TotalAmountofGiftsOffered"
+id="TotalAmountofGiftsOffered" name="TotalAmountofGiftsOffered" ng-required="true" />
+
+</td>
+
+<td class="col-xs-2 col-sm-2 col-md-1">
+<i class="fa fa-plus-square  fa-2x" aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+ng-click="addBenificiaryItem(Benificiary)"></i>
+<i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;"
+ng-if="Benificiary.HideRemoveButton == false" ng-click="removeBenificiaryItem(Benificiary, $event)"></i>
+</td>
+
+</tr>
+</table>
+</div>
+</div>
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--END GIFT TAB -->
+
+<!-- START ENTERTAINMENT TAB-->
+<div ng-show="Entertainmenttype">
+    <!---->
+    <h1>!!!--- राधे  राधे ----!!!</h1>
+    <div ng-repeat="item in QuestionArray">
+        <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+            <label type="text" class="col-form-label"></label>
+            <div><span class="lbl-ol" style="color: white;">{{item.SrNo}} ). {{item.Question}}</span></div>
+        </div>
+        <div class="col-md-11">
+    
+            <div class="control">
+                <div ng-show="item.TypeOfControl == 'Radio'">
+                    <label class="radio">
+                        <input type="radio" ng-model="{{item.Modal}}" value="Yes">
+                        Yes
+                    </label>
+                    <label class="radio">
+                        <input type="radio" ng-model="{{item.Modal}}" value="No">
+                        No
+                    </label>
+                </div>
+                <div ng-show="item.TypeOfControl == 'Input Text'" >
+                    <input class="form-control-plaintext" ng-modal="{{item.Modal}}"/>
+
+
+                </div>
+
+                
+                
+                <div class="col-md-11" style="background-color:#4395d1;margin-top: 30px;margin-left: 5px;">
+                    <label type="text" class="col-form-label"></label>
+                    <div><span class="lbl-ol" style="color: white;">{{SrNo3_2}}) {{question3_2}}</span></div>
+                </div>
+
+
+
+                
+                
+                <!-- <p>{{Radio3}}</p> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--END ENTERTAINMENT TAB-->
+
+<!--START Travel TAB-->
+<div ng-show="Traveltype">
+   
+    <h1>!!!---हरे कृष्णा ---!!!</h1>
+</div>
+<!--END Travel TAB-->
+
+<!--START Meal TAB-->
+<div ng-show="Mealtype">
+    <h1>!!!----हरे राम---!!!</h1>
+    
+</div>
+<!-- END Travel TAB-->
+
+
+
+</div>
+<div class="row">
+    <div class="col-md-12 " style="text-align: center;margin-top:20px;">
+        <button class="btn btn-success" type="button" ng-show="!frmReqInitiation.$invalid" ng-click="onSubmit()"
+            style="margin-right:16px; transition:none;">Submit</button>
+        <button class="btn btn-primary" type="button" ng-show="!frmReqInitiation.$invalid" ng-click="onSaveAsDraft()"
+            style="margin-right:16px;">Save As Draft</button>
+        <button class="btn btn-secondary" type="button" ng-click="onInitiationCancel()">Exit</button>
+    </div>
+</div>

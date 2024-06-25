@@ -1,0 +1,537 @@
+<style>
+    /* .multiselectDropdown .dropdown-menu {
+        top: -1px !important;
+        left: -14px;
+    }
+
+    .multiselectDropdown .dropdown-header {
+        display: block;
+        padding: 0.5rem 0.5rem !important;
+    }
+
+    .multiselectDropdown .btn {
+        border: 1px solid #ced4da;
+        padding: 0.375rem 3rem;
+    }
+
+    .multiselectDropdown ul li,
+    a {
+        text-align: left;
+        font-size: 13px;
+        color: #000;
+        text-decoration: none;
+    }
+  
+        .modal-lg {
+            max-width: 96%;
+        }
+    
+        .document-heading {
+            border-bottom: 1px solid grey !important;
+            margin-bottom: 10px !important;
+            margin-top: 5px !important;
+            font-size: 12px !important;
+        }
+
+        .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+        }
+        .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+        } */
+
+
+        .multiselectDropdown .dropdown-menu {
+        top: -1px !important;
+        left: -14px;
+    }
+
+    .multiselectDropdown .dropdown-header {
+        display: block;
+        padding: 0.5rem 0.5rem !important;
+    }
+
+    .multiselectDropdown .btn {
+        border: 1px solid #ced4da;
+        padding: 0.375rem 3rem;
+    }
+
+    .multiselectDropdown ul li,
+    a {
+        text-align: left;
+        font-size: 13px;
+        color: #000;
+        text-decoration: none;
+    }
+
+
+    </style>
+    
+    <!-- <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.1.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"> 
+
+ -->
+
+ <div id="divLoading" class="" ng-if="isLoading">
+    <center style="margin-top:15%;"> <div tabindex="9999" class="spinner"></div></center>
+ </div>
+
+
+<div ng-form="frmReqInitiation" novalidate  class="bsviewformwrap">
+    <div class="modal-header customModalheader">
+        <div class="modal-title customModalTitle wid-100" id="modal-title">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+            <h3 style="display: inline-block; font-size: 18px; margin: 0px;">Edit Business Case Initiation Form</h3>
+            <div class="userbox"><span class="fstyle">Welcome</span> : <span class="username">{{CurrLogUserId}}</span></div>
+        </div>
+    </div>
+    <div style="border: 1px solid #ddd; margin-top: 20px;border-radius: 5px;" class="addasswrap">
+        <div class="modal-body" id="divContSafeAuditFrm">
+            <div style="position: relative; margin-top:10px;margin-bottom:20px;margin-left:605px;margin-right:0px;">
+                <p style="color:red;margin-left:350px;margin-right:20px;margin-top:20px; font-size: 11px; ">Note:<span style="margin-left:5px;">1.Mandatory Fields are
+                        indicated with Red border and “*”.</span> 
+                        
+            
+                </p>
+            </div>
+
+            <div class="row mt-10">
+                <div class="col-md-4">
+                    <label class="col-form-label">Strategy<span style="color:red;">*</span></label>
+                      <select class="form-control" disabled name="ddlStrategy" ng-model="ddlStrategy" id="ddlStrategy"
+                ng-required="true">
+                <option ng-value="">Select</option>
+                <option ng-value="{{Strategy.Id}}" ng-repeat="Strategy in StrategyColl">{{Strategy.Title}}
+                </option>
+            </select>
+					
+                </div>
+
+              
+
+                <div class="col-md-4">
+                    <label class="col-form-label">SubStrategy</label>
+                    <select class="form-control" disabled name="ddlSubStrategy" ng-model="ddlSubStrategy" id="ddlSubStrategy"
+                        ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{SubStrategy.Id}}"
+                            ng-repeat="SubStrategy in SubStrategyColl | filter:{StrategyId: ddlStrategy}">
+                            {{SubStrategy.Title}}</option>
+                    </select>
+                </div>
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Month Of Initiation</label>
+                    <div>
+                        <label class="col-form-label" id="lblDate">{{CurrDate|date :"MMM - yyyy"}}</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Business Case Name<span style="color:red;">*</span></label>
+                    <input type="text" class="form-control" ng-model="BusinessCaseName" name="BusinessCaseName" ng-disabled="true"
+                        id="BusinessCaseName" ng-required="true">
+                </div>
+
+               
+                <div class="col-md-4">
+                    <label class="col-form-label">Product Category
+                       
+                    <select class="form-control" disabled name="ddlProductCategory" ng-model="ddlProductCategory"
+                        ng-change="bindproduct(ddlProductCategory)" id="ddlProductCategory" ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{productcat.Id}}" ng-repeat="productcat in ProductCategoryColl">
+                            {{productcat.Title}}</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Product Name </label>
+                    <select class="form-control"  disabled name="ddlProductName" ng-model="ddlProductName" id="ddlProductName"
+                        ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{productname.Id}}"
+                            ng-repeat="productname in ProductMasterColl | filter:{ ProductCategoryNameId : ddlProductCategory }">
+                            {{productname.Title}}</option>
+                    </select>
+                </div>
+
+               
+
+                    <!-- <div class="col-md-4">
+                        <label class="col-form-label">Dosage Form</label> <span style="color:red;">*</span>
+                            <input type="text" class="form-control" ng-required="true"  name="dosage1" ng-model="dosage1" id="dosage1" disabled>                            
+    
+                    </div> -->
+                  
+
+                    <div class="col-md-4">
+                        <label class="col-form-label">Business Case Details 
+                            <span style="color:red;">*</span></label>
+                        </label>
+                        <input type="text" class="form-control"  ng-required="true" ng-model="BusinessCaseDescription" name="BusinessCaseDescription" id="BusinessCaseDescription"/>
+    
+                    </div>
+                
+
+                <div class="col-md-4">
+                <label class="col-form-label">LOE (mmm-yyyy) </label>
+                <div class="">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy" ng-model="LOEDate" ng-disabled="true"
+                            is-open="LOEDateOptions.opened" datepicker-options="LOEDateOptions" ng-required="true"
+                            close-text="Close" alt-input-formats="altInputFormats" ng-readonly="true"
+                            show-button-bar="false" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-secondary" ng-click="openLoeDate()"
+                                style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                <i class="fa-svg-icon">
+                                    <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                    </svg>
+                                </i>
+                            </button>
+                        </span>
+                    </p>
+                </div>  
+                </div>
+                
+                
+                <div class="col-md-4">
+                <label class="col-form-label">Launch Date (US) (mmm-yyyy) </label>
+                <div class="">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy" ng-model="LaunchDate" datepicker-options="LaunchDateOptions" ng-disabled="true"
+                            is-open="LaunchDateOptions.opened"  ng-required="true"
+                            close-text="Close" alt-input-formats="altInputFormats" ng-readonly="true"
+                            show-button-bar="false" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-secondary" ng-click="openLaunchDate()"
+                                style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                <i class="fa-svg-icon">
+                                    <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                    </svg>
+                                </i>
+                            </button>
+                        </span>
+                    </p>
+                </div>  
+                </div>
+          
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Filling Date</label>
+                    <div class="">
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy" ng-model="FillingDate" datepicker-options="FillingDateOptions"
+                                is-open="FillingDateOptions.opened"  ng-required="true"
+                                close-text="Close" alt-input-formats="altInputFormats" ng-readonly="true"
+                                show-button-bar="false" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary" ng-click="openFillingDate()"
+                                    style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                    <i class="fa-svg-icon">
+                                        <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                        </svg>
+                                    </i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>  
+                    </div>
+
+
+
+                    <div class="col-md-4">
+                        <label class="col-form-label">No of Generic Fillers<span style="color:red;">*</span></label>
+                        <input type="number" class="form-control" ng-model="NoofGenericFilers" name="NoofGenericFilers"
+                            id="NoofGenericFilers" min="0"  ng-required="true">
+                    </div>
+    
+                   
+                    <div class="col-md-4">
+                        <label class="col-form-label">Filling Type
+                            <span style="color:red;">*</span></label>
+                        <select class="form-control" name="ddlFillingType" ng-model="ddlFillingType"
+                           id="ddlFillingType" ng-required="true">
+                            <option ng-value="">Select</option>
+                            <option ng-value="{{filling.Id}}" ng-repeat="filling in FillingTypeColl">
+                                {{filling.Title}}</option>
+                        </select>
+                    </div>
+
+
+          
+
+                    <div class="col-md-4">
+                        <label class="col-form-label">Filling Status
+                            <span style="color:red;">*</span></label>
+                        <select class="form-control" name="ddlFillingStatus" ng-model="ddlFillingStatus"
+                           id="ddlFillingStatus" ng-required="true">
+                            <option ng-value="">Select</option>
+                            <option ng-value="{{Status.Id}}" ng-repeat="Status in StatusColl">
+                                {{Status.Title}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="col-form-label">Innovator
+                            <span style="color:red;">*</span></label>
+                        <select class="form-control" name="ddlInnovator" ng-model="ddlInnovator"
+                           id="ddlInnovator" ng-required="true">
+                            <option ng-value="">Select</option>
+                            <option ng-value="{{Innovator.Id}}" ng-repeat="Innovator in InnovatorColl">
+                                {{Innovator.Title}}</option>
+                        </select>
+                    </div>
+
+                    
+
+
+
+                    <div class="col-md-4">
+                        <label class="col-form-label">Dosage Form</label>
+                        <div class="col-md-10" >
+                            <label  name="dosage1" ng-model="dosage1" id="dosage1" disabled> {{dosage1}} </label>    
+                                                    
+                    
+                        </div>              
+                
+                    </div>
+           
+
+               
+                           
+
+            
+            </div>
+
+
+        </div>
+    </div>
+
+
+  
+
+    <div class="row document-heading">
+        <div class="col-xs-1 col-sm-1 col-md-3">
+            <span style="color: red;">*</span>Market 
+        </div>
+
+        <div class="col-xs-1 col-sm-1 col-md-3">
+            <span style="color: red;">*</span>Country 
+        </div>
+
+    </div>
+
+    <div class="row grid-style rowItem document-content" >
+        
+        <div class="col-xs-1 col-sm-1 col-md-3">
+            
+            <select class="form-control" ng-model="ddlMarket" id="ddlMarket" ng-readonly="true"  ng-disabled="true"
+            ng-required="true">
+            <option ng-value="0">Select</option>
+            <option ng-value="{{market.ID}}" ng-repeat="market in MarketColl">
+                {{market.Title}}
+            </option>
+        </select>
+
+    </div>
+
+        <div class="col-xs-1 col-sm-1 col-md-3">
+            <select class="form-control" ng-model="ddlcountry" id="ddlcountry"  ng-readonly="true" ng-disabled="true"
+            ng-required="true">
+            <option ng-value="0">Select</option>
+            <option ng-value="{{country.ID}}" ng-repeat="country in CountryColl |filter :{MarketNameId:ddlMarket}">  
+                {{country.Title}}
+            </option>
+        </select>
+    </div>
+     
+</div>
+<div ng-repeat="Capex in OldCapexPhaseColl">
+   
+            <div class="form-group row">
+                <table class="col-sm-12">
+                   
+                    <tr class="row document-heading">
+                      
+                        <td class="col-xs-1 col-sm-1 col-md-2">
+                            <span style="color: red;">*</span>SKU 
+                        </td>
+                        
+                       
+                        <td class="col-xs-1 col-sm-1 col-md-2">
+                            <span style="color: red;">*</span>SKU Unit
+                        </td>
+
+                        <td class="col-xs-1 col-sm-1 col-md-2">
+                            <span style="color: red;">*</span>Pack Size
+                        </td>
+
+                        <td class="col-xs-1 col-sm-1 col-md-2">
+                            <span style="color: red;">*</span>Packing Type
+                        </td>
+                       
+                    </tr>
+                    
+                    <tr class="row grid-style rowItem document-content" >
+                        
+                        <td class="col-xs-1 col-sm-1 col-md-2">
+                            <input type="number" class="form-control"  ng-model="Capex.SKU" ng-required="true"
+                            ng-readonly="isFormReadonly" min="0" max="1000" />
+
+                        </td>
+
+                        <td class="col-xs-1 col-sm-1 col-md-2">
+
+                            <select class="form-control" ng-model="Capex.ddlSKUUnit" id="ddlSKUUnit"
+                            ng-required="true">
+                            <option ng-value="0">Select</option>
+                            <option ng-value="{{skuUnit.ID}}" ng-repeat="skuUnit in Capex.SkuMasterColl">
+                                {{skuUnit.Title}}
+                            </option>
+                        </select>
+
+
+                        </td>
+
+                        <td class="col-xs-1 col-sm-1 col-md-2">
+                            <input type="number" class="form-control"  ng-model="Capex.PackSize" ng-required="true"
+                            ng-readonly="isFormReadonly" min="0" max="1000" />
+
+                        </td>
+
+                        <td class="col-xs-1 col-sm-1 col-md-2">
+                           <select class="form-control" ng-model="Capex.ddlPackingType" id="ddlPackingType"
+                            ng-required="true">
+                            <option ng-value="0">Select</option>
+                            <option ng-value="{{PackType.ID}}" ng-repeat="PackType in Capex.PackingTypeColl">
+                                {{PackType.Title}}
+                            </option>
+                        </select>
+
+                        </td>
+                       
+                        <td class="col-xs-2 col-sm-2 col-md-2">
+                         
+                            <i class="fa fa-plus-square  fa-2x" aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+                            ng-click="HideAddButton(Capex)"></i>
+                            <!-- <i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;" 
+                                ng-if="Capex.HideRemoveButton == false" ng-click="removeAuditItem(Capex, $event)"></i> -->
+                        </td>
+                     
+                    </tr>
+                </table>
+            </div>
+ </div>
+ <div ng-show="newMarketColldiv">
+    <div ng-repeat="Capex in cfsaAuditColl">
+   
+        <div class="form-group row">
+            <table class="col-sm-12">
+               
+                <tr class="row document-heading">
+                  
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <span style="color: red;">*</span>SKU 
+                    </td>
+                    
+                   
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <span style="color: red;">*</span>SKU Unit
+                    </td>
+
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <span style="color: red;">*</span>Pack Size
+                    </td>
+
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <span style="color: red;">*</span>Packing Type
+                    </td>
+                   
+                </tr>
+                
+                <tr class="row grid-style rowItem document-content" >
+                    
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <input type="number" class="form-control"  ng-model="Capex.SKU" ng-required="true"
+                        ng-readonly="isFormReadonly" min="0" max="1000" />
+
+                    </td>
+
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+
+                        <select class="form-control" ng-model="Capex.ddlSKUUnit" id="ddlSKUUnit"
+                        ng-required="true">
+                        <option ng-value="0">Select</option>
+                        <option ng-value="{{skuUnit.ID}}" ng-repeat="skuUnit in Capex.SkuMasterColl">
+                            {{skuUnit.Title}}
+                        </option>
+                    </select>
+
+
+                    </td>
+
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                        <input type="number" class="form-control"  ng-model="Capex.PackSize" ng-required="true"
+                        ng-readonly="isFormReadonly" min="0" max="1000" />
+
+                    </td>
+
+                    <td class="col-xs-1 col-sm-1 col-md-2">
+                       <select class="form-control" ng-model="Capex.ddlPackingType" id="ddlPackingType"
+                        ng-required="true">
+                        <option ng-value="0">Select</option>
+                        <option ng-value="{{PackType.ID}}" ng-repeat="PackType in Capex.PackingTypeColl">
+                            {{PackType.Title}}
+                        </option>
+                    </select>
+
+                    </td>
+                   
+                    <td class="col-xs-2 col-sm-2 col-md-2">
+                    <i class="fa fa-plus-square  fa-2x" aria-hidden="true"
+                    ng-if="Capex.HideAddButtonMarket == false"
+                   ng-click="HideAddButton(Capex)" ng-if="Capex.HideRemoveButtonMarket == false">
+
+                </i>
+               <i class="fa fa-minus-square fa-2x" aria-hidden="true"
+                   ng-if="Capex.HideRemoveButtonMarket == false"
+                   ng-click="removeAuditItem(Capex, $event)"
+                   style="color: #dc3545; cursor: pointer;">
+
+               </i>
+               </div>
+                    </td>
+                 
+                </tr>
+            </table>
+        </div>
+</div>
+
+
+ </div>
+        
+</div>
+<div class="row">
+    <div class="col-md-12 " style="text-align: center;margin-top:20px;">
+        <button class="btn btn-success" type="button" ng-show="!frmReqInitiation.$invalid"  ng-disabled='disabledFlag' ng-click="onSubmit()"
+            style="margin-right:16px; transition:none;">Submit</button>
+            <!-- <button class="btn btn-primary" type="button"  ng-show="!frmReqInitiation.$invalid" ng-click="onSaveAsDraft()" style="margin-right:16px;">Save As Draft</button> -->
+        <button class="btn btn-secondary" type="button" ng-click="onInitiationCancel()">Exit</button>
+    </div>
+</div>
+</div>

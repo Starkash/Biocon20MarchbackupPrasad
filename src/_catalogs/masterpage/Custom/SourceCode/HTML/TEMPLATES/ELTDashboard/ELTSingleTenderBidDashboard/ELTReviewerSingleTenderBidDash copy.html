@@ -1,0 +1,188 @@
+﻿<div id="divLoading" class="d-flex justify-content-center align-items-center" ng-show="isLoading">
+    <div tabindex="9999" class="spinner"></div>
+</div>
+<div class="modal-header customModalheader w-100">
+    <div class="modal-title customModalTitle w-100" id="modal-title">
+        <i class="fa fa-list-alt" aria-hidden="true"></i>
+        <h3 class="headingtitle"> TENDER BID(Single) Business Case ELT Reviewer Dashboard</h3>
+ <div class="userbox"><span class="">Welcome</span> : <span class="username">{{CurrLogUserId}}</span></div>
+ <div class="userbox" style="margin-top: -8px;float: left;"><button style="font-size: 18px;background: transparent;color: #fff;" type="button" class="btn btn-link" ng-click="onClickHome()"><i class="fa fa-home" aria-hidden="true"></i> Home</button>
+    <a style="font-size: 18px;background: transparent;color: #fff;" type="button" class="btn btn-link" href="../SitePages/ELTCommercialsRBClp.aspx"><i class="fa fa-arrow-left" aria-hidden="true"></i> 
+        Back</a></div>
+    </div>
+
+</div>
+
+<div class="row mt-12">
+   
+
+    <div style="margin-left:20px;">
+
+
+        <select class="form-control  d-inlineblock" name="ddlPartner" ng-model="ddlPartner" id="ddlPartner"
+            ng-change="Partnerfilter(ddlPartner);ifallblank()">
+            <option ng-value="">Select Partner Name</option>
+            <option ng-value="{{chngSt.PartnerId}}" ng-repeat="chngSt in newfilteredarrayCol2">
+                {{chngSt.PartnerTitle}}</option>
+        </select>
+
+    </div>
+
+
+
+<div style="margin-left:10px;">
+    <div class="dropdown-container">
+        <select class="form-control  d-inlineblock" name="Submarket" ng-model="Submarket" id="Submarket"
+            ng-change="Submarketfilter(Submarket);ifallblank()">
+            <option ng-value="">Select SubMarket Name</option>
+            <option ng-value="{{chngSt.SubMarketId}}"
+                ng-repeat="chngSt in newfilteredarrayColl  |unique:'SubMarketId'">
+                {{chngSt.SubMarketTitle}}</option>
+        </select>
+    </div>
+</div>
+
+
+<div style="margin-left:10px;">
+
+    <div class="dropdown-container">
+        <select class="form-control  d-inlineblock" name="ddlProduct5" ng-model="ddlProduct5" id="ddlProduct5"
+            ng-change="Productfilter(ddlProduct5);ifallblank()">
+            <option value="">Select Product Name</option>
+            <option ng-repeat="repManager in InBusinessLicencingLicencingColl4|unique:'ProductNameId'"
+                value="{{repManager.ProductNameId}}">
+                {{repManager.ProductName.Title}}
+            </option>
+
+        </select>
+    </div>
+</div>
+<div class="n-searchselect">
+
+    <select ng-model="ddlStatus" id="ddlStatus" class="form-control  d-inlineblock" ng-change="ifallblank()">
+
+        <option value="">Select Status</option>
+
+
+        <option value="{{chngSt.CaseStatus}}" ng-repeat="chngSt in InBusinessLicencingLicencingColl5 |unique:'CaseStatus'">
+            {{chngSt.CaseStatus}}</option>
+    </select>
+</div>
+
+<div class=" search-box">
+    <input type="text" name="search" placeholder="Search" class="search-boxn search-box " ng-model="search">
+</div>
+</div>
+ 
+<div class="my-2 initiatortable">
+    <div class="card-body no-padding">
+        <div class="table-responsive ">
+            <table class="table tbl tbldata" id="film">
+                <thead>
+                    <tr>
+                        <th>Business Case Id</th>
+                        <th>Strategy</th>
+                        <!-- <th>Sub Strategy</th> -->
+                        <th>Business Case Name</th>
+                        <th style="text-align:center;">Business Case Details</th>
+                       
+                        <th>Month Of Initiation</th>
+                        <th>Product Name</th>
+                       <th style="text-align:center;">Lap Version</th>
+                         <th style="text-align:center;">Version</th>
+                        <th>Current Business Case Stage</th>
+                        <th>Current Case Status</th>
+                        <th style="text-align:center;">View</th>
+
+                        <th style="text-align:center;">V2V Comparison Report</th>
+                        <th style="text-align:center;">DRC dashboard</th>
+                      
+                        <!-- <th style="text-align:center;">ELT Review Report</th> -->
+                       
+                    
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="request in InBusinessLicencingLicencingColl1   = (test |filter : search |filter : modified| filter :{InvoiceNo:ddlInvNo,CaseStatus:ddlStatus,ProductNameId:ddlProduct5} )|orderBy : '-Modified' | limitTo :
+                    itemsPerPage:itemsPerPage*(currentPage-1)">
+                    <td>{{request.Title}}</td>
+                    <!-- <td>{{request.Strategy.Title}}</td> -->
+                    <td>{{request.SubStrategy.Title}}</td>
+                    <td>{{request.BusinessCaseName}}</td>
+                    <td class="ellipsis" style="text-align:center;">{{request.BusinessCaseDescription}}</td>
+
+                    <td>{{request.InitiationDate|date : "MMM-yyyy"}}</td>
+                    <td>{{request.ProductName.Title}}</td>
+                    <td style="text-align:center;">{{request.LapVersion}}</td>
+                    <td>{{request.VersionNo}}</td>
+
+
+                    <td>{{request.CaseStage.Title}}</td>
+                    <td>{{request.CaseStatus}}</td>
+                   
+                    <td style="text-align:center;" class="col-xs-1 col-sm-1 col-md-1"><a class="view" ng-click="ViewReviewerForm(request,'ELTReviewerAPIDash')"><i
+                                class="fa fa-eye" aria-hidden="true"></i></a> </td>
+
+                                <td style="text-align:center;">
+                                    <a href="{{request.V2VPowerBiLink}}" target="_blank">
+                                <img src="../SiteAssets/BusinessCaseLP/assets/img/report-logo-bicon1.png" class="r-bio-img"></a>
+                                </td>
+                                <td style="text-align:center;">
+                                    <a href="{{request.DRCPowerBiLink}}" target="_blank">
+                                        <img src="../SiteAssets/BusinessCaseLP/assets/img/report-logo-bicon.png"
+                                            class="r-bio-img"></a>
+                                </td>
+        
+                                <!-- <td style="text-align:center;"> -->
+                                 <!-- <a href="https://app.powerbi.com/groups/02afbc0f-af46-45ca-99cb-35370af19987/reports/464376c7-1d60-4aa8-857c-7c80c4a6ae97/ReportSection0a67bd0e8cc1e819ed00?experience=power-bi&filter=OutLicensingBusinessCase/Id eq {{request.ID}}" target="_blank"> -->
+                                    <!-- <img src="../SiteAssets/BusinessCaseLP/assets/img/report-logo-bicon.png" class="r-bio-img"></a>
+                                 </td> -->
+        
+        
+
+
+                </tr>
+                </tbody>
+
+			<div >
+            </table>
+            <div ng-hide="InBusinessLicencingLicencingColl1.length==0">
+                <div class="pagination" >
+                    <ul uib-pagination ng-model="currentPage" total-items="InBusinessLicencingLicencingColl1.length" items-per-page="itemsPerPage"
+                        max-size="maxSize" class="pagination-sm" boundary-link-numbers="true"></ul>
+                </div>
+            
+                <label for="itemsPerPageSelect">Items per Page:</label>
+                <select id="itemsPerPageSelect" ng-model="itemsPerPage" ng-change="updatePagination()">
+                   
+                    <option ng-value="20" >20</option>
+                    <option ng-value="50">50</option>
+                    <option ng-value="100">100</option>
+
+
+                </select>
+           </div>
+            
+            <div ng-show="InBusinessLicencingLicencingColl1.length==0">
+            <p>No data available in the table.</p>
+            </div>
+            
+        </div>
+        <!-- <div class="row pr-4 pl-4 pt-2">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="selectbox">
+                    <div class="recordperpagebox">Records Per Page</div>
+                    <select ng-model="pageSize1" id="pageSize1"class="form-control searchShowMore" ng-change="getSelectedRecords()">
+                        <option ng-selected="true" value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select></div>
+                <ul uib-pagination boundary-link-numbers="true" max-size="2"
+                    total-items="businessCaseRequestColl.length" ng-model="PreviousCurrentPage"
+                    class="pagination-sm pull-right" items-per-page="PreviousItemsPerPage" previous-text="&lsaquo;"
+                    next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+            </div>
+        </div> -->
+    </div>

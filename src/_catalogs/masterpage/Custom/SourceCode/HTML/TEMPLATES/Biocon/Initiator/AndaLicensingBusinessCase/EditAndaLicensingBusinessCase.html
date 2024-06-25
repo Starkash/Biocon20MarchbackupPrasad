@@ -1,0 +1,804 @@
+﻿<style>
+    .multiselectDropdown .dropdown-menu {
+        top: -1px !important;
+        left: -14px;
+    }
+
+    .multiselectDropdown .dropdown-header {
+        display: block;
+        padding: 0.5rem 0.5rem !important;
+    }
+
+    .multiselectDropdown .btn {
+        border: 1px solid #ced4da;
+        padding: 0.375rem 3rem;
+    }
+
+    .multiselectDropdown ul li,
+    a {
+        text-align: left;
+        font-size: 13px;
+        color: #000;
+        text-decoration: none;
+    }
+
+    .pofa-minus-square {
+        top: 33px;
+        position: absolute;
+        left: 36px;
+        margin: -10px;
+    }
+</style>
+
+<div id="divLoading" class="" ng-if="isLoading">
+    <center style="margin-top:15%;"> <div tabindex="9999" class="spinner"></div></center>
+ </div>
+ 
+<div ng-form="frmReqInitiation" novalidate>
+    <div class="modal-header customModalheader">
+        <div class="modal-title customModalTitle" id="modal-title">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+            <h3 style="display: inline-block; font-size: 18px; margin: 0px;">Edit Business Case Initiation</h3>
+        </div>
+    </div>
+    <div style="border: 1px solid #ddd; margin-top: 20px;border-radius: 5px;" class="addasswrap">
+        <div class="modal-body" id="divContSafeAuditFrm">
+            <div style="position: relative; margin-top:10px;margin-bottom:20px;margin-left:605px;margin-right:0px;">
+                <p style="color:red;margin-left:120px; font-size: 11px; ">Note:<span style="margin-left:5px;">1.Mandatory Fields are
+                        indicated with Red border and “*”.</span> 
+                        </br><span style="margin-left:33px;">2.Duplicate entry of “Country & SKU Details” will get deleted at
+                            submit, hence leading to loss of data.</span>
+            
+                </p>
+            </div>
+            <div class="row mt-10">
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Strategy</label>
+
+                    <select class="form-control" disabled name="ddlStrategy" ng-model="ddlStrategy" id="ddlStrategy"
+                        ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{Strategy.Id}}" ng-repeat="Strategy in StrategyColl">{{Strategy.Title}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">SubStrategy</label>
+                    <select class="form-control" disabled name="ddlSubStrategy" ng-model="ddlSubStrategy"
+                        id="ddlSubStrategy" ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{SubStrategy.Id}}"
+                            ng-repeat="SubStrategy in SubStrategyColl | filter:{StrategyId: ddlStrategy}">
+                            {{SubStrategy.Title}}</option>
+                    </select>
+                </div>
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Month Of Initiation</label>
+                    <div>
+                        <label class="col-form-label" id="lblDate">{{MonthInitiation|date :"MMM - yyyy"}}</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Business Case Name</label>
+
+                    <input type="text" class="form-control" ng-model="BusinessCaseName" disabled name="BusinessCaseName"
+                        id="BusinessCaseName" ng-required="true">
+                </div>
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Product Category
+
+                        <select class="form-control" disabled name="ddlProductCategory" ng-model="ddlProductCategory"
+                            ng-change="bindproduct(ddlProductCategory)" id="ddlProductCategory" ng-required="true">
+                            <option ng-value="">Select</option>
+                            <option ng-value="{{productcat.Id}}" ng-repeat="productcat in ProductCategoryColl">
+                                {{productcat.Title}}</option>
+                        </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Product Name </label>
+                    <select class="form-control" disabled name="ddlProductName" ng-model="ddlProductName"
+                        id="ddlProductName" ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{productname.Id}}"
+                            ng-repeat="productname in ProductMasterColl | filter:{ ProductCategoryNameId : ddlProductCategory }">
+                            {{productname.Title}}</option>
+                    </select>
+                </div>
+
+                
+                <div class="col-md-4">
+                    <label class="col-form-label">Business Case Details 
+                        <span style="color:red;">*</span></label>
+                    </label>
+                    <input type="text" class="form-control"  ng-required="true" ng-model="BusinessCaseDescription" name="BusinessCaseDescription" id="BusinessCaseDescription"/>
+
+
+                </div>
+                
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Innovator
+                        <span style="color:red;">*</span></label>
+                    <select class="form-control" name="ddlInnovator" ng-model="ddlInnovator" id="ddlInnovator"
+                        ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{ddlInnovator.Id}}" ng-repeat="ddlInnovator in InnovatorColl">
+                            {{ddlInnovator.Title}}</option>
+                    </select>
+                </div>
+
+                
+               
+                <div class="col-md-4">
+                    <label class="col-form-label">Dosage Form</label>
+                    <div class="col-md-10">
+                        <label name="dosage1" ng-model="dosage1" id="dosage1" disabled> {{dosage1}} </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div>
+
+            <div>
+                <div>
+                    <div class="col-sm-12" ng-repeat="marRow in ExistMarketRowColl">
+                        <div class="row">
+                            <div class="col-xs-1 col-sm-1 col-md-2">
+                                <span>Market <span style="color:red;">*</span></span>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-3">
+                                <span>SUB Market <span style="color:red;">*</span></span>
+                            </div>
+                        </div>
+
+                        <div class="row grid-style rowItem document-content" >
+                            <div class="col-xs-1 col-sm-1 col-md-2">
+                                <select class="form-control" name="ddlmarket" ng-model="marRow.ddlmarket" id="ddlmarket"
+                                    ng-required="true">
+                                    <option ng-value="">Select</option>
+                                    <option ng-value="{{market.Id}}" ng-repeat="market in MarketColl">
+                                        {{market.MarketName}} </option>
+                                </select>
+                            </div>
+                            <!-- ng-change="existRowMarket(marRow,ddlSubMarket)" -->
+                            <div class="col-xs-1 col-sm-1 col-md-2">
+                                <select class="form-control" name="ddlSubMarket" ng-change="bindproduct1(marRow)"
+                                    ng-model="marRow.ddlSubMarket" ng-required="true" id="ddlSubMarket ">
+                                    <option ng-value="">Select</option>
+                                    <option ng-value="{{sm.Id}}"
+                                        ng-repeat="sm in subMarketColl |filter : {MarketId:marRow.ddlmarket}">
+                                        {{sm.Title}} </option>
+                                   </select>
+
+
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-2">
+                                <i class="fa fa-plus-square  fa-2x" aria-hidden="true"
+                                    style="color: #1a8f49; cursor: pointer;" ng-if="marRow.HideAddButtonMarket == false"
+                                    ng-click="addMarketRow('new')" ng-if="marRow.HideRemoveButtonMarket == false">
+                                    <span style="background-color: #1a8f49; color:white;">Add Market Section</span>
+
+                                </i>
+                                <i class="fa fa-minus-square fa-2x" aria-hidden="true"
+                                    ng-if="marRow.HideRemoveButtonMarket == false"
+                                    style="color: #dc3545; cursor: pointer;">
+
+                                </i>
+                            </div>
+                            <!-- ADD  COuntrow row (ng repaet) -->
+                            <div class="row grid-style rowItem document-content"
+                                ng-repeat="countryRow1 in marRow.CountryRow">
+
+
+                                <div class="row document-heading countrytitletbox m-15">
+                                    <div class="col-xs-1 col-sm-1 col-md-2">
+                                        <span>Country <span style="color:red;">*</span></span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2">
+                                        <span>LOE Date <span style="color:red;">*</span></span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2">
+                                        <span>Filling Date <span style="color:red;">*</span></span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2">
+                                        <span>Launch Date <span style="color:red;">*</span></span>
+                                    </div>
+                                    <div class="col-xs-2 col-sm-2 col-md-1 mx-111">
+                                        <span>Partner </span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 mx-111">
+                                        <span>Partner Details </span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1  mx-111">
+                                        <span>Currency <span style="color:red;">*</span></span>
+                                    </div>
+
+
+
+                                    <div class="col-xs-1 col-sm-1 col-md-2">
+                                       <select class="form-control" ng-model="countryRow1.Country" ng-required="true">
+                                            <option ng-value="0">Select</option>
+                                            <option ng-value="{{cont.ID}}" ng-repeat="cont in countryRow1.CountryColl">
+                                                {{cont.Title}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2">
+                                        <p class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy"
+                                                ng-model="countryRow1.LOEDate" ng-required="true"
+                                                is-open="countryRow1.IsOpenDate" datepicker-options="LOEDateOptions"
+                                                close-text="Close" alt-input-formats="altInputFormats"
+                                                ng-readonly="true" show-button-bar="false" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-secondary"
+                                                    ng-click="openLOEDate(countryRow1)"
+                                                    style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                                    <i class="fa-svg-icon">
+                                                        <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                                        </svg>
+                                                    </i>
+                                                </button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2">
+                                        <p class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy"
+                                                ng-model="countryRow1.FillingDate" ng-required="true"
+                                                is-open="countryRow1.IsOpenDate2"
+                                                datepicker-options="FillingDateOptions" close-text="Close"
+                                                alt-input-formats="altInputFormats" ng-readonly="true"
+                                                show-button-bar="false" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-secondary"
+                                                    ng-click="openFillingDate(countryRow1)"
+                                                    style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                                    <i class="fa-svg-icon">
+                                                        <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                                        </svg>
+                                                    </i>
+                                                </button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2">
+                                        <p class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy"
+                                                ng-model="countryRow1.LaunchDate" ng-required="true"
+                                                is-open="countryRow1.IsOpenDate3" datepicker-options="LaunchDateOptions"
+                                                close-text="Close" alt-input-formats="altInputFormats"
+                                                ng-readonly="true" show-button-bar="false" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-secondary"
+                                                    ng-click="openLaunchDate(countryRow1)"
+                                                    style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                                    <i class="fa-svg-icon">
+                                                        <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                                        </svg>
+                                                    </i>
+                                                </button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-2 col-sm-2 col-md-1 mx-111">
+                                        <select class="form-control" ng-model="countryRow1.Partner" id="conagency">
+                                            <option ng-value="0">Select</option>
+                                            <option ng-value="{{part.ID}}" ng-repeat="part in countryRow1.PartnerColl">
+                                                {{part.Title}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 mx-111">
+                                        <input type="text" class="form-control" ng-model="countryRow1.PartnerDesc">
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 mx-111">
+                                        <select class="form-control" ng-model="countryRow1.Currency" id="ddlCurrency"
+                                            ng-required="true">
+                                            <option ng-value="0">Select</option>
+                                            <option ng-value="{{currency.ID}}"
+                                                ng-repeat="currency in countryRow1.CurrencyColl">
+                                                {{currency.Title}}
+                                            </option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-2 col-md-2 ">
+                                        <span>Filing Type <span style="color:red;">*</span></span>
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-2 col-md-2 ">
+                                        <span>No of Generic Filler <span style="color:red;">*</span></span>
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-2 col-md-2 ">
+                                        <span>Filling Status <span style="color:red;">*</span></span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 ">
+
+                                    </div>
+
+                                </div>
+                                <!--   COuntrow row (ng repaet) -->
+                                <div class="col-xs-2 col-sm-2 col-md-2 ">
+                                    <select class="form-control" ng-model="countryRow1.FilingType" id="conagency"
+                                        ng-required="true">
+                                        <option ng-value="0">Select</option>
+                                        <option ng-value="{{FilingType.ID}}"
+                                            ng-repeat="FilingType in countryRow1.FilingTypeColl">
+                                            {{FilingType.Title}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 ">
+
+                                    <input type="number" ng-model="countryRow1.NoofGenericFiller" string-to-number
+                                        class="form-control wid-85" ng-required="true" ng-readonly="isFormReadonly"
+                                        min="0" max="1000" />
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-2">
+                                  <select class="form-control" ng-model="countryRow1.Status" id="ddlRiskLevel"
+                                        ng-required="true">
+                                        <option ng-value="0">Select</option>
+                                        <option ng-value="{{status.ID}}" ng-repeat="status in countryRow1.StatusColl">
+                                            {{status.Title}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-2 ">
+
+                                    <i class="fa fa-plus-square  fa-2x" ng-click="ExistCountryRow(countryRow1.MarketId)"
+                                        aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+                                        ng-if="countryRow1.HideAddButtonCountryRow == false">
+                                        <span style="background-color: #1a8f49; color:white;">Add Country</span>
+                                    </i>
+                                    <i class="fa fa-plus-square  fa-2x"
+                                        ng-click="ExistCountrySKURow(countryRow1.MarketId)" aria-hidden="true"
+                                        style="color: #1a8f49; cursor: pointer;"
+                                        ng-if="countryRow1.HideAddExistSKUButton == false">
+                                        <span style="background-color: #1a8f49; color:white;">Add SKU</span>
+                                    </i>
+                                    <i class="fa fa-minus-square fa-2x" aria-hidden="true"
+                                        style="color: #dc3545; cursor: pointer;"
+                                        ng-click="removeCountryDetailsRowExist(countryRow1, $event)"
+                                        ng-if="countryRow1.HideRemoveButtonCountryRow == false">
+                                    </i>
+
+                                </div>
+                                <!-- ADD SKU ROW NG REPAT -->
+                                <div class="col-sm-12" ng-repeat="skuRow1 in countryRow1.SKURow">
+                                    <div class="row document-heading">
+                                        <div class="col-xs-1 col-sm-1 col-md-2">
+                                            <span>SKU Qty <span style="color:red;">*</span></span>
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-2" style="white-space: nowrap;">
+                                            <span>SKU Unit <span style="color:red;">*</span></span>
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-2">
+                                            <span>Pack Size <span style="color:red;">*</span></span>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-4" style="white-space: nowrap;">
+                                            <span>Packing Type <span style="color:red;">*</span></span>
+                                        </div>
+                                    </div>
+                                    <!--  SKU ROW NG REPAT -->
+                                    <div class="row grid-style rowItem document-content">
+                                       <div class="col-xs-1 col-sm-1 col-md-2">
+                                           <input type="number" string-to-number class="form-control"
+                                                ng-model="skuRow1.SKUQunatity" ng-required="true"
+                                                ng-readonly="isFormReadonly" style="width: 78px;" min="0" max="1000" />
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-2">
+                                           <select class="form-control" ng-model="skuRow1.SKUUnit" id="SKUUnit"
+                                                ng-required="true">
+                                                <option ng-value="0">Select</option>
+                                                <option ng-value="{{skuunit.ID}}" ng-repeat="skuunit in SkuMasterColl">
+                                                    {{skuunit.Title}}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-2">
+                                           <input type="number" string-to-number class="form-control"
+                                                ng-model="skuRow1.PackSize" ng-required="true"
+                                                ng-readonly="isFormReadonly" style="width: 78px;" min="0" max="1000" />
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-2">
+                                            <select class="form-control" ng-model="skuRow1.PackingType"
+                                                id="ddlPackingType" ng-required="true">
+                                                <option ng-value="0">Select</option>
+                                                <option ng-value="{{packType.ID}}"
+                                                    ng-repeat="packType in PackingMasterColl">
+                                                    {{packType.Title}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-plus-square   fa-2x" aria-hidden="true"
+                                                ng-click="ExistSKUDetailsRow1(countryRow1.Country,countryRow1.MarketId,1)"
+                                                style="color: #1a8f49; cursor: pointer;">
+                                                <span style="background-color: #1a8f49; color:white;">Add SKU
+                                                    Section</span>
+
+                                            </i>
+                                            <i class="fa fa-minus-square fa-2x" aria-hidden="true"
+                                                ng-click="removeSKUDetailsRowExist(skuRow1, $event)"
+                                                style="color: #dc3545; cursor: pointer;"
+                                                ng-if="skuRow1.HideRemoveButtonSKURow == false"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <!-- END COuntrow row -->
+                        </div>
+                        <!-- END ng repeat market -->
+                    </div>
+                </div>
+
+                <!--   AddOL ----->
+                <div ng-show="newMarketColldiv" ng-repeat="marRow in newMarketRow1Coll">
+                    <!-- marketitletbox-->
+                    <div class="row lbl ">
+                        <div class="col-xs-1 col-sm-1 col-md-1">
+                            <span>Market <span style="color:red;">*</span></span>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-3">
+                            <span>SUB Market <span style="color:red;">*</span></span>
+                        </div>
+                    </div>
+                    <!-- ng repeat market -->
+                    <div class="row grid-style rowItem document-content ptb-5">
+
+                        <div class="col-xs-1 col-sm-1 col-md-1">
+                            <select class="form-control wid-auto" name="ddlmarket" ng-model="marRow.ddlmarket"
+                                id="ddlmarket" ng-required="true">
+                                <option ng-value="">Select</option>
+                                <option ng-value="{{market.Id}}" ng-repeat="market in MarketColl"">
+                                             {{market.MarketName}} </option>
+                                             <!-- ng-repeat=" market in MarketColl" -->
+                            </select>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-5 ">
+                            <div class="marketbox">
+                                <!-- ng-change="bindCountry(marRow.ddlmarket);addMarketRow(marRow)"  ng-change="addMarketRow(marRow,'SB')"-->
+                                <select class="form-control wid-auto" name="ddlSubMarket"
+                                    ng-change="addMarketRowNew(marRow,'SB')" ng-model="marRow.ddlSubMarket"
+                                    ng-required="true" id="ddlSubMarket ">
+                                    <option ng-value="">Select</option>
+                                    <option ng-repeat="sm in subMarketColl |filter : {MarketId:marRow.ddlmarket}"
+                                        value="{{sm.Id}}">{{sm.Title}}</option>
+                                </select>
+                            </div>
+                            <div class="marketbox">
+                                <i class="fa fa-plus-square  fa-2x" aria-hidden="true"
+                                    ng-if="marRow.HideAddButtonMarket == false" ng-click="addMarketRowNew(marRow,null)"
+                                    ng-if="marRow.HideRemoveButtonMarket == false">
+                                    <span style="color:#003e76;">Add One More Market</span>
+
+                                </i>
+                                <i class="fa fa-minus-square fa-2x" aria-hidden="true"
+                                    ng-if="marRow.HideRemoveButtonMarket == false"
+                                    ng-click="removeMarketDetailsRowNew(marRow, $event)"
+                                    style="color: #dc3545; cursor: pointer;">
+
+                                </i>
+                            </div>
+                        </div>
+
+                        <!-- ADD  COuntrow row (ng repaet) -->
+
+                        <div ng-if="marRow.hidecountryRow==true">
+
+                            <!--   COuntrow row (ng repaet) -->
+                            <div class="row grid-style rowItem document-content p-0"
+                                ng-repeat="countryRow1 in marRow.CountryRow">
+                                <div class="row document-heading countrytitletbox m-15">
+                                    <div class="col-xs-1 col-sm-1 col-md-2 datebox">
+                                        <span>Country <span style="color:red;">*</span></span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2 datebox">
+                                        <span>Loss Of Exclusivity(LOE) <span style="color:red;">*</span></span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2 datebox">
+                                        <span>Filling Date <span style="color:red;">*</span></span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2 datebox">
+                                        <span>Launch Date <span style="color:red;">*</span></span>
+                                    </div>
+                                    <div class="col-xs-2 col-sm-2 col-md-1 mx-11">
+                                        <span>Partner </span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 mx-11">
+                                        <span>Partner Details </span>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 mx-11">
+                                        <span>Currency <span style="color:red;">*</span></span>
+                                    </div>
+
+
+
+                                    <div class="col-xs-1 col-sm-1 col-md-2 datebox">
+                                        <select class="form-control" ng-model="countryRow1.Country" ng-required="true">
+                                            <option ng-value="0">Select</option>
+                                            <option ng-value="{{cont.ID}}"
+                                                ng-repeat="cont in countryRow1.CountryColl |filter :{MarketNameId:marRow.ddlmarket}">
+                                                {{cont.Title}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2 datebox">
+                                        <p class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy"
+                                                ng-model="countryRow1.LOEDate" ng-required="true"
+                                                is-open="countryRow1.IsOpenDate" datepicker-options="LOEDateOptions"
+                                                close-text="Close" alt-input-formats="altInputFormats"
+                                                ng-readonly="true" show-button-bar="false" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-secondary"
+                                                    ng-click="openLOEDate(countryRow1)"
+                                                    style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                                    <i class="fa-svg-icon">
+                                                        <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                                        </svg>
+                                                    </i>
+                                                </button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2 datebox">
+                                        <p class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy"
+                                                ng-model="countryRow1.FillingDate" ng-required="true"
+                                                is-open="countryRow1.IsOpenDate2"
+                                                datepicker-options="FillingDateOptions" close-text="Close"
+                                                alt-input-formats="altInputFormats" ng-readonly="true"
+                                                show-button-bar="false" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-secondary"
+                                                    ng-click="openFillingDate(countryRow1)"
+                                                    style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                                    <i class="fa-svg-icon">
+                                                        <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                                        </svg>
+                                                    </i>
+                                                </button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-2 datebox">
+                                        <p class="input-group">
+                                            <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy"
+                                                ng-model="countryRow1.LaunchDate" ng-required="true"
+                                                is-open="countryRow1.IsOpenDate3" datepicker-options="LaunchDateOptions"
+                                                close-text="Close" alt-input-formats="altInputFormats"
+                                                ng-readonly="true" show-button-bar="false" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-secondary"
+                                                    ng-click="openLaunchDate(countryRow1)"
+                                                    style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                                    <i class="fa-svg-icon">
+                                                        <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                                        </svg>
+                                                    </i>
+                                                </button>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="col-xs-2 col-sm-2 col-md-1 mx-11">
+                                       <select class="form-control" ng-model="countryRow1.Partner" id="conagency">
+                                            <option ng-value="0">Select</option>
+                                            <option ng-value="{{part.ID}}" ng-repeat="part in countryRow1.PartnerColl">
+                                                {{part.Title}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 col-md-1 mx-11">
+                                        <input type="text" class="form-control" ng-model="countryRow1.PartnerDesc">
+                                    </div>
+
+                                    <div class="col-xs-1 col-sm-1 col-md-1 mx-11">
+                                       <select class="form-control" ng-model="countryRow1.Currency" id="ddlCurrency"
+                                            ng-required="true">
+                                            <option ng-value="0">Select</option>
+                                            <option ng-value="{{currency.ID}}"
+                                                ng-repeat="currency in countryRow1.CurrencyColl">
+                                                {{currency.Title}}
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-2 col-md-2 ">
+                                        <span>Filing Type <span style="color:red;">*</span></span>
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-2 col-md-2 ">
+                                        <span>No of Generic Filler <span style="color:red;">*</span></span>
+                                    </div>
+
+                                    <div class="col-xs-2 col-sm-2 col-md-2 ">
+                                        <span>Filling Status <span style="color:red;">*</span></span>
+                                    </div>
+
+
+                                </div>
+
+                                <!--   COuntrow row (ng repaet) -->
+                                <div class="col-xs-2 col-sm-2 col-md-2 ">
+                                    <select class="form-control" ng-model="countryRow1.FilingType" id="conagency"
+                                        ng-required="true">
+                                        <option ng-value="0">Select</option>
+                                        <option ng-value="{{FilingType.ID}}"
+                                            ng-repeat="FilingType in countryRow1.FilingTypeColl">
+                                            {{FilingType.Title}}
+                                        </option>
+                                    </select>
+                                </div>
+
+
+                                <div class="col-xs-2 col-sm-2 col-md-2 ">
+
+                                    <input type="number" ng-model="countryRow1.NoofGenericFiller" string-to-number
+                                        class="form-control wid-85" ng-required="true" ng-readonly="isFormReadonly"
+                                        min="0" max="1000" />
+
+
+
+                                </div>
+
+
+                                <div class="col-xs-1 col-sm-1 col-md-2 ">
+                                   <select class="form-control" ng-model="countryRow1.Status" id="ddlRiskLevel"
+                                        ng-required="true">
+                                        <option ng-value="0">Select</option>
+                                        <option ng-value="{{status.ID}}" ng-repeat="status in countryRow1.StatusColl">
+                                            {{status.Title}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-xs-1 col-sm-1 col-md-1" style="margin-top:-10px;margin-left:50px">
+
+                                    <i class="fa fa-plus-square  fa-2x pofa-plus-square" aria-hidden="true"
+                                        ng-click="bindCountryRowNew(marRow,'RowClick')"
+                                        ng-if="countryRow1.HideAddButtonCountryRow == false">
+                                        <span>Add One More Country</span>
+                                      </i>
+                                    <i class="fa fa-plus-square  fa-2x pofa-plus-square" aria-hidden="true"
+                                        ng-click="addSKUNew(countryRow1.MarketId,countryRow1.Country,skuRow1,1)">
+                                        <span>Add SKU</span>
+
+                                    </i>
+                                    <i class="fa fa-minus-square fa-2x pofa-minus-square" aria-hidden="true"
+                                        style="color: #dc3545; cursor: pointer;margin-top: -21px;margin-left:99px;"
+                                        ng-if="countryRow1.HideRemoveButtonCountryRow == false"
+                                        ng-click="removeCountryDetailsRowNew(countryRow1, $event)">
+
+
+                                    </i>
+
+                                </div>
+                                <!-- ADD SKU ROW NG REPAT -->
+                                <div class="col-sm-12" ng-repeat="skuRow1 in countryRow1.SKURow">
+                                    <div class="row document-heading ">
+                                        <!-- <div class="col-xs-1 col-sm-1 col-md-2">
+                                                         <span>S No</span>
+                                                     </div> -->
+                                        <div class="col-xs-1 col-sm-1 col-md-2 datebox p-0">
+                                            <span>SKU <span style="color:red;">*</span></span>
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-2 p-0 datebox "
+                                            style="white-space: nowrap;">
+                                            <span>SKU Unit <span style="color:red;">*</span></span>
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-2 datebox ">
+                                            <span class="p-span">Pack Size <span style="color:red;">*</span></span>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-4 datebox" style="white-space: nowrap;">
+                                            <span class="p-span">Packing Type <span style="color:red;">*</span></span>
+                                        </div>
+                                    </div>
+                                    <!--  SKU ROW NG REPAT -->
+                                    <div class="row grid-style rowItem document-content p-0">
+                                       <div class="col-xs-1 col-sm-1 col-md-2 datebox  p-0">
+                                            <!-- <input type="text" class="form-control" ng-model="skuRow1.SKU"> -->
+                                            <input type="number" string-to-number class="form-control wid-85"
+                                                ng-model="skuRow1.SKUQunatity" ng-required="true"
+                                                ng-readonly="isFormReadonly" min="0" max="1000" />
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-2 datebox p-0">
+
+                                            <select class="form-control" ng-model="skuRow1.SKUUnit" id="SKUUnit"
+                                                ng-required="true">
+                                                <option ng-value="0">Select</option>
+                                                <option ng-value="{{skuunit.ID}}" ng-repeat="skuunit in SkuMasterColl">
+                                                    {{skuunit.Title}}
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-2 datebox pt--5">
+                                           
+                                            <input type="number" string-to-number class="form-control wid-85"
+                                                ng-model="skuRow1.PackSize" ng-required="true"
+                                                ng-readonly="isFormReadonly" min="0" max="1000" />
+                                        </div>
+                                        <div class="col-xs-1 col-sm-1 col-md-5 pt--5">
+                                            <div class="marketbox wid-40">
+                                               <select class="form-control" ng-model="skuRow1.PackingType"
+                                                    id="ddlPackingType" ng-required="true">
+                                                    <option ng-value="0">Select</option>
+                                                    <option ng-value="{{packType.ID}}"
+                                                        ng-repeat="packType in PackingMasterColl">
+                                                        {{packType.Title}}
+                                                    </option>
+                                                </select>
+
+                                            </div>
+                                           
+                                            <i class="fa fa-plus-square  fa-2x" aria-hidden="true"
+                                                ng-click="addOneMoreSKUNew(countryRow1.MarketId,countryRow1.Country,skuRow1,1)">
+                                                <span>Add One More SKU Section</span>
+
+                                            </i>
+                                            <i class="fa fa-minus-square fa-2x" aria-hidden="true"
+                                                style="color: #dc3545; cursor: pointer;"
+                                                ng-if="skuRow1.HideRemoveButtonSKURow == false"
+                                                ng-click="removeSKUDetailsRowNew(skuRow1, $event)"></i>
+                                           
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!-- END COuntrow row -->
+                    </div>
+                    <!-- END ng repeat market -->
+                </div>
+            </div>
+        </div>
+
+
+        <!--  ADDOL-->
+
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-12 " style="text-align: center;margin-top:20px;">
+        <button class="btn btn-success" type="button" ng-click="onSubmit()" ng-disabled='disabledFlag'
+            ng-show="!frmReqInitiation.$invalid" ng-s style="margin-right: 16px;">Submit</button>
+        <button class="btn btn-danger" type="button" ng-click="onInitiationCancel()">Exit</button>
+    </div>
+</div>
+</div>

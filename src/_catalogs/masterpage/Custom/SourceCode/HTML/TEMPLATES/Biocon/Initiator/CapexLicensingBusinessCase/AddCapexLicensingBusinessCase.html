@@ -1,0 +1,438 @@
+<style>
+    .multiselectDropdown .dropdown-menu {
+        top: -1px !important;
+        left: -14px;
+    }
+
+    .multiselectDropdown .dropdown-header {
+        display: block;
+        padding: 0.5rem 0.5rem !important;
+    }
+
+    .multiselectDropdown .btn {
+        border: 1px solid #ced4da;
+        padding: 0.375rem 3rem;
+    }
+
+    .multiselectDropdown ul li,
+    a {
+        text-align: left;
+        font-size: 13px;
+        color: #000;
+        text-decoration: none;
+    }
+
+    .modal-lg {
+        max-width: 96%;
+    }
+
+    .document-heading {
+        border-bottom: 1px solid grey !important;
+        margin-bottom: 10px !important;
+        margin-top: 5px !important;
+        font-size: 12px !important;
+    }
+
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>
+
+<!-- <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.1.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"> 
+
+ -->
+ <div id="divLoading" class="" ng-if="isLoading">
+    <center style="margin-top:15%;"> <div tabindex="9999" class="spinner"></div></center>
+ </div>
+
+<div ng-form="frmReqInitiation" novalidate class="bsviewformwrap">
+    <div class="modal-header customModalheader">
+        <div class="modal-title customModalTitle wid-100" id="modal-title">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>
+            <h3 style="display: inline-block; font-size: 18px; margin: 0px;">Business Case Initiation Form</h3>
+            <div class="userbox"><span class="fstyle">Welcome</span> : <span class="username">{{CurrLogUserId}}</span>
+            </div>
+        </div>
+    </div>
+    <div style="border: 1px solid #ddd; margin-top: 20px;border-radius: 5px;" class="addasswrap">
+        <div class="modal-body" id="divContSafeAuditFrm">
+            <div style="position: relative; margin-top:10px;margin-bottom:20px;margin-left:605px;margin-right:0px;">
+                <p style="color:red;margin-left:135px; font-size: 11px;">Note:<span  style="margin-left:5px;">1.Fields are
+                        indicated with Red border and “*”.</span> </br><span style="margin-left:33px;"> 2.Business case name can
+                        contain 20 characters only. </span>
+                    </br><span style="margin-left:33px;"> 3.Business case name can contain special characters like (~ ` ! @ $ ^ & (
+                        ) _ - + = { } [ ] , .) .</span>
+                   
+                
+                </p>
+                </div>
+
+            <div class="row mt-10">
+                <div class="col-md-4">
+                    <label class="col-form-label">Strategy<span style="color:red;">*</span></label>
+                    <div><span class="lbl-ol">{{ddlStrategyCAPEX}}</span></div>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Sub Strategy <span style="color:red;">*</span></label>
+                    <!-- <select class="form-control" name="ddlSubStrategy " ng-model="ddlSubStrategy" id="ddlSubStrategy"
+                        ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{SubStrategy .Id}}" ng-repeat="SubStrategy in SubStrategyColl">
+                            {{SubStrategy.Title}}</option>
+                    </select> -->
+                    <div><span class="lbl-ol">{{SubStrategy}}</span></div>
+
+
+                </div>
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Month Of Initiation</label>
+                    <div>
+                        <label class="col-form-label" id="lblDate">{{CurrDate|date :"MMM - yyyy"}}</label>
+                    </div>
+                </div>
+               
+                <div class="col-md-4">
+
+                    <label class="col-form-label">Business Case Name<span style="color:red;">*</span></label>
+                    <input type="text" class="form-control" ng-change="InvalidBusinesscasename(BusinessCaseName)"
+                        ng-model="BusinessCaseName" name="BusinessCaseName" id="BusinessCaseName" ng-required="true" required maxlength="20">
+                    <span ng-show="isValid" style="color: red; font-size: x-small;">Special characters such as ( ~ ` ! @ $ ^ & ( ) _ - + = { }  [ ] , .) are  allowed.</span>
+                    <span ng-show="BusinesscaseNameLength" style="color: red; font-size: x-small;">Business Case Name maximum 20
+                        characters will  be allowed.</span>
+                
+                
+                </div>
+
+
+
+                
+<!-- ng-change="AddPhaseRow(null)"-->
+                <div class="col-md-4">
+                    <label class="col-form-label">Entity
+                        <span style="color:red;">*</span></label>
+                    <select class="form-control" name="ddlProductCategory" ng-model="ddlProductCategory"
+                        id="ddlProductCategory"
+                        ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{productcat.Id}}" ng-repeat="productcat in ProductCategoryColl">
+                            {{productcat.Title}}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Site
+                    </label>
+                    <select class="form-control" name="ddlSite" ng-model="ddlSite" id="ddlSite" ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{site.Id}}" ng-repeat="site in SiteColl">
+                            {{site.Title}}</option>
+                    </select>
+                </div>
+
+
+
+              
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Business Case Details 
+                        <span style="color:red;">*</span></label>
+                    </label>
+                    <input type="text" class="form-control"  ng-required="true" ng-model="BusinessCaseDescription" name="BusinessCaseDescription" id="BusinessCaseDescription"/>
+
+
+                </div>
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Cost Escalation(In  Crs) 
+                    </label>
+                    <input type="number" min="0" class="form-control" ng-model="Escalation" name="Escalation"  ng-change="OnCapexValueChange()" id="Escalation">
+
+                </div>
+
+                <div class="col-md-4" ng-show="Escalation">
+                    <label class="col-form-label"> Escalation Remarks
+                    </label><span style="color:red;">*</span>
+                    <textarea type="text" class="form-control"  ng-model="EscalationRemarks" name="EscalationRemarks"
+                        id="EscalationRemarks">
+                        </textarea>
+
+                </div>
+
+                <!-- <div class="col-md-4">  
+                    <label class="col-form-label">Capex Approval Year
+                        </label>
+                      
+                        <label class="form-control" ng-model="CapexApprovalYear" name="CapexApprovalYear" id="CapexApprovalYear" disabled="true"></label>
+
+                      
+                </div> -->
+                <div class="col-md-4">
+
+                    <label class="col-form-label">BC Completion Year </label><span style="color:red;">*</span>
+                    <!-- <div class="col-sm-6 align-self-center"> -->
+                    <div>
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="yyyy" ng-model="auditDate"
+                                datepicker-options="auditDateOptions" is-open="auditDatePopUp.opened"
+                                datepicker-options="auditDateOptions" ng-required="true" close-text="Close"
+                                alt-input-formats="altInputFormats" ng-readonly="true" show-button-bar="false" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary" ng-click="openAuditDate()"
+                                    style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                    <i class="fa-svg-icon">
+                                        <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                        </svg>
+                                    </i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Capex Currency</label><span style="color:red;">*</span>
+
+                    <select class="form-control" name="CapexCurrency" ng-model="CapexCurrency"
+                        id="CapexCurrency" ng-required="true">
+                        <option ng-value="">Select</option>
+                        <option ng-value="{{Currency.Id}}" ng-repeat="Currency in CurrencyMasterColl">
+                            {{Currency.Title}}</option>
+                    </select>
+
+
+                </div>
+               
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Block Name
+                    </label>
+                    <input type="text" class="form-control"  ng-model="BlockName" name="BlockName" id="BlockName"/>
+
+
+                </div>
+
+
+                <div class="col-md-4">
+                    <label class="col-form-label">Capex Context 
+                        <span style="color:red;">*</span></label>
+                    <select class="form-control" ng-model="ddlCapexContext1" ng-required="true" >
+                        <option value="">Select</option>
+                        <option value={{context.Title}}  ng-repeat="context in CapexContextColl" >
+                            {{context.Title}}({{context.Code}})</option>
+                    </select>
+                    <!-- <p ng-show="ddlCapexContext1">{{ddlCapexContext1}}</p> -->
+                </div>
+
+
+                
+                <div class="col-md-4">
+                    <label class="col-form-label">Capex Value( In  Crs)
+                        </label>
+
+                    <!-- <label type="number" class="form-control" ng-model="CapexValue" name="CapexValue" id="CapexValue" min="0"
+                        value="{{CapexPhaseTotal2}}" disabled="true">{{CapexPhaseTotal2}}</label> -->
+                        <div><span min="0" max="10" step="0.25" value="0.00"  ng-model="CapexValue"  disabled="true" class="lbl-ol">{{CapexPhaseTotal2}}</span></div>
+
+
+
+                </div>
+
+                <div class="col-md-4">
+                    <label class="col-form-label">No of Products
+                    </label>
+                    <!-- <label type="number" class="form-control" value="{{Productcount}}" ng-model="NoofProducts"
+                        name="NoofProducts" id="NoofProducts" disabled="true">{{Productcount}}</label> -->
+
+                        <div><span ng-model="NoofProducts" disabled="true" class="lbl-ol">{{Productcount}}</span></div>
+
+                    <!-- <label type="number" class="form-control" ng-model="NoofProducts" onchange=" NoOfProductonChange()" name="NoofProducts" id="NoofProducts" disabled="true">{{selectedContTypeDes.length}}</label> -->
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="form-group row">
+
+
+        <div class="col-sm-12" ng-repeat="Capex in CapexPhaseColl">
+
+            <div class="row document-heading">
+                <div class="col-xs-1 col-sm-1 col-md-2">
+                    Phase
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-2">
+                    <span style="color: red;">*</span>Capex Phase Total ( In  Crs)
+                </div>
+
+                <div class="col-xs-2 col-sm-2 col-md-2" style="white-space: nowrap;">
+                    <span style="color: red;">*</span>Capex BC  Phase Trigger year 
+                </div>
+
+                <!-- <div class="col-xs-1 col-sm-1 col-md-1">
+                                <span style="color: red;">*</span>Product Name
+                            </div> -->
+                <div class="col-xs-2 col-sm-2 col-md-2">
+                    <span style="color: red;">*</span>Capex BC  Phase completion year 
+                </div>
+
+
+            </div>
+
+            <div class="row grid-style rowItem document-content">
+                <div class="col-xs-1 col-sm-1 col-md-2">
+                    <label type="number" class="form-control" ng-model="Capex.Phase">{{$index+1}}</label>
+                    <!--ng-model="ddlSelectedLocation"-->
+
+
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-2">
+                    <input type="number" min="0" class="form-control" ng-model="Capex.CapexPhaseTotal" ng-required="true"
+                        ng-change="OnCapexValueChange()">
+
+                </div>
+                <!-- <input type="date" class="form-control"  ng-model="Capex.Location"> -->
+                <div class="col-xs-1 col-sm-1 col-md-2 ">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy"
+                            ng-model="Capex.TriggerYear" ng-required="true" is-open="Capex.IsOpenDate2"
+                            datepicker-options="TriggerYearOptions" close-text="Close"
+                            alt-input-formats="altInputFormats" ng-readonly="true" show-button-bar="false" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-secondary" ng-click="openTriggerYear(Capex)"
+                                style="min-width: 1em !important;" ng-disabled="isFormReadonly">
+                                <i class="fa-svg-icon">
+                                    <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                    </svg>
+                                </i>
+                            </button>
+                        </span>
+                    </p>
+
+
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-2 ">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="MMM-yyyy"
+                            ng-model="Capex.CompletionYear" ng-required="true" is-open="Capex.IsOpenDate"
+                            datepicker-options="CompletionYearDateOptions" close-text="Close"
+                            alt-input-formats="altInputFormats" ng-readonly="true" show-button-bar="false" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-secondary"
+                                ng-click="openCompletionYearDate(Capex)" style="min-width: 1em !important;"
+                                ng-disabled="isFormReadonly">
+                                <i class="fa-svg-icon">
+                                    <svg width="1792" height="1792" viewBox="0 0 1792 1792"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M192 1664h288v-288h-288v288zm352 0h320v-288h-320v288zm-352-352h288v-320h-288v320zm352 0h320v-320h-320v320zm-352-384h288v-288h-288v288zm736 736h320v-288h-320v288zm-384-736h320v-288h-320v288zm768 736h288v-288h-288v288zm-384-352h320v-320h-320v320zm-352-864v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm736 864h288v-320h-288v320zm-384-384h320v-288h-320v288zm384 0h288v-288h-288v288zm32-480v-288q0-13-9.5-22.5t-22.5-9.5h-64q-13 0-22.5 9.5t-9.5 22.5v288q0 13 9.5 22.5t22.5 9.5h64q13 0 22.5-9.5t9.5-22.5zm384-64v1280q0 52-38 90t-90 38h-1408q-52 0-90-38t-38-90v-1280q0-52 38-90t90-38h128v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h384v-96q0-66 47-113t113-47h64q66 0 113 47t47 113v96h128q52 0 90 38t38 90z" />
+                                    </svg>
+                                </i>
+                            </button>
+                        </span>
+                    </p>
+                </div>
+
+
+                <div class="col-xs-2 col-sm-2 col-md-2">
+
+                    <i class="fa fa-plus-square  fa-2x" aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+                        ng-click="AddPhaseRow(Capex)"></i>
+                    <i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;"
+                        ng-if="Capex.HideRemoveButton == false" ng-click="removeAuditItem(Capex, $event)"></i>
+                </div>
+
+            </div>
+
+
+            
+
+            <div ng-repeat="prod in Capex.ProdColl">
+                <div class="row document-heading">
+                    <div class="col-xs-1 col-sm-1 col-md-2">
+                       Product Name
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-2" ng-show="prod.ddlProductName">
+                       Product Sub-heading
+                    </div>
+                </div>
+
+                <div class="row grid-style rowItem document-content">
+                    <!-- <div ng-repeat="prod in CapexPhaseColl1">  -->
+
+                    <!-- <div> -->
+                    <div class="col-xs-1 col-sm-1 col-md-2">
+
+                        <select class="form-control" name="ddlProductName" ng-model="prod.ddlProductName" ng-change="ProdCount();"
+                            id="ddlProductName">
+                            <option ng-value="">Select</option>
+                            <option ng-value="{{productname.Id}}" ng-repeat="productname in ProductMasterColl">
+                                {{productname.Title}}</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-2">
+                        <input type="text" ng-show="prod.ddlProductName" class="form-control" ng-model="prod.ProductSubheading">
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2">
+
+                        <i class="fa fa-plus-square  fa-2x" aria-hidden="true" style="color: #1a8f49; cursor: pointer;"
+                            ng-click="AddProd(Capex)"></i>
+                        <!-- <i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;"
+                            ng-if="prod.HideRemoveButton == false" ng-click="removeAuditItem1(prod, $event)"></i>  -->
+
+                            <i class="fa fa-minus-square fa-2x" aria-hidden="true" style="color: #dc3545; cursor: pointer;"
+                            ng-click="removeAuditItem1(Capex, prod, $event)" ng-if="prod.HideRemoveButton == false"></i>
+                    </div>
+
+                    <!-- </div> -->
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12 " style="text-align: center;margin-top:20px;">
+            <button class="btn btn-success" type="button" ng-show="!frmReqInitiation.$invalid"
+                ng-disabled='disabledFlag' ng-click="onSubmit()"
+                style="margin-right:16px; transition:none;">Submit</button>
+            <button class="btn btn-primary" type="button" ng-show="!frmReqInitiation.$invalid"
+                ng-click="onSaveAsDraft()" style="margin-right:16px;">Save As Draft</button>
+            <button class="btn btn-secondary" type="button" ng-click="onInitiationCancel()">Exit</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,345 @@
+﻿<div ng-form="frmReqInitiation" novalidate class="bsviewformwrap">
+    <div class="modal-header customModalheader ">
+        <div class="modal-title customModalTitle" id="modal-title"><i class="fa fa-list-alt" aria-hidden="true"></i>
+            <h3 class="headingtitle">View Business Case Initiation Form</h3>
+        </div>
+    </div>
+    <div style="border: 1px solid #ddd; margin-top: 20px; border-radius: 5px;" class="addasswrap">
+        <div class="modal-body" id="divContSafeAuditFrm">
+            <div class="row ">
+                <!-- <div class="col-md-4">
+                      <label class="col-form-label">Business Case ID</label>
+                         <input type="text" class="form-control" ng-model="Businesscaseid" id="Businesscaseid" disabled>
+                         </div> -->
+              
+                <div class="col-md-4">
+                   <label class="col-form-label">Strategy </label>
+                   <input type="text" class="form-control" ng-model="ddlStrategy" id="ddlStrategy" disabled> 
+                 </div>
+                 <div class="col-md-4">
+                    <label class="col-form-label">SubStrategy </label>
+                    <input type="text" class="form-control" ng-model="ddlSubStrategy" id="ddlSubStrategy" disabled> 
+                  </div>
+                <div class="col-md-4">
+                <label class="col-form-label">Business Case Name</label>
+                <input type="text" class="form-control" ng-model="Businesscasename" disabled>
+             </div>
+             <div class="col-md-4">
+                <label class="col-form-label">Business Case ID</label>
+                <input type="text" class="form-control" ng-model="Businesscaseid" id="Businesscaseid" disabled>
+             </div>
+               
+                <div class="col-md-4">
+                <label class="col-form-label">Product Category</label>
+                   <input type="text" class="form-control" ng-model="ddlProductCategory" id="ddlProductCategory" disabled>
+                  </div>
+                <div class="col-md-4">
+                <label class="col-form-label">Product Name </label>
+                    <input type="text" class="form-control"  ng-model="ddlProductName" id="ddlProductName" disabled>
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Date Of Initiation</label>
+                   <input type="date" class="form-control" ng-model="InitiationDate" id="InitiationDate" disabled>
+ 
+                 </div>
+                 <div class="col-md-4">
+                    <label class="col-form-label">Dosage Form</label>
+                        <input type="text" class="form-control"  name="dosage1" ng-model="dosage1" id="dosage1" disabled>                            
+
+                </div>
+           
+                <!-- <div class="col-md-4">
+                    <label class="col-form-label">Market </label>
+                        <input type="text" class="form-control" ng-model="ddlmarket" id="ddlmarket" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="col-form-label">Sub-Market </label>
+                            <input type="text" class="form-control" ng-model="ddlsubmarket" id="ddlsubmarket" disabled>
+                        </div>
+                    <div class="col-md-4">
+                    <label class="col-form-label">Country</label>
+                        <input type="text" class="form-control" ng-model="ddlCountry" id="ddlCountry" disabled>                            
+
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">LOE Date</label>
+                        <input type="date" class="form-control" ng-model="loedate" id="loedate" disabled>                            
+
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Filling  Date</label>
+                        <input type="date" class="form-control" ng-model="fillingdate" id="fillingdate" disabled>                            
+
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Launch  Date</label>
+                        <input type="date" class="form-control" ng-model="launchdate" id="launchdate" disabled>                            
+
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Partner</label>
+                        <input type="text" class="form-control" ng-model="partner" id="partner" disabled>                            
+
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Partner Details</label>
+                        <input type="text" class="form-control" ng-model="partnerdetails" id="partnerdetails" disabled>                            
+
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Currency</label>
+                        <input type="text" class="form-control" ng-model="currency" id="currency" disabled>                            
+
+                </div>
+                <div class="col-md-4">
+                    <label class="col-form-label">Current Status</label>
+                        <input type="text" class="form-control" ng-model="currentstatus" id="currentstatus" disabled>                            
+
+                </div> -->
+            </div>
+
+            </div>
+        </div>
+        <div class="col-md-12" style="margin-top:50px;">
+            <table id="tableM" class="table table-bordered flowtbl">
+                      <thead>
+                      <tr>
+                        <th style="text-align:left"> Market</th>  
+                        <th style="text-align:left"> SubMarket</th>  
+                        <th style="text-align:left"> Country</th>  
+                          <th style="text-align:left"> Loss Of Exclusivity(LOE) </th> 
+                          <th style="text-align:left"> FillingDate</th>
+                          <th style="text-align:left"> LaunchDate</th>  
+                          <th style="text-align:left"> Partner</th>  
+                          <th style="text-align:left"> PartnerDetails</th>  
+                          <th style="text-align:left"> Currency</th>  
+                          <th style="text-align:left"> Current Status</th>  
+                        
+                          <th style="text-align:left"> </th>  
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="Lauchdetails in OutLicensingLaunchDetailsColl" >
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.Market.Title}}
+                                </div>
+                                                                                    
+                            </td>   <td > 
+                                <div>
+                                    {{Lauchdetails.SubMarket.Title}}
+                                </div>
+                                                                                    
+                            </td> 
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.Country.Title}}
+                                </div>
+                                                                                    
+                            </td>  
+                            <td >
+                                <div>
+                                    {{Lauchdetails.LOEDate|date : "MM-yyyy"}}
+                                </div>
+                                </td>     
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.FillingDate|date : "MM-yyyy"}}   
+                                </div>
+                                                                                    
+                            </td>    
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.LaunchDate|date : "MM-yyyy"}}
+                                </div>
+                                                                                    
+                            </td> 
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.Partner.Title}}
+                                </div>
+                                                                                    
+                            </td>  <td > 
+                                <div>
+                                    {{Lauchdetails.PartnerDetails}}
+                                </div>
+                                                                                    
+                            </td> 
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.Currency}}
+                                </div>
+                                                                                    
+                            </td> <td > 
+                                <div>
+                                    {{Lauchdetails.CurrentStatus}}
+                                </div>
+                                                                                    
+                            </td> 
+                           
+                            <td style="margin-top:50px;">
+                                <table id="tableM" class="table table-bordered flowtbl">
+                                    <thead>
+                                    <tr>
+                                        <th style="text-align:left"> Quantity </th> 
+                                        <th style="text-align:left"> SKU Unit</th>
+                                        <th style="text-align:left"> Pack</th>  
+                                        <th style="text-align:left"> Packing Type</th>  
+                                    </tr>
+                                    </thead>
+                                        <tr ng-repeat="SKUdetails in Lauchdetails.LicenseSKUDetails track by $index" >
+                                            
+                                             
+                                            <td >
+                                                <div>
+                                                    {{SKUdetails.Quantity}}
+                                                </div>
+                                                </td>     
+                                            <td > 
+                                                <div>
+                                                    {{SKUdetails.Unit}}   
+                                                </div>
+                                                                                                    
+                                            </td>    
+                                            <td > 
+                                                <div>
+                                                    {{SKUdetails.Pack}}
+                                                </div>
+                                                                                                    
+                                            </td> 
+                                            <td > 
+                                                <div>
+                                                    {{SKUdetails.PackingType}}
+                                                </div>
+                                                                                                    
+                                            </td> 
+                                            
+                                            
+                                        </tr>
+                                    
+         
+                             </table>  
+                            </td>
+                            
+                        </tr>
+                      </tbody>
+               </table>     
+        </div>  
+        <div class="col-md-12" style="margin-top:50px;">
+            <table id="tableM" class="table table-bordered flowtbl">
+                      <thead>
+                      <tr>
+                          <th style="text-align:left">Template </th>
+                          <th style="text-align:left">{{VersionFlag}}</th>
+                          <th style="text-align:left">Current Business Case Stage</th>
+                          <th style="text-align:left">Current Case Status</th>
+                          <th style="text-align:left"> Reason for Version Change </th> 
+                          <th style="text-align:left"> User Name</th>
+                          <th style="text-align:left"> Last Updated On</th>  
+                      </tr>
+                      </thead>
+                      <tbody ng-repeat="DocData in BusinessCaseOLDocumentLinkColl" >
+                        <td>
+                            <div> 
+                                <a ng-href="ms-excel:ofv|u|{{DocData.ServRel}}"  target="_blank" style="text-decoration: underline;" >{{DocData.Fname}}</a><a  id="UploadDoc{{DocData.DocID}}" ng-click="DeleteDocAttachment(DocData.Fname,DocData.DocID,this)"></a>
+                            </div>
+                        </td>
+                            <td >
+                                <div>
+                                    {{MinorV}}
+                                </div>
+
+                            </td>       
+                            <td >
+                                  <div>
+                                      {{CaseStage}}
+                                  </div>
+                               </td>    <td >
+                                  <div>
+                                      {{CaseStatus}}
+                                  </div>
+                               </td>     
+                              <td > 
+                                  <div>
+                                      {{InitiatorComments1}}   
+                                  </div>
+                                                                                     
+                              </td>    
+                              <td > 
+                                  <div>
+                                     {{Editor}}
+                                  </div>
+                                                                                     
+                              </td> 
+                              <td > 
+                                  {{Modified |date :"MMM d,y h:mm:ss a"}}
+                              </td>  
+                            
+                        </tr>
+                </tbody>   
+                      
+               </table>     
+        </div>  
+                <!-- <div class="col-md-12" style="margin-top:50px;">
+                    <table id="tableM" class="table table-bordered flowtbl">
+                              <thead>
+                              <tr>
+                                  <th style="text-align:left"> SKU Name</th>
+                                  <th style="text-align:left"> Quantity </th> 
+                                  <th style="text-align:left"> SKU Unit</th>
+                                  <th style="text-align:left"> Pack</th>  
+                                  <th style="text-align:left"> Packing Type</th>  
+                              </tr>
+                              </thead>
+                              <tr>
+                              </tr>
+                              <tr ng-repeat="SKUdetails in InLicensingSKUDetailsColl" >
+                                      
+                                    <td>
+                                        <div>
+                                            {{SKUdetails.Title}}
+                                        </div>
+        
+                                    </td>       
+                                    <td >
+                                        <div>
+                                            {{SKUdetails.Quantity}}
+                                        </div>
+                                        </td>     
+                                    <td > 
+                                        <div>
+                                            {{SKUdetails.Unit}}   
+                                        </div>
+                                                                                            
+                                    </td>    
+                                    <td > 
+                                        <div>
+                                            {{SKUdetails.Pack}}
+                                        </div>
+                                                                                            
+                                    </td> 
+                                    <td > 
+                                        <div>
+                                            {{SKUdetails.PackingType}}
+                                        </div>
+                                                                                            
+                                    </td> 
+                                    
+                                    
+                                </tr>
+   
+                       </table>     
+                </div>   -->
+               
+               
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class=" row">
+        <div class="col-md-12 " style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-danger" type="button" ng-click="onInitiationCancel()">Exit</button>
+        </div>
+    </div>
+</div>

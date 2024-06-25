@@ -1,0 +1,412 @@
+﻿<div ng-form="frmReqInitiation" novalidate class="bsviewformwrap">
+    <div class="modal-header customModalheader">
+        <div class="modal-title customModalTitle wid-100" id="modal-title"><i class="fa fa-list-alt" aria-hidden="true"></i>
+            <h3 class="headingtitle">Validate Business Case Initiation Form</h3>
+            <div class="userbox"><span class="fstyle">Welcome</span> : <span class="username">{{CurrLogUserId}}</span></div>
+        </div>
+    </div> 
+     <div class="outlitab-section">
+     <ul class="nav nav-pills" id="pills-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" data-target="#Business-Case-Metadata" role="tab" aria-selected="true">Business Case Metadata </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" data-target="#Template-Workflow-History" role="tab"  aria-selected="false">Template Workflow History</a>
+              </li>
+             
+            </ul>
+
+</div>
+		     
+     </div>
+     <div class="tab-content" id="pills-tabContent">
+     <div class="tab-pane fade show active" id="Business-Case-Metadata" role="tabpanel" aria-labelledby="pills-home-tab">
+    <div style="border: 1px solid #ddd; margin-top: 20px; border-radius: 5px;" class="addasswrap">
+        <div class="" id="divContSafeAuditFrm">
+            <div class="row">
+                <!-- <div class="col-md-4">
+                      <label class="col-form-label">Business Case ID</label>
+                         <input type="text" class="form-control" ng-model="Businesscaseid" id="Businesscaseid" disabled>
+                         </div> -->
+              
+                <div class="col-md-4">
+                   <label class="col-form-label">Strategy </label>
+                   <input type="text" class="form-control" ng-model="ddlStrategy" id="ddlStrategy" disabled> 
+                 </div>
+                 <div class="col-md-4">
+                    <label class="col-form-label">Sub Strategy </label>
+                    <input type="text" class="form-control" ng-model="ddlSubStrategy" id="ddlSubStrategy" disabled> 
+                  </div>
+                <div class="col-md-4">
+                <label class="col-form-label">Business Case Name</label>
+                <input type="text" class="form-control" ng-model="Businesscasename" id="Businesscasename" disabled>
+             </div>    
+             <div class="col-md-4">
+                <label class="col-form-label">Business Case ID</label>
+                <input type="text" class="form-control" ng-model="Businesscaseid" id="Businesscaseid" disabled>
+             </div>
+               
+                <div class="col-md-4">
+                <label class="col-form-label">Product Category</label>
+                   <input type="text" class="form-control" ng-model="ddlProductCategory" id="ddlProductCategory" disabled>
+                  </div>
+                  
+                  <div class="col-md-4">
+                    <label class="col-form-label">Month Of Initiation</label>
+                    <label type="date" class="form-control" ng-model="InitiationDate" id="InitiationDate" disabled>{{InitiationDate|date : "MMM-yyyy"}}</label>
+ 
+                 </div>
+
+                <div class="col-md-4">
+                <label class="col-form-label">Product Name </label>
+                    <input type="text" class="form-control"  ng-model="ddlProductName" id="ddlProductName" disabled>
+                </div>
+
+               
+
+
+
+  <div class="col-md-4">
+                    <label class="col-form-label">Product Code </label>
+                        <input type="text" class="form-control"  ng-model="ProdCode" id="ProdCode" disabled>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="col-form-label">Business Case Details
+                        </label>
+                     
+                        <input type="text" class="form-control" ng-model="BusinessCaseDescription" name="BusinessCaseDescription"
+                            id="BusinessCaseDescription" disabled />
+                    
+                    </div>
+    
+                  
+                     <div class="col-md-4">
+                        <label class="col-form-label">Dosage Form</label>
+                        <div class="col-md-10" >
+                            <label  name="dosage1" ng-model="dosage1" id="dosage1" disabled> {{dosage1}} </label>    
+                                                    
+                    
+                        </div>              
+                
+                    </div>
+
+            </div>
+
+            </div>
+
+            <div>
+        <div class="col-md-12" style="margin-top:50px;">
+            <table id="tableM1" class="table table-bordered flowtbl">
+                      <thead>
+                      <tr>
+                        <th style="text-align:left"> Market</th>  
+                        <th style="text-align:left"> SubMarket</th>  
+                        <th style="text-align:left"> Country</th>  
+                          <!-- <th style="text-align:left"> SKU Name</th> -->
+                          <th style="text-align:left"> Loss Of Exclusivity(LOE) </th> 
+                          <th style="text-align:left"> FillingDate</th>
+                          <th style="text-align:left"> LaunchDate</th>  
+                          <th style="text-align:left"> Partner</th>  
+                          <th style="text-align:left"> PartnerDetails</th>  
+                                               
+                          <th style="text-align:left"> Currency</th>  
+                          <th style="text-align:left"> Current Status</th> 
+
+                        
+                        
+                          <th style="text-align:left">SKU Details </th>  
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="Lauchdetails in ILVsIHLaunchColl" >
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.Market.Title}}
+                                </div>
+                                                                                    
+                            </td>   <td > 
+                                <div>
+                                    {{Lauchdetails.SubMarket.Title}}
+                                </div>
+                                                                                    
+                            </td> 
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.Country.Title}}
+                                </div>
+                                                                                    
+                            </td>  
+                          
+                            <td >
+                                <div>
+                                    {{Lauchdetails.LOEDate|date : "MMM-yyyy"}}
+                                </div>
+                                </td>     
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.FillingDate|date : "MMM-yyyy"}}   
+                                </div>
+                                                                                    
+                            </td>    
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.LaunchDate|date : "MMM-yyyy"}}
+                                </div>
+                                                                                    
+                            </td> 
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.Partner.Title}}
+                                </div>
+                                                                                    
+                            </td>  <td > 
+                                <div>
+                                    {{Lauchdetails.PartnerDetails}}
+                                </div>
+                                                                                    
+                            </td> 
+                            
+
+
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.Currency.Title}}
+                                </div>
+                                                                                    
+                            </td>
+                            <td > 
+                                <div>
+                                    {{Lauchdetails.CurrentStatus.Title}}
+                                </div>
+                                                                                    
+                            </td> 
+
+                           
+                           
+                            <td style="margin-top:50px;">
+                            <a class="view" href="javascript:void(0)" ng-click="hideShow=(hideShow ? false : true)"><i class="fa fa-eye" aria-hidden="true" ></i></a>
+
+                             <div class="overlaybox ">
+								  <!-- The popup  ng-show="isPopupVisible"  -->
+								  
+
+								  <div class="hideByDefault modelpopbox" ng-show="hideShow">
+								    <div>
+								      <i class="fa fa-times-circle" ng-click="hideShow=(hideShow ? false : true)"></i>
+								    </div>
+
+                            <table id="tableM" class="table table-bordered flowtbl">
+                                    <thead>
+                                    <tr>
+                                       <!-- <th style="text-align:left"> SKU Name</th>-->
+                                        <th style="text-align:left"> SKU </th> 
+                                        <th style="text-align:left"> SKU Unit</th>
+                                        <th style="text-align:left"> Pack</th>  
+                                        <th style="text-align:left"> Packing Type</th>  
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="SKUdetails in Lauchdetails.LicenseSKUDetails track by $index" >
+                                           
+                                            <td >
+                                                <div>
+                                                    {{SKUdetails.Quantity}}
+                                                </div>
+                                                </td>     
+                                            <td > 
+                                                <div>
+                                                    {{SKUdetails.SkuUnit.Title}}   
+                                                </div>
+                                                                                                    
+                                            </td>    
+                                            <td > 
+                                                <div>
+                                                    {{SKUdetails.Pack}}
+                                                </div>
+                                                                                                    
+                                            </td> 
+                                            <td > 
+                                                <div>
+                                                    {{SKUdetails.PackingType.Title}}
+                                                </div>
+                                                                                                    
+                                            </td> 
+                                            
+                                            
+                                        </tr>
+                                    </tbody>
+         
+                             </table>
+	                           </div>
+                            </div> 
+                                  
+                            </td>
+                            
+                        </tr>
+                      </tbody>
+               </table>     
+        </div>  
+               
+        <div class="col-md-12" style="margin-top:50px;">
+            <table id="tableM" class="table table-bordered flowtbl">
+                      <thead>
+                      <tr>
+                         <th style="text-align:left">File Link <br>(The system needs 1 min, to configure the template)</th>
+                          <th style="text-align:left">Version Type {{VersionFlag}}</th>
+                          <th style="text-align:left">Lap Version</th>
+                          <th style="text-align:left">Current Business Case Stage</th>
+                          <th style="text-align:left">Current Case Status</th>
+                          <th style="text-align:left"> Reason for Version Change </th> 
+                          <th style="text-align:left"> User Name</th>
+                          <th style="text-align:left"> Last Updated On</th>  
+                      </tr>
+                      </thead>
+                      <tbody ng-repeat="DocData in ILVsIHDocumentLinkColl" >
+                      <tr>
+                        <td>
+                            <div> 
+                                <a ng-href="ms-excel:ofv|u|{{DocData.ServRel}}"  target="_blank" style="text-decoration: underline;" >{{DocData.Fname}}</a><a  id="UploadDoc{{DocData.DocID}}" ng-click="DeleteDocAttachment(DocData.Fname,DocData.DocID,this)"></a><!--- <i class="fa fa-code-fork fa-2x" aria-hidden="true" ng-click="openDocVersionHistory(DocData)"></i>-->
+
+                            </div>
+                        </td>
+                            <td >
+                                <div>
+                                    {{MinorV}}   
+                                </div>
+
+                            </td>      
+                             <td >
+                                <div>
+                                    {{LapVersion}}   
+                                </div>
+                            </td>      
+                            <td >
+                                  <div>
+                                      {{CaseStage}}
+                                  </div>
+                               </td>   
+                                 <td >
+                                  <div>
+                                      {{CaseStatus}}
+                                  </div>
+                               </td>     
+                              <td > 
+                                  <div>
+                                      {{InitiatorComments1}}   
+                                  </div>
+                                                                                     
+                              </td>    
+                              <td > 
+                                  <div>
+                                     {{Editor}}
+                                  </div>
+                                                                                     
+                              </td> 
+                              <td > 
+                                  {{Modified |date :"MMM d,y h:mm:ss a"}}
+                              </td>  
+                            
+                        </tr>
+                </tbody>   
+                      
+               </table>     
+        </div>  
+        </div>
+</div> 
+<div class="col-md-4">
+    <label class="col-form-label">Validator Comments<span style="color:red;">*</span></label>
+    <textarea ng-model="CommentsWorkflowHistory" maxlength="100" ng-change="ChnageCommentReuquired()" class="form-control" id="CommentsWorkflowHistory" ng-required="true"> </textarea>
+
+    <div>
+        <span style="color:red; font-size: x-small;">Note : Maximum 100 character will be allowed in comment.</span>
+
+    </div>
+
+    <span ng-hide="CommentsWorkflowHistory" ng-show="CommentReuquired"
+               style="color: red; font-size: x-small;">Please Enter Validator Comments </span>
+        </div>
+<hr> 
+<div class="row">
+<!-- ng-show="frmReqInitiation.$invalid" -->
+<div class="col-md-12 " style="text-align: center; margin-top: 20px;">
+   <button class="btn btn-save" type="button" ng-click="onCreateVersion()" style="margin-right: 16px;">Save Changes as Minor Version</button>
+   <button class="btn btn-validate" type="button" ng-click="onValidatorSubmit()" style="margin-right: 16px;">Validate</button>
+   <button class="btn btn-warning"  type="button" ng-click="onValidatorRework()" style="margin-right: 16px;">Rework</button>
+   <button class="btn onholdbtn"  type="button" ng-click="onValidatorOnHold()" style="margin-right: 16px;">On Hold</button>
+   <button class="btn btn-secondary" type="button" ng-click="onValidatorCancel()">Exit</button>
+ <!-- <button class="btn btn-secondary" type="button" ng-click="onInitiationCancel()">Exit</button> -->
+</div>
+</div>
+
+</div>
+<div class="tab-pane fade " id="Template-Workflow-History" role="tabpanel" aria-labelledby="pills-home-tab">
+	<div class="modal-body" style="border: 1px solid #ddd; margin-top: 20px; border-radius: 5px;">
+
+        <div class="btnbox search-box" style="margin-top: -60px;">
+            <input type="text" name="search" placeholder="Search" class="search-boxn search-box " ng-model="search">
+        </div>
+				 <div class="row">
+				 <table id="tableM" class="table table-bordered flowtbl">
+                      <thead>
+                      <tr>
+                      <th style="text-align:left">Lap Version</th>
+						<th style="text-align:left">Case Version</th>
+						<th style="text-align:left">Version description</th>
+						<th style="text-align:left">Attachment links</th>
+                      		<th style="text-align:left">File Link </th>
+                      		<th style="text-align:left">Version created on </th>	
+                      		
+							<th style="text-align:left">Last accessed on</th>
+                          <th style="text-align:left">Last accessed by</th>
+                          </tr>
+					</thead>
+                      <tbody  ng-repeat="DocData1 in ILVsIHDocLinkUrlWorkFlowColl |filter : search">
+                      <tr>
+                     
+                       <td>{{DocData1.LapVersion}} </td>
+                        <td>{{DocData1.CaseVersion}} </td>
+                        <!-- <td>{{DocData1.VersionDescription}} </td> -->
+                        <td>{{DocData1.FinalVersion}}</td>
+		                <!--  <td> Lap Version:-{{DocData1.LapVersion}}; 
+		                         Version Type:-{{DocData1.VersionType}};
+		                         CaseVersion:-{{DocData1.CaseVersion}};
+		                         CaseStage:-{{DocData1.CaseStage}};
+		                         Comments:-{{DocData1.CommentsWorkflowHistory}}
+		                          MemberType:-{{DocData1.MemberType}}
+                         </td>-->
+                          <td> 
+                          <!--{{DocData1.FinalAttachData}}-->
+                         <ul class="link-box" ng-repeat="DocData2 in DocData1.FinalAttachData">
+                          <li>
+                            <!-- <a href="{{DocData2.FinalAttachDataRel}}">{{DocData2.FinalAttachData}}</a> -->
+                            <a target="_blank" ng-href="{{DocData2.FinalAttachDataRel}}">{{DocData2.FinalAttachData}}</a>
+                        </li>
+                          </ul>
+                          </td>
+                          <td> <div> 
+                            <!-- <a ng-href="{{DocData1.ServRel}}"  
+                                target="_blank" style="text-decoration: underline;" >{{DocData1.Fname}}</a> -->
+                                <a ng-href="{{DocData1.ServRel}}"  
+                                target="_blank" style="text-decoration: underline;" >{{DocData1.Fname}}</a> 
+                             <!-- <a  id="UploadDoc{{DocData1.DocID}}" 
+                                ng-click="DeleteDocAttachment(DocData.Fname,DocData.DocID,this)"></a> -->
+                            </div></td>  
+                            
+                          <td>{{DocData1.Created |date :"MMM d,y h:mm:ss a"}} </td>
+						 <td>{{DocData1.Modified|date :"MMM d,y h:mm:ss a"}} </td>
+                        <td>{{DocData1.Editor}} </td>
+                         
+
+                      </tr>
+                      </tbody>
+                      </table>    
+				 </div>
+			</div>			  
+</div>
+
+</div>
+
+<div id="divLoading" class="" ng-if="isLoading">
+    <center style="margin-top:15%;"> <div tabindex="9999" class="spinner"></div></center>
+ </div>

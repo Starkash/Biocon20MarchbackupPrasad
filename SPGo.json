@@ -1,0 +1,8 @@
+{
+    "sourceDirectory": "src",
+    "sharePointSiteUrl": "https://biocon.sharepoint.com/sites/SPCustomAppl/BL/BusinessCaseAutomation",
+    "publishingScope": "Major",
+    "authenticationType": "Digest",
+    "checkInMessage": "Changes made by Arvind Pal:",
+    "remoteFolders": ["/_catalogs/masterpage/Custom/**/*.*"]
+  }

@@ -1,0 +1,190 @@
+﻿<div id="divLoading" class="d-flex justify-content-center align-items-center" ng-show="isLoading">
+    <div tabindex="9999" class="spinner"></div>
+</div>
+<div class="modal-header customModalheader model-headerwrap">
+    <div class="modal-title customModalTitle" id="modal-title">
+        <i class="fa fa-list-alt" aria-hidden="true"></i>
+        <h3 class="headingtitle">ANDA US Business Case Dashboard</h3>
+       
+        <div class="userbox"><span class="">Welcome</span> : <span class="username">{{CurrLogUserId}}</span></div>
+        <div class="userbox" style="margin-top: -8px;float: left;"><button style="font-size: 18px;background: transparent;color: #fff;" type="button" class="btn btn-link"ng-click="onClickHome()"><i class="fa fa-home" aria-hidden="true"></i> Home</button>
+            <a style="font-size: 18px;background: transparent;color: #fff;" type="button" class="btn btn-link" href="../../BusinessCaseAutomation/SitePages/ANDAlp.aspx"><i class="fa fa-arrow-left" aria-hidden="true"></i> 
+                Back</a></div></div>
+    </div>
+
+    <div>
+        <!--<button class="btn btn-success btnadd" type="button" ng-show="ddlStragy" ng-click="onAddInitiationClick(ddlStragy)">Create New</button>-->
+
+    </div>
+</div>
+<div class="row mt-12">
+    <div class="row mt-12">
+
+
+        <div class="d-inline ">
+            <button class="btn btn-success btnadd" type="button" 
+                ng-click="onAddInitiationClick()">Create New Business Case</button>
+                <button style="display:none;" class="btn btn-success btnadd" type="button"
+                ng-click="onClickHome()">Home</button>
+        </div>
+        
+    
+    
+        <div style="margin-left:10px;">
+    
+            <div class="dropdown-container">
+                <select class="form-control  d-inlineblock" name="ddlProduct5" ng-model="ddlProduct5" id="ddlProduct5"
+                    ng-change="Productfilter(ddlProduct5);ifallblank()">
+                    <option value="">Select Product Name</option>
+                    <option ng-repeat="repManager in OutBusinessLicencingColl4|unique:'ProductNameId'" ng-if="repManager.ProductName && repManager.ProductName.Title"
+                        value="{{repManager.ProductNameId}}">
+                        {{repManager.ProductName.Title}}
+                    </option>
+    
+                </select>
+            </div>
+        </div>
+        <div class="n-searchselect">
+    
+            <select ng-model="ddlStatus" id="ddlStatus" class="form-control  d-inlineblock" ng-change="ifallblank()">
+    
+                <option value="">Select Status</option>
+    
+    
+                <option value="{{chngSt.CaseStatus}}" ng-repeat="chngSt in OutBusinessLicencingColl5 |unique:'CaseStatus'">
+                    {{chngSt.CaseStatus}}</option>
+            </select>
+        </div>
+        
+        <div class="isearch">
+            <input type="text" name="search" placeholder="Search" class="search-boxn search-box " ng-model="search">
+        </div>
+    </div>
+    <!-- <div class="d-inline">
+        <label class="col-form-label">Select the relevant strategy to create the business case</label>
+
+        <select ng-model="ddlStragy" id="ddlStragy" class="form-control">
+            <option value="">Select Strategy</option>
+            <option ng-repeat="mod in StrategyColl" value="{{mod.Id}}">{{mod.Title}}</option>
+        </select>
+        <div>
+            <<button class="btn btn-success btnadd" type="button" ng-show="ddlStragy"
+                    ng-click="onAddInitiationClick(ddlStragy)">Create New</button>-->
+        <!-- </div>
+    </div>  -->
+    
+</div>
+<div class="row">
+
+    <!-- <div class="col-md-4">
+    <label class="col-form-label">Sub Strategy </label>
+    <select ng-model="ddlsubStragy" id="ddlsubStragy" class="form-control">
+        <option value="">Select Sub Strategy</option>
+        <option ng-repeat="mod in SubStrategyColl  |filter : {StrategyId:ddlStragy}" value="{{mod.Id}}">{{mod.Title}}</option>
+    </select>
+   </div> -->
+</div>
+
+
+<!-- <tr ng-repeat="objInvData in InvTrackColl | filter : search | filter : {InvoiceNo:ddlInvNo,Status:ddlStatus}| limitTo : PreviousItemsPerPage:PreviousItemsPerPage*(PreviousCurrentPage-1)"> -->
+<div class="my-2 initiatortable">
+    <div class="card-body no-padding">
+        <div class="table-responsive" >
+
+            <table class="table tbl tbldata" id="film" >
+                <thead>
+                    <tr>
+                        <th style="text-align:center;">Business Case Id</th>
+                        <th style="text-align:center;">Strategy</th>
+                        <!-- <th style="text-align:center;">Sub Strategy</th> -->
+                        <th style="text-align:center;">Business Case Name</th>
+                        <th style="text-align:center;">Business Case Details</th>
+                       
+                        <th style="text-align:center;">Month Of Initiation</th>
+                        <th style="text-align:center;">Product Name</th>
+                       
+                       <th style="text-align:center;">Lap Version</th>
+                         <th style="text-align:center;">Version</th>
+
+                        <th style="text-align:center;">Current Stage</th>
+                        <th style="text-align:center;">Current Status</th>
+                        <!-- <th>ID</th> -->
+                        
+                        <th>Update  Version</th>                     
+                        <th style="text-align:center;" >View</th>
+                        <th style="text-align:center;">Edit</th> 
+                        <th style="text-align:center;">V2V Comparison Report</th>
+                        <!-- <th style="text-align:center;">ELT Review Report</th> -->
+                       
+                    </tr>
+                </thead>
+
+                <tbody >
+                    <tr ng-repeat="request in USAndaBusinessLicencingColl  = (test |filter : search |filter : modified| filter :{InvoiceNo:ddlInvNo,CaseStatus:ddlStatus,ProductNameId:ddlProduct5} )|orderBy : '-Modified' |limitTo :
+                    itemsPerPage:itemsPerPage*(currentPage-1)" >
+                        <td style="text-align:center;">{{request.Title}}</td>
+                        <!-- <td style="text-align:center;">{{request.Strategy.Title}}</td> -->
+                        <td style="text-align:center;">{{request.SubStrategy.Title}}</td>
+                        <td style="text-align:center;">{{request.BusinessCaseName}}</td>
+                        <td class="ellipsis" style="text-align:center;">{{request.BusinessCaseDescription}}</td>
+
+                        <td style="text-align:center;">{{request.InitiationDate|date : "MMM-yyyy"}}</td>
+                        <td style="text-align:center;">{{request.ProductName.Title}}</td>
+                        <td style="text-align:center;">{{request.LapVersion}}</td>
+                        <td style="text-align:center;">{{request.VersionNo}}</td>
+
+
+                        <td style="text-align:center;">{{request.CaseStage.Title}}</td>
+                        <td style="text-align:center;">{{request.CaseStatus}}</td>
+                         <td  style="text-align:center;" class="col-xs-1 col-sm-1 col-md-1"><a class="edit" 
+                                ng-hide="((request.CaseStatus=='Under Internal Review' )||(request.CaseStatus=='Sent For Validation') ||(request.CaseStatus=='Draft')|| (request.CaseStatus=='On Hold') || (request.CaseStatus=='Minor Changes-by Validator'))"
+                               ng-click="ChangeStageRadioForm(request)"><img style="width:20%" src="../SiteAssets/BusinessCaseLP/assets/img/updateversion.png"></a>
+                        </td>
+                        
+                        <td style="text-align:center;" ><a class="view" ng-click="ViewRadioForm(request)"><i
+                                     class="fa fa-eye" aria-hidden="true"></i></a> 
+                        </td>
+                        <td style="text-align:center;"><a class="edit" ng-show="(request.CaseStatus=='Draft')|| (request.CaseStatus=='Data Input Stage')" ng-click="EditRadioForm(request)" ><i class="fa fa-pencil-square-o"></i></a>
+                        </td> 
+                        <td style="text-align:center;">
+                            <a href="{{request.V2VPowerBiLink}}" target="_blank">
+                        <img src="../SiteAssets/BusinessCaseLP/assets/img/report-logo-bicon.png" class="r-bio-img"></a>
+                        </td>
+
+                        <!-- <td style="text-align:center;"> -->
+                         <!-- <a href="https://app.powerbi.com/groups/02afbc0f-af46-45ca-99cb-35370af19987/reports/464376c7-1d60-4aa8-857c-7c80c4a6ae97/ReportSection0a67bd0e8cc1e819ed00?experience=power-bi&filter=OutLicensingBusinessCase/Id eq {{request.ID}}" target="_blank"> -->
+                            <!-- <img src="../SiteAssets/BusinessCaseLP/assets/img/report-logo-bicon.png" class="r-bio-img"></a>
+                         </td> -->
+                       
+                    </tr>
+                </tbody>
+                
+                </table>
+                <div ng-hide="USAndaBusinessLicencingColl.length==0">
+                    <div class="pagination" >
+                        <ul uib-pagination ng-model="currentPage" total-items="USAndaBusinessLicencingColl.length" items-per-page="itemsPerPage"
+                            max-size="maxSize" class="pagination-sm" boundary-link-numbers="true"></ul>
+                    </div>
+                
+                    <label for="itemsPerPageSelect">Items per Page:</label>
+                    
+                    <select id="itemsPerPageSelect" ng-model="itemsPerPage" ng-change="updatePagination()">
+                      
+                        <option ng-value="20" >20</option>
+                        <option ng-value="50">50</option>
+                        <option ng-value="100">100</option>
+
+                    </select>
+               </div>
+                
+                <div ng-show="USAndaBusinessLicencingColl.length==0">
+                <p>No data available in the table.</p>
+                </div>
+                
+    </div>
+        </div>
+            </div>
+        </div>
+
+
+    </div>

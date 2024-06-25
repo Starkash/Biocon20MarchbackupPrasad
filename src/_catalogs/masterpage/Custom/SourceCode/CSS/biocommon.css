@@ -1,0 +1,217 @@
+﻿.btnbox{
+	    margin-top: 34px;
+    margin-right: 10px;
+}
+.customModalheader {
+    border-bottom: 2px solid #3577a7!important;
+    background-color: #4395d1 !important;
+    padding: 0.5em;
+}
+.customModalTitle h3,
+.fa-list-alt
+{
+    color: #fff  !important;
+}
+.btn-success {
+    color: #fff!important;
+    background-color: #003e76 !important;
+    border-color: #003e76 !important;
+    border: 1px solid !important;
+}
+.initiatortable .table tr th {
+   
+    background: #003e76  !important;
+    color: #fff  !important;
+    white-space: nowrap;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+}
+
+.btn-success:hover{
+    color: #fff !important;
+    background-color: #4395d1 !important;
+    border-color: #4395d1 !important;
+    border: 1px solid !important;
+}
+.page-item.active .page-link {
+    background-color: #4395d1 !important;
+    color: #fff !important;
+    border-color: #4395d1 !important;
+}
+.s-position{margin-top: 33px;}
+.search-box{
+height:30px;
+	border-radius: 0.25rem;
+    font-size: 14px;
+      background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 3px 4px !important;
+}
+.search-box:focus-visible{
+	    outline: none !important;
+}
+body{
+	font-family: 'Merriweather Sans' !important;}
+	.initiatortable .pagination-sm {
+    margin-top: 0;
+}
+/*.selectbox{
+	position: absolute;
+    margin-top: 36px;
+    margin-left: 15px;
+}*/
+.selectbox{
+	position: absolute;
+    right: 102px;
+}
+
+.reviewsearch{
+	right: 17px;
+	    position: absolute;
+}
+.mt-10{
+	margin-top: 10px;
+}
+.w-100{
+	width:100%;
+}
+.f-right{
+	float: right;
+}
+.lbl-white{
+	color:#fff !important;
+}
+.model-headerwrap{
+	display:block !important;
+
+}
+.lb-white{
+	color:white  !important;
+
+}
+.model-headerwrap .btnadd{
+	margin-top: 34px;
+    margin-left: 10px;
+}
+.search-box{
+	right: 7px;
+    position: absolute;
+}
+.search-boxn{
+	background-color:#fff!important;
+
+}
+.h80{
+	height: 80px;
+}
+/* css for view pages*/
+
+.bsviewformwrap .modal-body {
+       padding: 0 0 1rem 0 !important;
+
+}
+  textareabox{
+	height:auto  !important;
+
+}
+
+.bsviewformwrap .form-control {
+    height: 30px !important;
+}
+.bsviewformwrap .table tr th {
+    font-weight: 500 !important;
+    background: #003e76 !important;
+    color: #fff !important;
+}
+.initiatortable .card-body{
+	padding:0!important;
+
+}
+.cbt{
+	padding-top: 35px;
+    padding-left: 16px;
+}
+.rpbox{
+	margin: 14px 27px 27px 27px;
+    display: inline-block;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #003e76  !important;
+    border-color: #003e76  !important;
+}
+.btn-danger:hover{
+ color: #fff;
+    background-color:#4497d2  !important;
+    border-color:#4497d2 !important;
+	
+}
+.table thead th {
+    vertical-align: top;
+   
+}
+.n-select{
+	position: absolute;
+    right: 215px;
+    padding-top: 0px;
+}
+
+.ARVIND-select{
+	position: absolute;
+    right: 165px;
+    padding-top: 37px;
+}
+.p-abs{
+ right: 215px;
+	position: absolute;
+        padding-top: 0px;
+
+
+}
+.recordperpagebox{
+    padding-top: 4px;
+	    position: absolute;
+    right: 77px;
+    white-space: nowrap;
+    font-size:13px;
+}
+img:hover,
+.fa:hover  {
+    cursor: pointer  !important;
+} 
+.pagination{
+	float:right;
+}
+.n-searchselect{position: absolute;
+    right: 215px;
+    padding-top: 1px!important;}
+
+    .mt--60{
+        margin-top: -60px;
+    }
+    .mx-111{
+        flex: 0 0 11% !important;
+    max-width: 11.333333% !important;
+    }
+    .mt-30{
+        margin-top: 40px;
+    }
+    .mt-35{margin-top:35px;}
+    .flex-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .p-abs {
+        margin-right: 10px; /* Adjust the spacing between elements if needed */
+    }
+    .d-inlineblock{
+        display: inline-block  !important;
+        width: auto  !important;
+    }
+    .mt-12{margin-top:12px;}
+    .mt-6{margin-top:6px;}
+    .isearch .search-box{    
+        margin-right: 10px;
+    margin-top: 1.3px;}
+    .userbox a{margin-left: -19px;}
