@@ -1,0 +1,167 @@
+﻿.width100{
+	width:100%;
+}
+
+.biobox img {
+  width: 100%;
+  height: 350px;
+  max-height: 100%;
+    max-width: 100%;
+}
+.container{background:#f8fbff;
+}
+
+.businessbox img {
+  text-align: center;
+  width: 71%;
+  background: #fff;
+  padding: 20px 20px 10px 20px;
+  }
+.box-center{  text-align: center;margin-top: 50px;}
+/*.outerbox{    width: 59%;
+  background: #fff;
+  margin: auto;}
+  .outerbox h5 {
+    font-size: 17px !important;
+}
+ */
+
+
+.outerbox{
+  background: #fff;
+  margin: auto;}
+  .outerbox h5{padding-bottom: 10px;
+  color:#003e76!important }
+ .outerbox h5 {
+    font-size: 15px !important;
+}
+.businessbox{box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0); background: #fff;
+}
+.countbox {
+  position: absolute;
+  margin: -26px auto;
+}
+.countbox h1{
+  font-weight: 1000;
+}
+.biobox a, a{text-decoration: none !important;}
+.md4 {
+  -ms-flex: 0 0 33.333333% !important;
+  flex: 0 0 32.333333% !important;
+  max-width: 32.333333% !important;
+}
+.pmid{    vertical-align: middle;
+  padding: 78px 0;}
+  .fa-chevron-right{font-size: 20px;
+    color: #3a9ae8;}
+#s4-titlerow,
+#sideNavBox,
+#s4-ribbonrow{
+	display:none!important;
+}
+#contentBox {
+    margin:0 !important;
+    min-width: 98% !important;
+}
+#s4-bodyContainer {
+    padding-bottom: 0!important;
+}
+#contentRow {
+    padding-top: 0 !important;
+}
+.ms-webpartzone-cell {
+    margin: auto auto !important;
+}
+#s4-workspace {
+       margin-top: -2px;
+}
+.bsatwrap{
+	background: #f8fbff;
+}
+@media only screen and (max-width: 1200px) and (min-width: 768px){
+	.md4 {
+    -ms-flex: 0 0 31.333333% !important;
+    flex: 0 0 31.333333% !important;
+    max-width: 31.333333% !important;
+}}
+
+@media only screen and (max-width: 768px){
+.md4 {
+    -ms-flex: 0 0 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+}}
+.biocon-logo{
+
+	    position: absolute;
+    /* z-index: 111111; */
+    background: #fff;
+    margin: 10px;
+    /* opacity: 0.5; */
+    padding: 5px;
+    border-radius: 5px;
+}
+.biocon-logo img{
+	    width: 147px !important;
+    height: 50px !important;}
+.ms-rtestate-field h1{
+	color: #003e76 !important;
+}
+.biotitle{
+position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%, -50%);	
+}
+.biotitle h2,
+.ms-rtestate-field h2 {
+    color: #fff  !important;
+
+    font-weight: 600  !important;
+
+}
+.userinfo{
+color: #fff;
+    position: absolute;
+    top: 1px;
+    right: 16px;
+    width: 24%;
+    font-weight: 600;}
+.biobox {
+	position:relative;
+}
+a:hover, a:active {
+    text-decoration: underline;
+    cursor: pointer !important;
+}
+.box-center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+@media screen and (max-width: 991px) and (min-width: 768px){
+	.md3{
+	flex: 0 0 26% !important;
+    max-width: 26%!important;
+	
+}
+.biotitle {
+    
+    top: 45px;
+    left: 58%;}
+}
+@media screen and (max-width: 600px){
+	.biotitle {
+        top: 43%;
+    left: 50%;
+    }
+}
+.businessbox h1{
+	 position: absolute;
+    margin: -26px auto;
+
+}
+/*.o365cs-base .o365sx-button {
+       display: none; 
+}*/

@@ -4,5 +4,5 @@
     "publishingScope": "Major",
     "authenticationType": "Digest",
     "checkInMessage": "Changes made by Arvind Pal:",
-    "remoteFolders": ["/_catalogs/masterpage/Custom/**/*.*"]
+"remoteFolders": ["/SiteAssets/**/*.*"]
   }

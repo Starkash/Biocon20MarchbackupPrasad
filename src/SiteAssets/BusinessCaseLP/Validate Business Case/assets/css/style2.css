@@ -1,0 +1,164 @@
+.bg {
+    
+    overflow: hidden;
+   
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+  height: 894px;
+  
+  }
+  .imglogo{
+    z-index: 11;
+    position: absolute;
+    top: 13%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8%;
+    border: 1px solid #196d37;
+    border-radius: 5px;
+  }
+  
+.container{
+    position: absolute;
+    top: 29%;
+    left: 9%;
+}
+.timeline {
+    position: relative;
+}
+.timeline-bar{background-color: yellow;}
+.timeline .timeline-bar {
+    content: '';
+    width: 4px;
+    opacity: .2;
+    margin-left: -2px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 100%;
+}
+.timeline .timeline-inner {
+    position: relative;
+}
+.timeline-box-left {
+    float: left;
+    clear: left;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+.dot{
+    background-color: yellow;
+}
+.timeline-box-left .dot {
+    right: 0;
+    margin-right: -4px;
+}
+.timeline-box-left .dot, .timeline-box-right .dot {
+    top: 25px;
+    width: 8px;
+    height: 8px;
+    display: block;
+    position: absolute;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+.timeline .timeline-bar {
+    content: '';
+    width: 4px;
+    opacity: .2;
+    margin-left: -2px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 100%;
+}
+h3{
+    color:#fff;
+}
+.theme-color-07cb79 .timeline-box-inner, .theme-color-07cb79 .price-box.box-primary .btn, .theme-color-07cb79 .widget_search .search-form, .theme-color-07cb79 .widget_tag_cloud a:hover {
+    border-color: #07cb79;
+}
+.timeline-box-inner{
+    background: #45ab5a;
+    padding: 6px;
+    border-radius: 5px;
+    padding: 13px 5%;
+    position: relative;
+    border-width: 5px 0 0;
+    border-top: solid #fff;
+    text-align: center;
+
+}
+.timeline-box-left .timeline-box-inner {
+    margin-right: 35px;
+}
+
+.timeline-box-left .timeline-box-right .timeline-box-inner .arrow {
+    right: -12px;
+    background-position: -18px 0;
+}
+  .arrow {
+    top: 60px;
+    width: 12px;
+    height: 41px;
+    display: block;
+    position: absolute;
+    background-image: url(images/arrows.png);
+    background: url("images/arrows.png") repeat 0 0;
+    background-repeat: no-repeat;
+}
+.timeline-box-right .timeline-box-inner {
+    margin-left: 35px;
+}
+.fa-caret-right{
+    font-size: 48px;
+    color: #fff;
+    position: absolute;
+    
+    margin-left: 49.7%;
+    top: 0;
+}
+.fa-caret-left{font-size: 48px;
+    color: #fff;
+    position: absolute;
+    margin-left: -55%;
+    top: 0;}
+
+    .empBox {
+        background: #14476d !important;
+    }
+    .enBox {
+        background: #6d1d54;
+    }
+    .itBox {
+        background: #002f89;
+    }
+    .ecBox {
+        background: #47c678;
+    }
+    .naBox {
+        background: #2c3d19;
+    }
+    .maBox {
+        background: #4e1714;
+    }
+    .clmBox {
+        background: #850dff;
+    }
+    .nabaBox {
+        background: #b83dba;
+    }
+    .rsaBox {
+        background: #f84ee1;
+    }
+    h3{font-size: 1.3rem !important;
+        margin-bottom: 0 !important;}
+
+    .timeline{
+        margin: auto 19%;
+    }
+    

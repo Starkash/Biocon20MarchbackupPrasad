@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+  <title>Business Case Automation Platform</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/css/biocon.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+   <script src="/sites/SPCustomAppl/BL/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/js/userinfo.js"></script>
+ 
+ 	<script src="/sites/SPCustomAppl/BL/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/js/bannerimage.js"></script>
+	<style>
+	#O365_MainLink_Settings_container, #O365_MainLink_Help_container, #s4-ribbonrow{
+    display: none !important;
+}
+	.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+ display: none;
+       position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100%;
+    /* width: 100%; */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 0 34px 6px 34px;
+    z-index: 1;
+    white-space: nowrap;
+    left: -49px;
+       }
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown-content a{
+color: #003e76 !important;
+    display: block;
+    padding: 5px 0;
+	
+}
+.r-box{
+	padding: 20px 20px 0 20px !important;
+}
+.dropdown h5{
+	padding:0 !important;
+
+}</style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Shruti Keer/INFO-TECH CONSULTANT/BIOCON</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Shruti Keer/INFO-TECH CONSULTANT/BIOCON</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+<div>
+<!--<label onclick="OutlicensingReviewerPending()">lable</label>-->
+</div>
+    <div class="bsatwrap">
+    <div class="container">
+            <div class="biobox ">
+            <div class="biocon-logo">
+            <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/latestimg/Biocon-Logo.png">
+            
+            </div>
+            <div class="userinfo"><span class="fstyle">Welcome</span> : <span class="username" id="CurrLogUserId"></span></div>
+            <div id="bannerimg" class="width100">
+            
+           <div class="biotitle"> <h2>Business Case Automation Platform</h2></div>
+            </div>
+            
+                <!--<img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/latestimg/bioconbg.png">-->
+            </div>
+            <div class="container">
+            <div class="row box-center box-center-container">
+                <div class="col-md-2 col-sm-12 md3">
+                    <a  onclick="GetInitiatorRole();" target="_blank">
+                        
+                        <div class="outerbox">
+                            <div class="countbox"><!--<h1 id="counter1"></h1>--></div>
+                            <div class="businessbox">
+                                <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/latestimg/Initiate%20Business%20Case.png">
+                                <h5>Initiate Business Case </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                   
+                </div>
+                <!--<div class="pmid"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>-->
+
+                <div class="col-md-2 col-sm-12 md3">
+                    <a onclick="GetReviewerRole();" target="_blank">
+                        
+                        <div  class="outerbox">
+                            <div class="countbox"><h1 id="counter"></h1></div>
+                            <div class="businessbox">
+                                <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/latestimg/Review%20Buisness%20Case.png">
+                                <h5>Review Business Case  </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <!--<div class="pmid"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>-->
+                <div class="col-md-2 col-sm-12 md3">
+                    <a onclick="GetValidatorRole();" target="_blank">
+
+                        
+                        <div  class="outerbox">
+                            <div class="countbox"><h1 id="counter2"></h1></div>
+                            <div class="businessbox">
+                                <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/latestimg/Validate%20Business%20Case.png">
+                                <h5>Validate Business Case </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-2 col-sm-12 md3">
+                     <a  onclick="Masters();" target="_blank">
+
+                        
+                        <div  class="outerbox">
+                             <div class="businessbox">
+                                <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/masterbio.png">
+                                <h5>Masters </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-2 col-sm-12 md3">
+                    <a href="javascript:void(0)">
+
+                        
+                        <div  class="outerbox">
+                            <div class="businessbox">
+                                <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/reportbio.png" class="r-box">
+                                
+                                <div class="dropdown">
+									  <h5>Reports</h5>
+									  <div class="dropdown-content">
+									  <a href="	https://app.powerbi.com/groups/02afbc0f-af46-45ca-99cb-35370af19987/reports/54a75bcc-da8c-4be6-9752-f5a7ee15638e/ReportSection0a67bd0e8cc1e819ed00?experience=power-bi" target="_blank">Strat Report</a>
+									 
+									 
+									   
+									  </div>
+									</div>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="col-md-2 col-sm-12 md3">
+                    <a  onclick="UpdateTemplate();" target="_blank">
+
+                        
+                        <div  class="outerbox">
+                          <div class="businessbox">
+                                <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/updaelogo.png">
+                                <h5> Update Templates </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+       <!-- <div class="container">
+            <div class="biobox ">
+            <div class="biocon-logo">
+            <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/latestimg/Biocon-Logo.png">
+            
+            </div>
+            <div class="userinfo"><span class="fstyle">Welcome</span> : <span class="username" id="CurrLogUserId"></span></div>
+            <div id="bannerimg" class="width100">
+            
+           <div class="biotitle"> <h2>Business Case Automation Tool</h2></div>
+            </div>
+            
+            </div>
+            <div class="container">
+            <div class="row box-center">
+                <div class="col-md-4 col-sm-12 md4">
+                    <a  onclick="GetRoleuser1();" target="_blank">
+                        
+                        <div class="outerbox">
+                            <div class="countbox"><h1 id="counter1"></h1></div>
+                            <div class="businessbox">
+                                <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/latestimg/Initiate%20Business%20Case.png">
+                                <h5>Initiate Business Case </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                   
+                </div>
+                <div class="pmid"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                <div class="col-md-4 col-sm-12 md4">
+                    <a onclick="GetRoleuser2();" target="_blank">
+                        
+                        <div  class="outerbox">
+                            <div class="countbox"><h1 id="counter"></h1></div>
+                            <div class="businessbox">
+                                <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/latestimg/Review%20Buisness%20Case.png">
+                                <h5>Review Business Case  </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+                <div class="pmid"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                <div class="col-md-4 col-sm-12 md4">
+                    <a onclick="GetRoleuser3();" target="_blank">
+
+                        
+                        <div  class="outerbox">
+                            <div class="countbox"><h1 id="counter2"></h1></div>
+                            <div class="businessbox">
+                                <img src="/sites/SPCustomApplUAT/BusinessCaseAutomation/SiteAssets/BusinessCaseLP/assets/img/latestimg/Validate%20Business%20Case.png">
+                                <h5>Validate Business Case </h5>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    </div>
+</body>
+</html>
+
+
