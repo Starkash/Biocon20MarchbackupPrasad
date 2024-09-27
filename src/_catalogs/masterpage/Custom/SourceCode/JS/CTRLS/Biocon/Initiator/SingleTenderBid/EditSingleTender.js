@@ -78,7 +78,7 @@ appOperations.controller("EditSingleTenderCtrl", function ($scope, $http, $filte
     // var strOLBUCaseUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('SingleBidBusinessCase')/items?$select=*,Title,ID&$top=1&$orderby=Id desc";
     var strPartnerUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('PartnerMaster')/items?$select=*&$top=500&$orderby=Id desc";
     // var strOLBULaunchUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('OutLicensingLaunchDetails')/items?$select=*,Title,ID&$top=1&$orderby=Id desc";
-    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title&$expand=UserGroup,Market&$filter=TemplateType eq 'Outlicensing'&$top=5000&$orderby=ID"; // cascading  
+    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title,SubMarket/Id,SubMarket/Title&$expand=UserGroup,Market,SubMarket&$filter=TemplateType eq 'Outlicensing'&$top=5000&$orderby=ID"; // cascading  
     var strOutLicensingBusinessCaseUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('SingleBidBusinessCase')/items?&$select=Id,Title,Modified,BusinessCaseName,InitiationDate,CaseStage/Id,CaseStage/Title,Strategy/Id,Strategy/Title,SubStrategy/Id,SubStrategy/Title,ProductCategory/Id,ProductCategory/Title,ProductName/Id,ProductName/Title,DosageForm/Id,DosageForm/Title&$expand=Strategy,CaseStage,SubStrategy,ProductCategory,ProductName,DosageForm&$filter=ID eq '" + $scope.IntiateID + "'&$top=5000&$orderby=ID asc";
  ///   var strOutLicensingLaunchDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('OutLicensingLaunchDetails')/items?&$select=Id,Title,Modified,LOEDate,FillingDate,LaunchDate,PartnerDetails,Currency/Id,Currency/Title,CurrentStatus/Id,CurrentStatus/Title,Market/Id,Market/Title,SubMarket/Id,SubMarket/Title,Country/Id,Country/Title,Partner/Id,Partner/Title,SingleBidBusinessCase/Id,SingleBidBusinessCase/Title&$expand=Market,SubMarket,Currency,CurrentStatus,Country,Partner,SingleBidBusinessCase&$filter=SingleBidBusinessCase/ID eq '" + $scope.IntiateID + "'&$top=5000&$orderby=ID asc";
     var strOutLicensingLaunchDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('SingleBidLaunchDetails')/items?&$select=Id,Title,Modified,BidAuthority/Id,BidAuthority/Title,BidDueDate,SupplyStartDate,SupplyEndDate,LOEDate,FillingDate,LaunchDate,PartnerDetails,Currency/Id,Currency/Title,CurrentStatus/Id,CurrentStatus/Title,Market/Id,Market/Title,SubMarket/Id,SubMarket/Title,Country/Id,Country/Title,Partner/Id,Partner/Title,SingleBidBusinessCase/Id,SingleBidBusinessCase/Title&$expand=Market,BidAuthority,SubMarket,Currency,CurrentStatus,Country,Partner,SingleBidBusinessCase&$filter=SingleBidBusinessCase/ID eq '" + $scope.IntiateID + "'&$top=5000&$orderby=ID asc";
@@ -801,7 +801,11 @@ appOperations.controller("EditSingleTenderCtrl", function ($scope, $http, $filte
         var pplInitiator = []; var pplReviewer = []; var pplValidator = [];
         for (var z = 0; z < $scope.UpdateLaunchDetails.length; z++) {
             $scope.fiterdInitiatorMember = $scope.RoleMasterColl.filter(function (item) {
-                return (item.Role == 'Initiator' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId);
+                
+                return (item.Role == 'Initiator' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId  && item.SubMarketId == $scope.UpdateLaunchDetails[z].SubMarketId);
+
+                
+              //  return (item.Role == 'Initiator' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId);
             });
             $scope.fiterdReviewerMember = $scope.RoleMasterColl.filter(function (item) {
                 return (item.Role == 'Reviewer'&& item.MarketId == $scope.UpdateLaunchDetails[z].MarketId);
@@ -852,7 +856,11 @@ appOperations.controller("EditSingleTenderCtrl", function ($scope, $http, $filte
             }
             for (var z = 0; z < $scope.FinalCountryLaunchColl.length; z++) {
                 $scope.fiterdInitiatorMemberNew = $scope.RoleMasterColl.filter(function (item) {
-                    return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
+                    
+
+                    return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId  && item.SubMarketId == $scope.FinalCountryLaunchColl[z].SubMarketId);
+
+                    //return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
                 });
                 $scope.fiterdReviewerMemberNew = $scope.RoleMasterColl.filter(function (item) {
                     return (item.Role == 'Reviewer'&& item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);

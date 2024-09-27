@@ -56,7 +56,7 @@ appOperations.controller("AddILVsIHCtrl", function ($scope, $http, $filter, $q, 
 
     var strPartnerUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('PartnerMaster')/items?$select=*&$top=500&$orderby=Id desc";
     var strOLBULaunchUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingVsInHouseLaunchDetails')/items?$select=*,Title,ID&$top=1&$orderby=Id desc";
-    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title&$expand=UserGroup,Market&$filter=TemplateType eq 'In licensing IH Vs IL'&$top=5000&$orderby=ID"; // cascading
+    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title,SubMarket/Id,SubMarket/Title&$expand=UserGroup,Market,SubMarket&$filter=TemplateType eq 'In licensing IH Vs IL'&$top=5000&$orderby=ID"; // cascading
     var strStageMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('StageMaster')/items?$select=*&$filter=Title eq 'Initiated'&$top=100&$orderby=ID"; // cascading
     var strSkuMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('SkuMaster')/items?$select=*&$top=100&$orderby=ID"; // cascading
     var strPackingMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('PackingType')/items?$select=*&$top=1000&$orderby=ID"; // cascading
@@ -1338,7 +1338,10 @@ function (btn) {
         var pplValidator = [];
         for (var z = 0; z < $scope.FinalCountryLaunchColl.length; z++) {
             $scope.fiterdInitiatorMember = $scope.RoleMasterColl.filter(function (item) {
-                return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
+
+                return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId  && item.SubMarketId == $scope.FinalCountryLaunchColl[z].SubMarketId);
+
+                //return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
             });
             $scope.fiterdReviewerMember = $scope.RoleMasterColl.filter(function (item) {
                 return (item.Role == 'Reviewer'&& item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
@@ -1657,7 +1660,9 @@ if($scope.BusinessCaseName.length>0){
       for (var z = 0; z < $scope.FinalCountryLaunchColl.length; z++) 
       {
         $scope.fiterdInitiatorMember = $scope.RoleMasterColl.filter(function (item) {
-            return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
+            return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId  && item.SubMarketId == $scope.FinalCountryLaunchColl[z].SubMarketId);
+
+            //return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
         });
         $scope.fiterdReviewerMember = $scope.RoleMasterColl.filter(function (item) {
             return (item.Role == 'Reviewer'&& item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);

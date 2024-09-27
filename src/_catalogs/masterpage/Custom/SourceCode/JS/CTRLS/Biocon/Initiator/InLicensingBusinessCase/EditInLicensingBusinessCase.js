@@ -62,7 +62,7 @@ appOperations.controller("EditInLicensingBusinessCaseCtrl", function ($scope, $h
     // var strOLBUCaseUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingBusinessCase')/items?$select=*,Title,ID&$top=1&$orderby=Id desc";
     var strPartnerUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('PartnerMaster')/items?$select=*&$top=500&$orderby=Id desc";
     // var strOLBULaunchUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingLaunchDetails')/items?$select=*,Title,ID&$top=1&$orderby=Id desc";
-    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title&$expand=UserGroup,Market&$filter=TemplateType eq 'InLicensing'&$top=5000&$orderby=ID"; // cascading
+    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title,SubMarket/Id,SubMarket/Title&$expand=UserGroup,Market,SubMarket&$filter=TemplateType eq 'InLicensing'&$top=5000&$orderby=ID"; // cascading
     var strInLicensingBusinessCaseUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingBusinessCase')/items?&$select=Id,BusinessCaseDescription,Title,Modified,LapVersion,BusinessCaseName,InitiationDate,CaseStage/Id,CaseStage/Title,Strategy/Id,Strategy/Title,SubStrategy/Id,SubStrategy/Title,ProductCategory/Id,ProductCategory/Title,ProductName/Id,ProductName/Title,DosageForm/Id,DosageForm/Title&$expand=Strategy,CaseStage,SubStrategy,ProductCategory,ProductName,DosageForm&$filter=ID eq '" + $scope.IntiateID + "'&$top=5000&$orderby=ID asc";
     var strInLicensingLaunchDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingLaunchDetails')/items?&$select=Id,Title,Modified,LOEDate,FillingDate,LaunchDate,PartnerDetails,Currency/Id,Currency/Title,CurrentStatus/Id,CurrentStatus/Title,Market/Id,Market/Title,SubMarket/Id,SubMarket/Title,Country/Id,Country/Title,Partner/Id,Partner/Title,InLicensingBusinessCase/Id,InLicensingBusinessCase/Title&$expand=Market,SubMarket,Currency,CurrentStatus,Country,Partner,InLicensingBusinessCase&$filter=InLicensingBusinessCase/ID eq '" + $scope.IntiateID + "'&$top=5000&$orderby=ID asc";
     var strInLicensingSKUDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingSKUDetails')/items?&$select=Id,Title,Modified,Quantity,Pack,SkuUnit/Id,SkuUnit/Title,PackingType/Id,PackingType/Title,InLicensingLaunchDetail/Id,InLicensingLaunchDetail/Title,InLicensingBusinessCase/Id,InLicensingBusinessCase/Title&$expand=InLicensingBusinessCase,PackingType,SkuUnit,InLicensingLaunchDetail&$filter=InLicensingBusinessCase/ID eq '" + $scope.IntiateID + "'&$top=5000&$orderby=ID asc";
@@ -1509,7 +1509,9 @@ appOperations.controller("EditInLicensingBusinessCaseCtrl", function ($scope, $h
         var pplInitiator = []; var pplReviewer = []; var pplValidator = [];
         for (var z = 0; z < $scope.UpdateLaunchDetails.length; z++) {
             $scope.fiterdInitiatorMember = $scope.RoleMasterColl.filter(function (item) {
-                return (item.Role == 'Initiator' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId);
+                return (item.Role == 'Initiator' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId  && item.SubMarketId == $scope.UpdateLaunchDetails[z].SubMarketId);
+
+                //return (item.Role == 'Initiator' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId);
             });
             $scope.fiterdReviewerMember = $scope.RoleMasterColl.filter(function (item) {
                 return (item.Role == 'Reviewer' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId);
@@ -1557,7 +1559,9 @@ appOperations.controller("EditInLicensingBusinessCaseCtrl", function ($scope, $h
             }
             for (var z = 0; z < $scope.FinalCountryLaunchColl.length; z++) {
                 $scope.fiterdInitiatorMemberNew = $scope.RoleMasterColl.filter(function (item) {
-                    return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
+                    return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId  && item.SubMarketId == $scope.FinalCountryLaunchColl[z].SubMarketId);
+
+                   // return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
                 });
                 $scope.fiterdReviewerMemberNew = $scope.RoleMasterColl.filter(function (item) {
                     return (item.Role == 'Reviewer' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);

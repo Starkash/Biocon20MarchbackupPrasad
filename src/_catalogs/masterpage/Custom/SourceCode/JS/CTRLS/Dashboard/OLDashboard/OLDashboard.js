@@ -3,10 +3,10 @@ appOperations.controller("InitiatorOLDashCtrl", function ($scope, $http, $filter
 
 
 
-    var strBusinessOutLicencingUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('OutLicensingBusinessCase')/items?$select=Id,Delete,CaseStatus,BusinessCaseDescription,Title,LapVersion,VersionNo,Modified,Counter,BusinessCaseName,InitiationDate,DosageForm/Id,DosageForm/Title,Strategy/Id,Initiators/Id,Initiators/Title,Strategy/Title,SubStrategy/Id,SubStrategy/Title,ProductNameId,ProductName/Title,CaseStage/Id,CaseStage/Title,CaseStatus&$expand=Strategy,CaseStage,SubStrategy,DosageForm,Initiators,ProductName&$filter=Counter ne '0'&$top=5000&$orderby=ID desc"
+    var strBusinessOutLicencingUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('OutLicensingBusinessCase')/items?$select=Id,Delete,CaseStatus,BusinessCaseDescription,Title,LapVersion,VersionNo,Modified,Counter,BusinessCaseName,InitiationDate,DosageForm/Id,DosageForm/Title,Strategy/Id,Initiators/Id,Initiators/Title,Strategy/Title,SubStrategy/Id,SubStrategy/Title,ProductNameId,ProductName/Title,CaseStage/Id,CaseStage/Title,CaseStatus,AuthorId,Author/Title,Author/EMail&$expand=Strategy,CaseStage,SubStrategy,DosageForm,Initiators,ProductName,Author&$filter=Counter ne '0'&$top=5000&$orderby=ID desc"
     var strStrategyUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('StrategyMaster')/items?$select=*&$top=5000&$orderby=ID ";
     var strSubStrategyUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('SubStrategyMaster')/items?$select=*,Strategy/Title,Strategy/Id&$expand=Strategy&$top=5000&$orderby=ID ";
-    var strOutLicensingLaunchDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('OutLicensingLaunchDetails')/items?$select=*,PartnerId,Partner/Title,SubMarketId,SubMarket/Title,MarketId,Market/Title,SubMarketId,SubMarket/Title,CountryId,Country/Title,OutLicensingBusinessCase/Title,OutLicensingBusinessCaseId&$expand=OutLicensingBusinessCase,Partner,SubMarket,Market,SubMarket,Country&$top=5000&$orderby=ID ";
+    var strOutLicensingLaunchDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('OutLicensingLaunchDetails')/items?$select=*,PartnerId,Partner/Title,SubMarketId,SubMarket/Title,MarketId,Market/Title,SubMarketId,SubMarket/Title,CountryId,Country/Title,OutLicensingBusinessCase/Title,OutLicensingBusinessCaseId,AuthorId,Author/Title,Author/EMail&$expand=OutLicensingBusinessCase,Partner,SubMarket,Market,SubMarket,Country,Author&$top=5000&$orderby=ID ";
 
 
     $scope.test = [];
@@ -21,6 +21,17 @@ appOperations.controller("InitiatorOLDashCtrl", function ($scope, $http, $filter
         $scope.StrategyColl = batchedData[1].d.results;
         $scope.SubStrategyColl = batchedData[2].d.results;
         $scope.OutLicensingLaunchDetailColl = batchedData[3].d.results;
+
+    //    $scope.CurrentloggedUser= _spPageContextInfo.userId
+
+
+    //     $scope.OutLicensingLaunchDetailColl = $filter('filter')($scope.OutLicensingLaunchDetailColl, function (item) {
+    //         return (item.AuthorId == $scope.CurrentloggedUser);
+    //     });
+
+    //     $scope.OutBusinessLicencingColl = $filter('filter')($scope.OutBusinessLicencingColl, function (item) {
+    //         return (item.AuthorId == $scope.CurrentloggedUser);
+    //     });
 
         if ($scope.OutLicensingLaunchDetailColl.length > 0) {
 

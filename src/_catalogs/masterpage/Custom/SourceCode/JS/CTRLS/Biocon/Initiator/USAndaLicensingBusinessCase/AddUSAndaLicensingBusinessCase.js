@@ -90,7 +90,7 @@ appOperations.controller("AddUSAndaBusinessCaseCtrl", function ($scope, $http, $
     var strCAPEXBUCaseUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('USAndaBusinessCase')/items?$select=*,Title,BusinessCaseDescription,ID&$top=1000&$orderby=Id desc";
     var strPartnerUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('PartnerMaster')/items?$select=*&$top=500&$orderby=Id desc";
     var strCAPEXBULaunchUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('CapexPhaseDetails')/items?$select=*,Title,ID&$top=1000&$orderby=Id desc";
-    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title&$expand=UserGroup,Market&$filter=TemplateType eq 'ANDA - Inhouse US'&$top=5000&$orderby=ID"; // cascading
+    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title,SubMarket/Id,SubMarket/Title&$expand=UserGroup,Market,SubMarket&$filter=TemplateType eq 'ANDA - Inhouse US'&$top=5000&$orderby=ID"; // cascading
     var strStageMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('StageMaster')/items?$select=*&$filter=Title eq 'Initiated'&$top=100&$orderby=ID"; // cascading
     var strSkuMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('SkuMaster')/items?$select=*&$top=100&$orderby=ID"; // cascading
     var strSiteUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('Site')/items?$select=*&$top=100&$orderby=ID"; // cascading

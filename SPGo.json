@@ -1,8 +1,8 @@
 {
     "sourceDirectory": "src",
-    "sharePointSiteUrl": "https://biocon.sharepoint.com/sites/SPCustomAppl/BL/BusinessCaseAutomation",
+    "sharePointSiteUrl": "https://sharepointistech.sharepoint.com/sites/Bioconuat",
     "publishingScope": "Major",
     "authenticationType": "Digest",
     "checkInMessage": "Changes made by Arvind Pal:",
-"remoteFolders": ["/SiteAssets/**/*.*"]  
+    "remoteFolders": ["/_catalogs/masterpage/Custom/**/*.*"]
 }

@@ -5,10 +5,10 @@ appOperations.controller("InitiatorCAPEXDashCtrl", function ($scope, $http, $fil
 
 
     // }
-    var strBusinessCapexLicencingUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('CapexBusinessCase')/items?$select=Id,Delete,Title,Site/Id,Site/Title,CapexValue,ProductCategory/Id,ProductCategory/Title,CapexContext/Id,CapexContext/Title,LapVersion,VersionNo,Initiators/Id,Initiators/Title,Modified,BusinessCaseDescription,BusinessCaseName,Counter,InitiationDate,Strategy/Id,Strategy/Title,SubStrategy/Id,SubStrategy/Title,CaseStage/Id,CaseStage/Title,CaseStatus&$expand=Strategy,Site,ProductCategory,CapexContext,CaseStage,Initiators,SubStrategy&$filter=Counter ne '0'&$top=5000&$orderby=ID desc"
+    var strBusinessCapexLicencingUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('CapexBusinessCase')/items?$select=Id,AuthorId,Author/Title,Author/EMail,Delete,Title,Site/Id,Site/Title,CapexValue,ProductCategory/Id,ProductCategory/Title,CapexContext/Id,CapexContext/Title,LapVersion,VersionNo,Initiators/Id,Initiators/Title,Modified,BusinessCaseDescription,BusinessCaseName,Counter,InitiationDate,Strategy/Id,Strategy/Title,SubStrategy/Id,SubStrategy/Title,CaseStage/Id,CaseStage/Title,CaseStatus&$expand=Strategy,Site,ProductCategory,CapexContext,CaseStage,Initiators,SubStrategy,Author&$filter=Counter ne '0'&$top=5000&$orderby=ID desc"
     var strStrategyUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('StrategyMaster')/items?$select=*&$top=5000&$orderby=ID ";
     var strSubStrategyUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('SubStrategyMaster')/items?$select=*,Strategy/Title,Strategy/Id&$expand=Strategy&$top=5000&$orderby=ID ";
-    var strCapexProductDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('CapexProductDetails')/items?&$select=Id,Title,Modified,ProductName/Id,ProductName/Title,ProductSubheading,CapexPhase/Id,CapexPhase/Title,CapexBusinessCase/Id,CapexBusinessCase/Title&$expand=CapexPhase,ProductName,CapexBusinessCase&$filter=ProductName/Id ne null  &$top=5000&$orderby=ID desc";
+    var strCapexProductDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('CapexProductDetails')/items?&$select=Id,AuthorId,Author/Title,Author/EMail,Title,Modified,ProductName/Id,ProductName/Title,ProductSubheading,CapexPhase/Id,CapexPhase/Title,CapexBusinessCase/Id,CapexBusinessCase/Title&$expand=CapexPhase,ProductName,CapexBusinessCase,Author&$filter=ProductName/Id ne null  &$top=5000&$orderby=ID desc";
 
     $scope.test=[];
     var urlColl = [strBusinessCapexLicencingUrl, strStrategyUrl, strSubStrategyUrl, strCapexProductDetailsUrl];
@@ -29,7 +29,17 @@ appOperations.controller("InitiatorCAPEXDashCtrl", function ($scope, $http, $fil
         $scope.CapexProductDetailsColl = batchedData[3].d.results;
 
 
+        // $scope.CurrentloggedUser= _spPageContextInfo.userId
 
+
+        // $scope.CapexProductDetailsColl = $filter('filter')($scope.CapexProductDetailsColl, function (item) {
+        //     return (item.AuthorId == $scope.CurrentloggedUser);
+        // });
+
+        // $scope.CapexBusinessLicencingColl = $filter('filter')($scope.CapexBusinessLicencingColl, function (item) {
+        //     return (item.AuthorId == $scope.CurrentloggedUser);
+        // });
+       
 
 
         // 7 Dec-2023---

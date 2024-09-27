@@ -78,7 +78,7 @@ appOperations.controller("EditAndaLicensingBusinessCaseCtrl", function ($scope, 
     // var strOLBUCaseUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('AndaBusinessCase')/items?$select=*,Title,ID&$top=1&$orderby=Id desc";
     var strPartnerUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('PartnerMaster')/items?$select=*&$top=500&$orderby=Id desc";
     // var strOLBULaunchUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('AndaLicensingLaunchDetails')/items?$select=*,Title,ID&$top=1&$orderby=Id desc";
-    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title&$expand=UserGroup,Market&$filter=(TemplateType eq '"+encodeURIComponent('ANDA - Inhouse US + MoW')+"')&$top=5000&$orderby=ID asc";
+    var strRoleMasterUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('RoleMaster')/items?$select=*,UserGroup/Id,UserGroupId/EMail,Market/Id,Market/Title,SubMarket/Id,SubMarket/Title&$expand=UserGroup,Market,SubMarket&$filter=(TemplateType eq '"+encodeURIComponent('ANDA - Inhouse US + MoW')+"')&$top=5000&$orderby=ID asc";
     var strAndaBusinessCaseUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('AndaBusinessCase')/items?&$select=Id, BusinessCaseDescription,Title,Modified,LapVersion,Innovator/Id,Innovator/Title,BusinessCaseName,InitiationDate,CaseStage/Id,CaseStage/Title,Strategy/Id,Strategy/Title,SubStrategy/Id,SubStrategy/Title,ProductCategory/Id,ProductCategory/Title,ProductName/Id,ProductName/Title,DosageForm/Id,DosageForm/Title&$expand=Strategy,CaseStage,SubStrategy,ProductCategory,Innovator,ProductName,DosageForm&$filter=ID eq '" + $scope.IntiateID + "'&$top=5000&$orderby=ID asc";
     var strAndaLicensingLaunchDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('AndaLicensingLaunchDetails')/items?&$select=Id,Title,FilingType/Id,FilingType/Title,NoofGenericFilers,Modified,LOEDate,FillingDate,LaunchDate,PartnerDetails,Currency/Id,Currency/Title,CurrentStatus/Id,CurrentStatus/Title,Market/Id,Market/Title,SubMarket/Id,SubMarket/Title,Country/Id,Country/Title,Partner/Id,Partner/Title,AndaBusinessCase/Id,AndaBusinessCase/Title&$expand=Market,SubMarket,Currency,CurrentStatus,Country,Partner,FilingType,AndaBusinessCase&$filter=AndaBusinessCase/ID eq '" + $scope.IntiateID + "'&$top=5000&$orderby=ID asc";
     var strAndaSKUDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('AndaSKUDetails')/items?&$select=Id,Title,Modified,Quantity,SkuUnit/Id,SkuUnit/Title,Pack,PackingType/Id,PackingType/Title,AndaLicensingLaunchDetail/Id,AndaLicensingLaunchDetail/Title,AndaBusinessCase/Id,AndaBusinessCase/Title&$expand=AndaLicensingLaunchDetail,SkuUnit,PackingType,AndaBusinessCase&$filter=AndaBusinessCase/ID eq '" + $scope.IntiateID + "'&$top=5000&$orderby=ID asc";
@@ -1660,7 +1660,9 @@ appOperations.controller("EditAndaLicensingBusinessCaseCtrl", function ($scope, 
         var pplInitiator = []; var pplReviewer = []; var pplValidator = [];
         for (var z = 0; z < $scope.UpdateLaunchDetails.length; z++) {
             $scope.fiterdInitiatorMember = $scope.RoleMasterColl.filter(function (item) {
-                return (item.Role == 'Initiator' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId);
+                return (item.Role == 'Initiator' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId  && item.SubMarketId == $scope.UpdateLaunchDetails[z].SubMarketId);
+
+               // return (item.Role == 'Initiator' && item.MarketId == $scope.UpdateLaunchDetails[z].MarketId);
             });
             $scope.fiterdReviewerMember = $scope.RoleMasterColl.filter(function (item) {
                 return (item.Role == 'Reviewer'&& item.MarketId == $scope.UpdateLaunchDetails[z].MarketId);
@@ -1711,7 +1713,10 @@ appOperations.controller("EditAndaLicensingBusinessCaseCtrl", function ($scope, 
             }
             for (var z = 0; z < $scope.FinalCountryLaunchColl.length; z++) {
                 $scope.fiterdInitiatorMemberNew = $scope.RoleMasterColl.filter(function (item) {
-                    return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
+
+                    return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId  && item.SubMarketId == $scope.FinalCountryLaunchColl[z].SubMarketId);
+
+                  //  return (item.Role == 'Initiator' && item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);
                 });
                 $scope.fiterdReviewerMemberNew = $scope.RoleMasterColl.filter(function (item) {
                     return (item.Role == 'Reviewer'&& item.MarketId == $scope.FinalCountryLaunchColl[z].MarketId);

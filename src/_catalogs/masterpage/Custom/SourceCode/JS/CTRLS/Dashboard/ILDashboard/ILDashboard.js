@@ -1,9 +1,9 @@
 appOperations.controller("InitiatorILDashCtrl", function ($scope, $http, $filter, $q, $window, $timeout, $route, $routeParams, $interval, NgTableParams, Logics, Utilities, $uibModal, $uibModalStack, $rootScope, $location, $dialogs) {
-    var strBusinessInLicencingUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingBusinessCase')/items?$select=Id,Delete,VersionNo,BusinessCaseDescription,LapVersion,Initiators/Id,Initiators/Title,Title,Modified,Counter,BusinessCaseName,InitiationDate,DosageForm/Id,DosageForm/Title,Strategy/Id,Strategy/Title,SubStrategy/Id,SubStrategy/Title,ProductNameId,ProductName/Title,CaseStage/Id,CaseStage/Title,CaseStatus&$expand=Strategy,Initiators,CaseStage,SubStrategy,DosageForm,ProductName&$filter=Counter ne '0'&$top=5000&$orderby=ID desc"
+    var strBusinessInLicencingUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingBusinessCase')/items?$select=Id,Delete,VersionNo,BusinessCaseDescription,LapVersion,Initiators/Id,Initiators/Title,Title,Modified,Counter,BusinessCaseName,InitiationDate,DosageForm/Id,DosageForm/Title,Strategy/Id,Strategy/Title,SubStrategy/Id,SubStrategy/Title,ProductNameId,ProductName/Title,CaseStage/Id,CaseStage/Title,CaseStatus,AuthorId,Author/Title,Author/EMail&$expand=Strategy,Initiators,CaseStage,SubStrategy,DosageForm,ProductName,Author&$filter=Counter ne '0'&$top=5000&$orderby=ID desc"
     var strStrategyUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('StrategyMaster')/items?$select=*&$top=5000&$orderby=ID ";
     var strSubStrategyUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('SubStrategyMaster')/items?$select=*,Strategy/Title,Strategy/Id&$expand=Strategy&$top=5000&$orderby=ID ";
 
-    var strInLicensingLaunchDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingLaunchDetails')/items?$select=*,PartnerId,Partner/Title,SubMarketId,SubMarket/Title,MarketId,Market/Title,SubMarketId,SubMarket/Title,CountryId,Country/Title,InLicensingBusinessCase/Title,InLicensingBusinessCaseId&$expand=InLicensingBusinessCase,Partner,SubMarket,Market,SubMarket,Country&$top=5000&$orderby=ID ";
+    var strInLicensingLaunchDetailsUrl = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/GetByTitle('InLicensingLaunchDetails')/items?$select=*,PartnerId,Partner/Title,SubMarketId,SubMarket/Title,MarketId,Market/Title,SubMarketId,SubMarket/Title,CountryId,Country/Title,InLicensingBusinessCase/Title,InLicensingBusinessCaseId,AuthorId,Author/Title,Author/EMail&$expand=InLicensingBusinessCase,Partner,SubMarket,Market,SubMarket,Country,Author&$top=5000&$orderby=ID ";
 
     $scope.test = [];
 
@@ -17,6 +17,20 @@ appOperations.controller("InitiatorILDashCtrl", function ($scope, $http, $filter
         $scope.StrategyColl = batchedData[1].d.results;
         $scope.SubStrategyColl = batchedData[2].d.results;
         $scope.InLicensingLaunchDetailColl = batchedData[3].d.results;
+
+
+        // $scope.CurrentloggedUser= _spPageContextInfo.userId
+
+
+        // $scope.InLicensingLaunchDetailColl = $filter('filter')($scope.InLicensingLaunchDetailColl, function (item) {
+        //     return (item.AuthorId == $scope.CurrentloggedUser);
+        // });
+
+        // $scope.InBusinessLicencingLicencingColl = $filter('filter')($scope.InBusinessLicencingLicencingColl, function (item) {
+        //     return (item.AuthorId == $scope.CurrentloggedUser);
+        // });
+
+
 
         //
         if ($scope.InLicensingLaunchDetailColl.length > 0) {
